@@ -5,10 +5,13 @@ const int Application::framesPerSecond = 60;
 const sf::Time Application::timePerFrame = sf::seconds(1.0f / 60.0f);
 
 Application::Application()
-    : window(sf::VideoMode(640, 480), "Testing...", sf::Style::Close)
+    : window(sf::VideoMode(640, 480, 32), "Testing...", sf::Style::Close),
+      statUpdateTime(),
+      statFrameCount(0)
 {
-    // window.setVerticalSyncEnabled(true);
     window.setFramerateLimit(framesPerSecond);
+    window.setVerticalSyncEnabled(false);
+    window.setKeyRepeatEnabled(false);
 
     try
     {
@@ -24,7 +27,14 @@ Application::Application()
     background.setTexture(textures.get(Textures::bg1));
     statText.setFont(fonts.get(Fonts::normal));
     statText.setPosition(5.0f, 5.0f);
-    statText.setCharacterSize(16);
+    statText.setCharacterSize(12);
+    statText.setString(
+            "Frames / Second = \nTime / Update = ");
+
+    stuff.setFont(fonts.get(Fonts::jp));
+    stuff.setPosition(5.0f, 100.0f);
+    stuff.setCharacterSize(32);
+    stuff.setString(L"我是美国人.\n私はアメリカ人です.");
 }
 
 void Application::run()
@@ -35,16 +45,16 @@ void Application::run()
     while (window.isOpen())
     {
         sf::Time dt = clock.restart();
-        // timeSinceLastUpdate += dt;
-        // printf("%.4f\n", timeSinceLastUpdate.asSeconds());
+        timeSinceLastUpdate += dt;
 
-        // while (timeSinceLastUpdate > timePerFrame)
-        // {
-        //     timeSinceLastUpdate -= timePerFrame;
-        //     processEvents();
-        //     update(timePerFrame);
-        // }
-        processEvents();
+        while (timeSinceLastUpdate > timePerFrame)
+        {
+            timeSinceLastUpdate -= timePerFrame;
+            processEvents();
+            update(timePerFrame);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+            window.close();
         update(dt);
 
         calculateStatistics(dt);
@@ -57,14 +67,8 @@ void Application::processEvents()
     sf::Event event;
     while (window.pollEvent(event))
     {
-        switch (event.type)
-        {
-        case sf::Event::Closed:
+        if (event.type == sf::Event::Closed)
             window.close();
-            break;
-        default:
-            break;
-        }
     }
 }
 
@@ -77,6 +81,7 @@ void Application::render()
     window.clear();
     window.draw(background);
     window.draw(statText);
+    window.draw(stuff);
     window.display();
 }
 

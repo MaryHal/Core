@@ -29,6 +29,7 @@ class Application
     sf::Sprite background;
 
     FontHolder fonts;
+    sf::Text stuff;
     sf::Text statText;
     sf::Time statUpdateTime;
     std::size_t statFrameCount;
