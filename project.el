@@ -14,11 +14,7 @@
     (shell-command (concat "(cd " rootDir " && ./run && cd -)" )))
   )
 
-(add-hook 'c-mode-common-hook
-          (lambda ()
-            (global-set-key (kbd "<f4>") 'premake)
-            (global-set-key (kbd "C-<f5>") 'compile)
-            (global-set-key (kbd "<f5>") 'recompile)
-            (global-set-key (kbd "<f6>") 'runProgram)
-            )
-          )
+(global-set-key (kbd "<f4>") 'premake)
+(global-set-key (kbd "C-<f5>") 'compile)
+(global-set-key (kbd "<f5>") 'recompile)
+(global-set-key (kbd "<f6>") 'runProgram)
