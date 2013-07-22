@@ -1,11 +1,12 @@
 #ifndef _Application_hpp_
 #define _Application_hpp_
 
-#include <SFML/Graphics.hpp>
 #include "ResourceHolder.hpp"
 #include "ResourceIdentifiers.hpp"
 
-#include "MusicPlayer.hpp"
+#include "StateStack.hpp"
+
+#include <SFML/Graphics.hpp>
 
 class Application
 {
@@ -19,18 +20,15 @@ class Application
     void render();
 
     void calculateFps(sf::Time elapsedTime);
+    void registerStates();
 
     private:
     sf::RenderWindow window;
-    sf::View world;
-
-    MusicPlayer musicPlayer;
+    StateStack stateStack;
 
     TextureHolder textures;
-    sf::Sprite background;
-
     FontHolder fonts;
-    sf::Text stuff;
+
     sf::Text statText;
     sf::Time statUpdateTime;
     std::size_t statFrameCount;
@@ -40,3 +38,11 @@ class Application
 };
 
 #endif // _Application_hpp_
+
+
+
+
+
+
+
+

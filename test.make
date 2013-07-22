@@ -153,8 +153,11 @@ endif
 
 OBJECTS := \
 	$(OBJDIR)/MusicPlayer.o \
+	$(OBJDIR)/StateStack.o \
 	$(OBJDIR)/Application.o \
 	$(OBJDIR)/main.o \
+	$(OBJDIR)/State.o \
+	$(OBJDIR)/TitleState.o \
 
 RESOURCES := \
 
@@ -218,10 +221,19 @@ endif
 $(OBJDIR)/MusicPlayer.o: src/MusicPlayer.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/StateStack.o: src/StateStack.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Application.o: src/Application.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/main.o: src/main.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/State.o: src/State.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/TitleState.o: src/States/TitleState.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
