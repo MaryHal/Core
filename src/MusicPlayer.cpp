@@ -5,11 +5,11 @@ MusicPlayer::MusicPlayer()
     , mFilenames()
     , mVolume(100.f)
 {
-    mFilenames[Music::main]    = "data/music/song1.flac";
-    mFilenames[Music::other]   = "data/music/song2.wav";
+    mFilenames[Res::Music::main]    = "data/music/song1.flac";
+    mFilenames[Res::Music::other]   = "data/music/song2.wav";
 }
 
-void MusicPlayer::play(Music theme)
+void MusicPlayer::play(Res::Music theme)
 {
     std::string filename = mFilenames[theme];
 
