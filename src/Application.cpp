@@ -6,6 +6,7 @@ const sf::Time Application::timePerFrame = sf::seconds(1.0f / 60.0f);
 
 Application::Application()
     : window(sf::VideoMode(640, 480, 32), "Testing...", sf::Style::Close),
+      world(window.getDefaultView()),
       statUpdateTime(),
       statFrameCount(0)
 {
@@ -55,9 +56,25 @@ void Application::run()
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
             window.close();
-        update(dt);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+            world.rotate(-1);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+            world.rotate(1);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+            world.zoom(0.99);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+            world.zoom(1.01);
 
-        calculateStatistics(dt);
+        // if (sf::Keyboard::isKeyPressed(sf::Keyboard::H))
+        //     world.move(-1, 0);
+        // if (sf::Keyboard::isKeyPressed(sf::Keyboard::J))
+        //     world.move(0, 1);
+        // if (sf::Keyboard::isKeyPressed(sf::Keyboard::K))
+        //     world.move(0, -1);
+        // if (sf::Keyboard::isKeyPressed(sf::Keyboard::L))
+        //     world.move(1, 0);
+
+        calculateFps(dt);
         render();
     }
 }
@@ -78,6 +95,8 @@ void Application::update(sf::Time deltaTime)
 
 void Application::render()
 {
+    window.setView(world);
+
     window.clear();
     window.draw(background);
     window.draw(statText);
@@ -85,7 +104,7 @@ void Application::render()
     window.display();
 }
 
-void Application::calculateStatistics(sf::Time elapsedTime)
+void Application::calculateFps(sf::Time elapsedTime)
 {
     statUpdateTime += elapsedTime;
     statFrameCount += 1;
