@@ -18,10 +18,11 @@ class Application
     void update(sf::Time deltaTime);
     void render();
 
-    void calculateStatistics(sf::Time elapsedTime);
+    void calculateFps(sf::Time elapsedTime);
 
     private:
     sf::RenderWindow window;
+    sf::View world;
 
     MusicPlayer musicPlayer;
 
