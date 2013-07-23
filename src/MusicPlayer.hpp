@@ -14,18 +14,19 @@
 class MusicPlayer : private sf::NonCopyable
 {
     public:
-        MusicPlayer();
+    MusicPlayer();
 
-        void play(Res::Music theme);
-        void stop();
+    void play(Res::Music theme);
+    void stop();
+    void pause();
 
-        void setPaused(bool paused);
-        void setVolume(float volume);
+    void setPaused(bool paused);
+    void setVolume(float volume);
 
     private:
-        sf::Music mMusic;
-        std::map<Res::Music, std::string> mFilenames;
-        float mVolume;
+    sf::Music mMusic;
+    std::map<Res::Music, std::string> mFilenames;
+    float mVolume;
 };
 
 #endif // _MusicPlayer_hpp_

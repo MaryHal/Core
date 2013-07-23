@@ -152,10 +152,12 @@ ifeq ($(config),release64)
 endif
 
 OBJECTS := \
+	$(OBJDIR)/Entity.o \
 	$(OBJDIR)/MusicPlayer.o \
 	$(OBJDIR)/StateStack.o \
 	$(OBJDIR)/Application.o \
 	$(OBJDIR)/main.o \
+	$(OBJDIR)/Keybinding.o \
 	$(OBJDIR)/State.o \
 	$(OBJDIR)/TitleState.o \
 
@@ -218,6 +220,9 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 endif
 
+$(OBJDIR)/Entity.o: src/Entity.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/MusicPlayer.o: src/MusicPlayer.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -228,6 +233,9 @@ $(OBJDIR)/Application.o: src/Application.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/main.o: src/main.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Keybinding.o: src/Keybinding.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/State.o: src/State.cpp

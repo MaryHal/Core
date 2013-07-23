@@ -41,11 +41,9 @@ class StateStack : private sf::NonCopyable
 
     bool isEmpty() const;
 
-
     private:
     State::Ptr createState(States::ID stateID);
     void applyPendingChanges();
-
 
     private:
     struct PendingChange
@@ -55,7 +53,6 @@ class StateStack : private sf::NonCopyable
         Action action;
         States::ID stateID;
     };
-
 
     private:
     std::vector<State::Ptr> mStack;

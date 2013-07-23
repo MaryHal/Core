@@ -3,6 +3,7 @@
 
 #include "ResourceHolder.hpp"
 #include "ResourceIdentifiers.hpp"
+#include "MusicPlayer.hpp"
 
 #include "StateStack.hpp"
 
@@ -28,6 +29,7 @@ class Application
 
     TextureHolder textures;
     FontHolder fonts;
+    MusicPlayer music;
 
     sf::Text statText;
     sf::Time statUpdateTime;
