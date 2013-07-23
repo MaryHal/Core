@@ -26,9 +26,18 @@ void MusicPlayer::stop()
     mMusic.stop();
 }
 
+void MusicPlayer::pause()
+{
+    if (mMusic.getStatus() == sf::Music::Status::Paused)
+        mMusic.play();
+    else if (mMusic.getStatus() == sf::Music::Status::Playing)
+        mMusic.pause();
+}
+
 void MusicPlayer::setVolume(float volume)
 {
     mVolume = volume;
+    mMusic.setVolume(mVolume);
 }
 
 void MusicPlayer::setPaused(bool paused)

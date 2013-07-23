@@ -11,7 +11,7 @@ namespace sf
 
 namespace Res
 {
-    enum class Textures { bg1 };
+    enum class Textures { bg1, bg2 };
     enum class Fonts { normal, jp };
     enum class Shaders {};
     enum class Sounds {};

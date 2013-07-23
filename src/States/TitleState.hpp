@@ -15,7 +15,11 @@ class TitleState : public State
     virtual bool handleEvent(const sf::Event& event);
 
     private:
-    sf::Sprite background;
+    sf::View world;
+
+    sf::Sprite bg1;
+    sf::Sprite bg2;
+    sf::Text text;
 };
 
 #endif // _TitleState_hpp_

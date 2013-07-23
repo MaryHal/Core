@@ -10,7 +10,7 @@ const sf::Time Application::timePerFrame = sf::seconds(1.0f / 60.0f);
 
 Application::Application()
     : window(sf::VideoMode(640, 480, 32), "Testing...", sf::Style::Close)
-    , stateStack(State::Context(window, textures, fonts))
+    , stateStack(State::Context(window, textures, fonts, music))
     , statUpdateTime()
     , statFrameCount(0)
 {
@@ -33,13 +33,6 @@ Application::Application()
     statText.setCharacterSize(12);
     statText.setString(
             "Frames / Second = \nTime / Update = ");
-
-    // background.setTexture(textures.get(Res::Textures::bg1));
-
-    // stuff.setFont(fonts.get(Res::Fonts::jp));
-    // stuff.setPosition(5.0f, 100.0f);
-    // stuff.setCharacterSize(32);
-    // stuff.setString(L"我是美国人.\n私はアメリカ人です.");
 
     registerStates();
     stateStack.pushState(States::Title);

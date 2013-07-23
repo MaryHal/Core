@@ -3,6 +3,7 @@
 
 #include "StateIdentifiers.hpp"
 #include "ResourceIdentifiers.hpp"
+#include "MusicPlayer.hpp"
 
 #include <SFML/System/Time.hpp>
 #include <SFML/Window/Event.hpp>
@@ -23,11 +24,15 @@ class State
 
     struct Context
     {
-        Context(sf::RenderWindow& window, TextureHolder& textures, FontHolder& fonts);
+        Context(sf::RenderWindow& window,
+                TextureHolder& textures,
+                FontHolder& fonts,
+                MusicPlayer& music);
 
         sf::RenderWindow* window;
         TextureHolder* textures;
         FontHolder* fonts;
+        MusicPlayer* music;
     };
 
 

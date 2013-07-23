@@ -7,14 +7,29 @@
 TitleState::TitleState(StateStack& stack, Context context)
     : State(stack, context)
 {
+    world = context.window->getDefaultView();
+
     context.textures->load(Res::Textures::bg1, "data/bg/Frac2.png");
-    background.setTexture(context.textures->get(Res::Textures::bg1));
+    context.textures->load(Res::Textures::bg2, "data/bg/Frac3.png");
+
+    bg1.setTexture(context.textures->get(Res::Textures::bg1));
+    bg2.setTexture(context.textures->get(Res::Textures::bg2));
+    bg2.setPosition(0.0f, 480.0f);
+
+    text.setFont(context.fonts->get(Res::Fonts::jp));
+    text.setPosition(5.0f, 100.0f);
+    text.setCharacterSize(32);
+    text.setString(L"我是美国人.\n私はアメリカ人です.");
 }
 
 void TitleState::draw()
 {
     sf::RenderWindow& window = *getContext().window;
-    window.draw(background);
+    window.setView(world);
+
+    window.draw(bg1);
+    window.draw(bg2);
+    window.draw(text);
 }
 
 bool TitleState::update(sf::Time dt)
@@ -24,5 +39,30 @@ bool TitleState::update(sf::Time dt)
 
 bool TitleState::handleEvent(const sf::Event& event)
 {
+    if (event.type == sf::Event::KeyPressed)
+    {
+        if (event.key.code == sf::Keyboard::Space)
+            getContext().music->play(Res::Music::other);
+        else if (event.key.code == sf::Keyboard::Z)
+            getContext().music->pause();
+    }
     return true;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
