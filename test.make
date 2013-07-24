@@ -159,8 +159,11 @@ OBJECTS := \
 	$(OBJDIR)/main.o \
 	$(OBJDIR)/Keybinding.o \
 	$(OBJDIR)/State.o \
-	$(OBJDIR)/TitleState.o \
+	$(OBJDIR)/ParallelTask.o \
 	$(OBJDIR)/Menu.o \
+	$(OBJDIR)/TitleState.o \
+	$(OBJDIR)/TestState.o \
+	$(OBJDIR)/LoadingState.o \
 
 RESOURCES := \
 
@@ -242,10 +245,19 @@ $(OBJDIR)/Keybinding.o: src/Keybinding.cpp
 $(OBJDIR)/State.o: src/State.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/TitleState.o: src/States/TitleState.cpp
+$(OBJDIR)/ParallelTask.o: src/ParallelTask.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Menu.o: src/GUI/Menu.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/TitleState.o: src/Game/TitleState.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/TestState.o: src/Game/TestState.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/LoadingState.o: src/Game/LoadingState.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 

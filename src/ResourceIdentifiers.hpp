@@ -1,6 +1,8 @@
 #ifndef _ResourceIdentifiers_hpp_
 #define _ResourceIdentifiers_hpp_
 
+#include "ResourceHolder.hpp"
+
 namespace sf
 {
     class Texture;
@@ -23,5 +25,7 @@ typedef ResourceHolder <sf::Texture,     Res::Textures> TextureHolder;
 typedef ResourceHolder <sf::Font,        Res::Fonts>    FontHolder;
 typedef ResourceHolder <sf::Shader,      Res::Shaders>  ShaderHolder;
 typedef ResourceHolder <sf::SoundBuffer, Res::Sounds>   SoundHolder;
+
+// typedef FontManager<Res::Fonts> FontHolder;
 
 #endif // _ResourceIdentifiers_hpp_

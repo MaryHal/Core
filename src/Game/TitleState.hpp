@@ -17,8 +17,7 @@ class TitleState : public State
     private:
     sf::View world;
 
-    sf::Sprite bg1;
-    sf::Sprite bg2;
+    sf::Sprite bg;
     sf::Text text;
 
     Menu menu;

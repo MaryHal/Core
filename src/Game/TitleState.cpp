@@ -12,9 +12,7 @@ TitleState::TitleState(StateStack& stack, Context context)
     context.textures->load(Res::Textures::bg1, "data/bg/Frac2.png");
     context.textures->load(Res::Textures::bg2, "data/bg/Frac3.png");
 
-    bg1.setTexture(context.textures->get(Res::Textures::bg1));
-    bg2.setTexture(context.textures->get(Res::Textures::bg2));
-    bg2.setPosition(0.0f, 480.0f);
+    bg.setTexture(context.textures->get(Res::Textures::bg1));
 
     text.setFont(context.fonts->get(Res::Fonts::jp));
     text.setPosition(5.0f, 100.0f);
@@ -33,7 +31,7 @@ void TitleState::draw()
     sf::RenderWindow& window = *getContext().window;
     window.setView(world);
 
-    window.draw(bg1);
+    window.draw(bg);
     window.draw(menu);
 
     window.draw(text);
@@ -42,7 +40,7 @@ void TitleState::draw()
 bool TitleState::update(sf::Time dt)
 {
     menu.update(dt);
-    return true;
+    return false;
 }
 
 bool TitleState::handleEvent(const sf::Event& event)
@@ -55,6 +53,8 @@ bool TitleState::handleEvent(const sf::Event& event)
             getContext().music->play(Res::Music::other);
         else if (event.key.code == sf::Keyboard::Z)
             getContext().music->pause();
+        else if (event.key.code == sf::Keyboard::T)
+            requestStackPush(States::Test);
     }
-    return true;
+    return false;
 }
