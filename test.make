@@ -160,6 +160,7 @@ OBJECTS := \
 	$(OBJDIR)/Keybinding.o \
 	$(OBJDIR)/State.o \
 	$(OBJDIR)/TitleState.o \
+	$(OBJDIR)/Menu.o \
 
 RESOURCES := \
 
@@ -242,6 +243,9 @@ $(OBJDIR)/State.o: src/State.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/TitleState.o: src/States/TitleState.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Menu.o: src/GUI/Menu.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
