@@ -19,12 +19,40 @@ class ResourceHolder
     Resource& get(Identifier id);
     const Resource& get(Identifier id) const;
 
-    private:
+    protected:
     void insertResource(Identifier id, std::unique_ptr<Resource> resource);
 
-    private:
+    protected:
     std::map<Identifier, std::unique_ptr<Resource>> resourceMap;
 };
 
+// #include <SFML/Graphics.hpp>
+
+// template <typename Identifier>
+// class FontManager : public ResourceHolder<sf::Font, Identifier>
+// {
+//     public:
+//     sf::Text makeText(Identifier id, sf::String string)
+//     {
+//         return sf::Text(string, this->get(id));
+//     }
+// };
+
 #include "ResourceHolder.inl"
+
 #endif // _ResourceHolder_hpp_
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

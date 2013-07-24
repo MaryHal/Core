@@ -1,7 +1,9 @@
 #include "Application.hpp"
 #include "StateIdentifiers.hpp"
 
-#include "States/TitleState.hpp"
+#include "Game/TitleState.hpp"
+#include "Game/TestState.hpp"
+#include "Game/LoadingState.hpp"
 
 #include <cstdio>
 
@@ -35,7 +37,7 @@ Application::Application()
             "Frames / Second = \nTime / Update = ");
 
     registerStates();
-    stateStack.pushState(States::Title);
+    stateStack.pushState(States::Loading);
 }
 
 void Application::run()
@@ -72,6 +74,14 @@ void Application::processEvents()
 
         if (event.type == sf::Event::Closed)
             window.close();
+
+        if (event.type == sf::Event::KeyPressed)
+        {
+            if (event.key.code == sf::Keyboard::Escape)
+                stateStack.clearStates();
+            else if (event.key.code == sf::Keyboard::BackSpace)
+                stateStack.popState();
+        }
     }
 }
 
@@ -105,5 +115,7 @@ void Application::calculateFps(sf::Time elapsedTime)
 
 void Application::registerStates()
 {
+    stateStack.registerState<LoadingState>(States::Loading);
     stateStack.registerState<TitleState>(States::Title);
+    stateStack.registerState<TestState>(States::Test);
 }
