@@ -2,7 +2,7 @@
 #define _TitleState_hpp_
 
 #include "../State.hpp"
-
+#include "../GUI/Menu.hpp"
 #include <SFML/Graphics.hpp>
 
 class TitleState : public State
@@ -20,6 +20,8 @@ class TitleState : public State
     sf::Sprite bg1;
     sf::Sprite bg2;
     sf::Text text;
+
+    Menu menu;
 };
 
 #endif // _TitleState_hpp_
