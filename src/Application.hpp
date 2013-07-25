@@ -13,7 +13,7 @@ class Application
 {
     public:
     Application();
-    void run();
+    void run(States::ID initialState);
 
     private:
     void processEvents();
@@ -40,11 +40,3 @@ class Application
 };
 
 #endif // _Application_hpp_
-
-
-
-
-
-
-
-

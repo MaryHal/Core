@@ -37,11 +37,12 @@ Application::Application()
             "Frames / Second = \nTime / Update = ");
 
     registerStates();
-    stateStack.pushState(States::Loading);
 }
 
-void Application::run()
+void Application::run(States::ID initialState)
 {
+    stateStack.pushState(States::Title);
+
     sf::Clock clock;
     sf::Time timeSinceLastUpdate = sf::Time::Zero;
 
@@ -115,7 +116,7 @@ void Application::calculateFps(sf::Time elapsedTime)
 
 void Application::registerStates()
 {
-    stateStack.registerState<LoadingState>(States::Loading);
+    // stateStack.registerState<LoadingState>(States::Loading);
     stateStack.registerState<TitleState>(States::Title);
     stateStack.registerState<TestState>(States::Test);
 }
