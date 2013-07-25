@@ -12,10 +12,10 @@ class ParallelTask
     ParallelTask();
     void execute();
     bool isFinished();
-    float getCompletion();
+    virtual float getCompletion();
 
     private:
-    void runTask();
+    virtual void runTask();
 
     private:
     sf::Thread thread;

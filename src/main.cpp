@@ -3,7 +3,7 @@
 int main(int argc, char* argv[])
 {
     Application app;
-    app.run();
+    app.run(States::Title);
 
     return 0;
 }
