@@ -9,15 +9,9 @@
 class Menu : public sf::Drawable, public sf::Transformable
 {
     public:
-    struct MenuItem
-    {
-        sf::String text;
-    };
-
-    public:
     Menu();
-    void addItem(MenuItem item);
-    void build(const sf::Font& font);
+    void addItem(sf::String string, const sf::Font& font, unsigned int size=20);
+    void build();
 
     bool handleEvent(const sf::Event& event);
     bool update(sf::Time dt);
@@ -26,9 +20,7 @@ class Menu : public sf::Drawable, public sf::Transformable
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
     private:
-    std::vector<MenuItem> menuItems;
     std::vector<sf::Text> items;
-
     unsigned int index;
 };
 

@@ -5,22 +5,20 @@ Menu::Menu()
 {
 }
 
-void Menu::addItem(MenuItem item)
+void Menu::addItem(sf::String string, const sf::Font& font, unsigned int size)
 {
-    menuItems.push_back(item);
+    sf::Text text(string, font, size);
+    items.push_back(text);
 }
 
-void Menu::build(const sf::Font& font)
+void Menu::build()
 {
     // Build Text Drawables
     float y = 0;
-    for (const MenuItem& item : menuItems)
+    for (sf::Text& text : items)
     {
-        sf::Text text(item.text, font, 16);
         text.setPosition(0.0f, y);
-        y += 16.0f;
-
-        items.push_back(text);
+        y += text.getCharacterSize();
     }
     items[index].setColor(sf::Color::Magenta);
 }
