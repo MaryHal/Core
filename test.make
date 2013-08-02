@@ -152,18 +152,18 @@ ifeq ($(config),release64)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/Entity.o \
+	$(OBJDIR)/State.o \
 	$(OBJDIR)/MusicPlayer.o \
+	$(OBJDIR)/ParallelTask.o \
 	$(OBJDIR)/StateStack.o \
+	$(OBJDIR)/Keybinding.o \
 	$(OBJDIR)/Application.o \
 	$(OBJDIR)/main.o \
-	$(OBJDIR)/Keybinding.o \
-	$(OBJDIR)/State.o \
-	$(OBJDIR)/ParallelTask.o \
-	$(OBJDIR)/Menu.o \
-	$(OBJDIR)/TitleState.o \
-	$(OBJDIR)/TestState.o \
+	$(OBJDIR)/Entity.o \
 	$(OBJDIR)/LoadingState.o \
+	$(OBJDIR)/TestState.o \
+	$(OBJDIR)/TitleState.o \
+	$(OBJDIR)/Menu.o \
 
 RESOURCES := \
 
@@ -224,13 +224,19 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 endif
 
-$(OBJDIR)/Entity.o: src/Entity.cpp
+$(OBJDIR)/State.o: src/State.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/MusicPlayer.o: src/MusicPlayer.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/ParallelTask.o: src/ParallelTask.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/StateStack.o: src/StateStack.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Keybinding.o: src/Keybinding.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Application.o: src/Application.cpp
@@ -239,25 +245,19 @@ $(OBJDIR)/Application.o: src/Application.cpp
 $(OBJDIR)/main.o: src/main.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Keybinding.o: src/Keybinding.cpp
+$(OBJDIR)/Entity.o: src/Entity.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/State.o: src/State.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/ParallelTask.o: src/ParallelTask.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Menu.o: src/GUI/Menu.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/TitleState.o: src/Game/TitleState.cpp
+$(OBJDIR)/LoadingState.o: src/Game/LoadingState.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/TestState.o: src/Game/TestState.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/LoadingState.o: src/Game/LoadingState.cpp
+$(OBJDIR)/TitleState.o: src/Game/TitleState.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Menu.o: src/GUI/Menu.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
