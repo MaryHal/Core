@@ -25,3 +25,4 @@ class Menu : public sf::Drawable, public sf::Transformable
 };
 
 #endif // _Menu_hpp_
+

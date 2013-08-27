@@ -21,7 +21,7 @@ TitleState::TitleState(StateStack& stack, Context context)
 
     const sf::Font& font = context.fonts->get(Res::Fonts::jp);
     menu.setPosition(64.0f, 300.0f);
-    menu.addItem(L"Hello", context.fonts->get(Res::Fonts::normal);
+    menu.addItem(L"Hello", context.fonts->get(Res::Fonts::normal));
     menu.addItem(L"你好", font);
     menu.addItem(L"今日は", font);
     menu.build();
@@ -59,3 +59,4 @@ bool TitleState::handleEvent(const sf::Event& event)
     }
     return false;
 }
+

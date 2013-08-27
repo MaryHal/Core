@@ -42,17 +42,3 @@ class ResourceHolder
 
 #endif // _ResourceHolder_hpp_
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
