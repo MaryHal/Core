@@ -19,11 +19,11 @@ TitleState::TitleState(StateStack& stack, Context context)
     text.setCharacterSize(32);
     text.setString(L"我是美国人.\n私はアメリカ人です.");
 
-    const sf::Font& font = context.fonts->get(Res::Fonts::jp);
+    const sf::Font& font = context.fonts->get(Res::Fonts::normal);
     menu.setPosition(64.0f, 300.0f);
-    menu.addItem(L"Hello", context.fonts->get(Res::Fonts::normal));
-    menu.addItem(L"你好", font);
-    menu.addItem(L"今日は", font);
+    menu.addItem(L"Hello", font, 16);
+    menu.addItem(L"Bonjour", font, 16);
+    menu.addItem(L"Hola", font, 16);
     menu.build();
 }
 

@@ -16,6 +16,7 @@ class MusicPlayer : private sf::NonCopyable
     public:
     MusicPlayer();
 
+    void addSong(Res::Music song, std::string filename);
     void play(Res::Music theme);
     void stop();
     void pause();
@@ -30,3 +31,4 @@ class MusicPlayer : private sf::NonCopyable
 };
 
 #endif // _MusicPlayer_hpp_
+
