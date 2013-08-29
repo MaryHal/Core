@@ -9,6 +9,11 @@ MusicPlayer::MusicPlayer()
     mFilenames[Res::Music::other]   = "data/music/song2.wav";
 }
 
+void MusicPlayer::addSong(Res::Music song, std::string filename)
+{
+    mFilenames[song] = filename;
+}
+
 void MusicPlayer::play(Res::Music theme)
 {
     std::string filename = mFilenames[theme];
@@ -47,3 +52,4 @@ void MusicPlayer::setPaused(bool paused)
     else
         mMusic.play();
 }
+
