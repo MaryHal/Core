@@ -3,6 +3,7 @@
 
 #include <functional>
 #include <SFML/System/Time.hpp>
+#include "Category.hpp"
 
 class Entity;
 
@@ -14,6 +15,8 @@ struct Command
     public:
     Command();
     Action action;
+    Category category;
 };
 
 #endif // _Command_hpp_
+
