@@ -8,7 +8,8 @@ Entity::Entity(Category c)
 
 void Entity::onCommand(const Command& command, sf::Time dt)
 {
-    command.action(*this, dt);
+    if (category & command.category)
+        command.action(*this, dt);
 }
 
 Category Entity::getCategory() const

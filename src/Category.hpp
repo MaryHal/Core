@@ -1,7 +1,7 @@
 #ifndef _Category_hpp_
 #define _Category_hpp_
 
-enum class Category
+enum Category
 {
     None   = 0,
     Player = 1 << 0,

@@ -9,11 +9,11 @@ void World::update(sf::Time dt)
     while (!commands.isEmpty())
     {
         Command command = commands.pop();
-        for (auto iter = commands.begin();
-                  iter != commands.end();
+        for (auto iter = entityList.begin();
+                  iter != entityList.end();
                   ++iter)
         {
-            iter->onCommand(command, dt);
+            (*iter)->onCommand(command, dt);
         }
     }
 }
