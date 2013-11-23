@@ -14,10 +14,10 @@ TitleState::TitleState(StateStack& stack, Context context)
 
     bg.setTexture(context.textures->get(Res::Textures::bg1));
 
-    text.setFont(context.fonts->get(Res::Fonts::jp));
+    text.setFont(context.fonts->get(Res::Fonts::normal));
     text.setPosition(5.0f, 100.0f);
     text.setCharacterSize(32);
-    text.setString(L"我是美国人.\n私はアメリカ人です.");
+    text.setString(L"我是美国人.\n私はアメリカ人です.\n나는 미국 해요");
 
     const sf::Font& font = context.fonts->get(Res::Fonts::normal);
     menu.setPosition(64.0f, 300.0f);
