@@ -16,4 +16,3 @@ class CommandQueue
 };
 
 #endif // _CommandQueue_hpp_
-
