@@ -1,6 +1,6 @@
 #include "TitleState.hpp"
-#include "../ResourceHolder.hpp"
-#include "../ResourceIdentifiers.hpp"
+#include "../System/ResourceHolder.hpp"
+#include "../System/ResourceIdentifiers.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
@@ -9,8 +9,15 @@ TitleState::TitleState(StateStack& stack, Context context)
 {
     world = context.window->getDefaultView();
 
-    context.textures->load(Res::Textures::bg1, "data/bg/Frac2.png");
-    context.textures->load(Res::Textures::bg2, "data/bg/Frac3.png");
+    try
+    {
+        context.fonts->load(Res::Fonts::normal, "data/fonts/DroidSansFallback.ttf");
+        context.textures->load(Res::Textures::bg1, "data/bg/Frac2.png");
+        context.textures->load(Res::Textures::bg2, "data/bg/Frac3.png");
+    }
+    catch (std::runtime_error& e)
+    {
+    }
 
     bg.setTexture(context.textures->get(Res::Textures::bg1));
 

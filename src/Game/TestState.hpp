@@ -1,7 +1,7 @@
 #ifndef _TestState_hpp_
 #define _TestState_hpp_
 
-#include "../State.hpp"
+#include "../System/State.hpp"
 #include <SFML/Graphics.hpp>
 
 class TestState : public State
