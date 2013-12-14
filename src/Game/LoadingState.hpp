@@ -1,8 +1,8 @@
 #ifndef _LoadingState_hpp_
 #define _LoadingState_hpp_
 
-#include "../State.hpp"
-#include "../ParallelTask.hpp"
+#include "../System/State.hpp"
+#include "../Utils/ParallelTask.hpp"
 #include <SFML/Graphics.hpp>
 
 class LoadingState : public State

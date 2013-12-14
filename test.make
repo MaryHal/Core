@@ -152,19 +152,21 @@ ifeq ($(config),release64)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/State.o \
-	$(OBJDIR)/MusicPlayer.o \
-	$(OBJDIR)/ParallelTask.o \
-	$(OBJDIR)/StateStack.o \
 	$(OBJDIR)/CommandQueue.o \
 	$(OBJDIR)/Keybinding.o \
-	$(OBJDIR)/Application.o \
 	$(OBJDIR)/main.o \
 	$(OBJDIR)/World.o \
 	$(OBJDIR)/Entity.o \
+	$(OBJDIR)/FpsCounter.o \
+	$(OBJDIR)/ParallelTask.o \
+	$(OBJDIR)/Log.o \
+	$(OBJDIR)/MusicPlayer.o \
 	$(OBJDIR)/LoadingState.o \
 	$(OBJDIR)/TestState.o \
 	$(OBJDIR)/TitleState.o \
+	$(OBJDIR)/State.o \
+	$(OBJDIR)/StateStack.o \
+	$(OBJDIR)/Application.o \
 	$(OBJDIR)/Menu.o \
 
 RESOURCES := \
@@ -226,25 +228,10 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 endif
 
-$(OBJDIR)/State.o: src/State.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/MusicPlayer.o: src/MusicPlayer.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/ParallelTask.o: src/ParallelTask.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/StateStack.o: src/StateStack.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/CommandQueue.o: src/CommandQueue.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Keybinding.o: src/Keybinding.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Application.o: src/Application.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/main.o: src/main.cpp
@@ -256,6 +243,18 @@ $(OBJDIR)/World.o: src/World.cpp
 $(OBJDIR)/Entity.o: src/Entity.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/FpsCounter.o: src/Utils/FpsCounter.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/ParallelTask.o: src/Utils/ParallelTask.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Log.o: src/Utils/Log.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/MusicPlayer.o: src/Audio/MusicPlayer.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/LoadingState.o: src/Game/LoadingState.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -263,6 +262,15 @@ $(OBJDIR)/TestState.o: src/Game/TestState.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/TitleState.o: src/Game/TitleState.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/State.o: src/System/State.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/StateStack.o: src/System/StateStack.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Application.o: src/System/Application.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Menu.o: src/GUI/Menu.cpp

@@ -1,7 +1,7 @@
 #ifndef _TitleState_hpp_
 #define _TitleState_hpp_
 
-#include "../State.hpp"
+#include "../System/State.hpp"
 #include "../GUI/Menu.hpp"
 #include <SFML/Graphics.hpp>
 

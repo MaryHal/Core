@@ -1,7 +1,7 @@
 #include "TestState.hpp"
 
-#include "../ResourceHolder.hpp"
-#include "../ResourceIdentifiers.hpp"
+#include "../System/ResourceHolder.hpp"
+#include "../System/ResourceIdentifiers.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
