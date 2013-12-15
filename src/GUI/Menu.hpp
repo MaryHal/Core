@@ -16,12 +16,16 @@ class Menu : public sf::Drawable, public sf::Transformable
     bool handleEvent(const sf::Event& event);
     bool update(sf::Time dt);
 
+    const bool isSelected() const;
+    const std::string getSelection();
+
     private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
     private:
     std::vector<sf::Text> items;
     unsigned int index;
+    bool selected;
 };
 
 #endif // _Menu_hpp_

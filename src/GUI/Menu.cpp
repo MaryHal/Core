@@ -1,7 +1,7 @@
 #include "Menu.hpp"
 
 Menu::Menu()
-    : index(0)
+    : index(0), selected(false)
 {
 }
 
@@ -39,6 +39,10 @@ bool Menu::handleEvent(const sf::Event& event)
             if (index > items.size() - 1)
                 index = 0;
         }
+        if (event.key.code == sf::Keyboard::Return)
+        {
+            selected = true;
+        }
     }
     return true;
 }
@@ -62,5 +66,20 @@ void Menu::draw(sf::RenderTarget& target, sf::RenderStates states) const
     {
         target.draw(text, states);
     }
+}
+
+const bool Menu::isSelected() const
+{
+    return selected;
+}
+
+const std::string Menu::getSelection()
+{
+    if (selected)
+    {
+        selected = false;
+        return items[index].getString();
+    }
+    return "";
 }
 

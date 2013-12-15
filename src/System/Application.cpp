@@ -53,7 +53,7 @@ void Application::processEvents()
         {
             if (event.key.code == sf::Keyboard::Escape)
                 stateStack.clearStates();
-            else if (event.key.code == sf::Keyboard::BackSpace)
+            else if (event.key.code == sf::Keyboard::F12)
                 stateStack.popState();
         }
     }
