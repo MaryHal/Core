@@ -157,9 +157,12 @@ OBJECTS := \
 	$(OBJDIR)/main.o \
 	$(OBJDIR)/World.o \
 	$(OBJDIR)/Entity.o \
+	$(OBJDIR)/QuadTree.o \
 	$(OBJDIR)/FpsCounter.o \
 	$(OBJDIR)/ParallelTask.o \
+	$(OBJDIR)/StringUtils.o \
 	$(OBJDIR)/Log.o \
+	$(OBJDIR)/BinaryHeap.o \
 	$(OBJDIR)/MusicPlayer.o \
 	$(OBJDIR)/LoadingState.o \
 	$(OBJDIR)/TestState.o \
@@ -243,13 +246,22 @@ $(OBJDIR)/World.o: src/World.cpp
 $(OBJDIR)/Entity.o: src/Entity.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/QuadTree.o: src/Utils/QuadTree.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/FpsCounter.o: src/Utils/FpsCounter.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/ParallelTask.o: src/Utils/ParallelTask.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/StringUtils.o: src/Utils/StringUtils.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Log.o: src/Utils/Log.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/BinaryHeap.o: src/Utils/BinaryHeap.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/MusicPlayer.o: src/Audio/MusicPlayer.cpp
