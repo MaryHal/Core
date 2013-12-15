@@ -3,7 +3,7 @@
 
 #include "State.hpp"
 #include "ResourceIdentifiers.hpp"
-#include "StateIdentifiers.hpp"
+#include "../Identifiers.hpp"
 
 #include <SFML/System/NonCopyable.hpp>
 #include <SFML/System/Time.hpp>
@@ -23,7 +23,6 @@ class StateStack : private sf::NonCopyable
 {
     public:
         enum class Action { Push, Pop, Clear };
-
 
     public:
         explicit StateStack(State::Context context);

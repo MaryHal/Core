@@ -1,3 +1,4 @@
+#include "../Utils/Log.hpp"
 
 template <typename Resource, typename Identifier>
 void ResourceHolder<Resource, Identifier>::load(Identifier id, const std::string& filename)
@@ -28,7 +29,7 @@ template <typename Resource, typename Identifier>
 Resource& ResourceHolder<Resource, Identifier>::get(Identifier id)
 {
     auto found = resourceMap.find(id);
-    assert(found != resourceMap.end());
+    pAssert(found != resourceMap.end(), "Resource not found.");
 
     return *found->second;
 }
@@ -37,15 +38,28 @@ template <typename Resource, typename Identifier>
 const Resource& ResourceHolder<Resource, Identifier>::get(Identifier id) const
 {
     auto found = resourceMap.find(id);
-    assert(found != resourceMap.end());
+    pAssert(found != resourceMap.end(), "Resource not found.");
 
     return *found->second;
 }
+
+// template <typename Resource, typename Identifier>
+// const Resource& ResourceContainer<Resource, Identifier>::operator[](Identifier id) const
+// {
+//     return this->get(id);
+// }
+
+// template <typename Resource, typename Identifier>
+// Resource& ResourceContainer<Resource, Identifier>::operator[](Identifier id)
+// {
+//     return this->get(id);
+// }
 
 template <typename Resource, typename Identifier>
 void ResourceHolder<Resource, Identifier>::insertResource(Identifier id, std::unique_ptr<Resource> resource) 
 {
     // Insert and check success
     auto inserted = resourceMap.insert(std::make_pair(id, std::move(resource)));
-    assert(inserted.second);
+    pAssert(inserted.second, "Resource could not be inserted into ResourceMap.");
 }
+

@@ -5,7 +5,6 @@
 #include <string>
 #include <memory>
 #include <stdexcept>
-#include <cassert>
 
 template <typename Resource, typename Identifier>
 class ResourceHolder
@@ -18,6 +17,9 @@ class ResourceHolder
 
     Resource& get(Identifier id);
     const Resource& get(Identifier id) const;
+
+    // Resource& operator[](Identifier id);
+    // const Resource& operator[](Identifier id) const;
 
     protected:
     void insertResource(Identifier id, std::unique_ptr<Resource> resource);

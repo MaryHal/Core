@@ -2,21 +2,22 @@
 
 MusicPlayer::MusicPlayer()
     : mMusic()
-    , mFilenames()
+    , fileMap()
     , mVolume(100.f)
 {
-    mFilenames[Res::Music::main]    = "data/music/song1.flac";
-    mFilenames[Res::Music::other]   = "data/music/song2.wav";
 }
 
-void MusicPlayer::addSong(Res::Music song, std::string filename)
+void MusicPlayer::addSong(Res::Music identifier, const std::string& filename)
 {
-    mFilenames[song] = filename;
+    auto found = fileMap.find(identifier);
+    
+    if (found == fileMap.end())
+        fileMap[identifier] = filename;
 }
 
 void MusicPlayer::play(Res::Music theme)
 {
-    std::string filename = mFilenames[theme];
+    std::string filename = fileMap[theme];
 
     if (!mMusic.openFromFile(filename))
         throw std::runtime_error("Music " + filename + " could not be loaded.");

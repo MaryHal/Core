@@ -18,7 +18,7 @@ namespace Res
     enum class Fonts { normal };
     enum class Shaders {};
     enum class Sounds {};
-    enum class Music { main, other };
+    enum class Music { main };
 };
 
 

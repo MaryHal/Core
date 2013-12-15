@@ -1,7 +1,6 @@
 #ifndef _State_hpp_
 #define _State_hpp_
 
-#include "StateIdentifiers.hpp"
 #include "ResourceIdentifiers.hpp"
 #include "../Audio/MusicPlayer.hpp"
 

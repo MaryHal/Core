@@ -16,7 +16,7 @@ class MusicPlayer : private sf::NonCopyable
     public:
     MusicPlayer();
 
-    void addSong(Res::Music song, std::string filename);
+    void addSong(Res::Music song, const std::string& filename);
     void play(Res::Music theme);
     void stop();
     void pause();
@@ -26,7 +26,7 @@ class MusicPlayer : private sf::NonCopyable
 
     private:
     sf::Music mMusic;
-    std::map<Res::Music, std::string> mFilenames;
+    std::map<Res::Music, std::string> fileMap;
     float mVolume;
 };
 
