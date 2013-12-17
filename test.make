@@ -164,6 +164,7 @@ OBJECTS := \
 	$(OBJDIR)/Log.o \
 	$(OBJDIR)/BinaryHeap.o \
 	$(OBJDIR)/MusicPlayer.o \
+	$(OBJDIR)/PatternState.o \
 	$(OBJDIR)/LoadingState.o \
 	$(OBJDIR)/TestState.o \
 	$(OBJDIR)/TitleState.o \
@@ -265,6 +266,9 @@ $(OBJDIR)/BinaryHeap.o: src/Utils/BinaryHeap.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/MusicPlayer.o: src/Audio/MusicPlayer.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/PatternState.o: src/Game/PatternState.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/LoadingState.o: src/Game/LoadingState.cpp

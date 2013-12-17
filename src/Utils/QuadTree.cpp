@@ -30,7 +30,7 @@ bool QuadTreeNode::insert(sf::Vector2f* point)
         QuadTreeNode* node = getChild(point->x, point->y);
         if (node != nullptr)
         {
-            return node->put(point);
+            return node->insert(point);
         }
     }
     return false;
@@ -41,9 +41,9 @@ std::vector<sf::Vector2f*> QuadTreeNode::get(const sf::FloatRect& area,
 {
     if (children == nullptr)
     {
-        for (const sf::Vector2f* point : items)
+        for (sf::Vector2f* point : items)
         {
-            if (area.contains(point))
+            if (area.contains(*point))
             {
                 collection.push_back(point);
             }
@@ -88,12 +88,16 @@ QuadTree::QuadTree()
 
 bool QuadTree::insert(sf::Vector2f point)
 {
+    return false;
 }
 
 std::vector<sf::Vector2f*> QuadTree::get(float x, float y, float w, float h)
 {
+    return std::vector<sf::Vector2f*>();
 }
 
 std::vector<sf::Vector2f*> QuadTree::get(const sf::FloatRect& area)
 {
+    return std::vector<sf::Vector2f*>();
 }
+

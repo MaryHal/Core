@@ -13,6 +13,8 @@ void MusicPlayer::addSong(Res::Music identifier, const std::string& filename)
     
     if (found == fileMap.end())
         fileMap[identifier] = filename;
+    else
+        logf("Attempting to add  \'%s\' a second time", filename.c_str());
 }
 
 void MusicPlayer::play(Res::Music theme)

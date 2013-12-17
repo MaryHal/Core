@@ -3,6 +3,12 @@
 template <typename Resource, typename Identifier>
 void ResourceHolder<Resource, Identifier>::load(Identifier id, const std::string& filename)
 {
+    if (resourceMap.find(id) != resourceMap.end())
+    {
+        logf("Attempting to load \'%s\' a second time", filename.c_str());
+        return;
+    }
+
     // Create and load resource
     std::unique_ptr<Resource> resource(new Resource());
     if (!resource->loadFromFile(filename))
@@ -16,6 +22,12 @@ template <typename Resource, typename Identifier>
 template <typename Parameter>
 void ResourceHolder<Resource, Identifier>::load(Identifier id, const std::string& filename, const Parameter& secondParam)
 {
+    if (resourceMap.find(id) != resourceMap.end())
+    {
+        logf("Attempting to load \'%s\' a second time", filename.c_str());
+        return;
+    }
+
     // Create and load resource
     std::unique_ptr<Resource> resource(new Resource());
     if (!resource->loadFromFile(filename, secondParam))

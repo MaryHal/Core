@@ -39,10 +39,10 @@ class StateStack : private sf::NonCopyable
         void clearStates();
 
         bool isEmpty() const;
+        void applyPendingChanges();
 
     private:
         State::Ptr createState(States::ID stateID);
-        void applyPendingChanges();
 
     private:
         struct PendingChange
@@ -54,20 +54,20 @@ class StateStack : private sf::NonCopyable
         };
 
     private:
-        std::vector<State::Ptr> mStack;
-        std::vector<PendingChange> mPendingList;
+        std::vector<State::Ptr> stack;
+        std::vector<PendingChange> pendingChangeList;
 
-        State::Context mContext;
-        std::map<States::ID, std::function<State::Ptr()>> mFactories;
+        State::Context stateContext;
+        std::map<States::ID, std::function<State::Ptr()>> stateFactory;
 };
 
 
     template <typename T>
 void StateStack::registerState(States::ID stateID)
 {
-    mFactories[stateID] = [this] ()
+    stateFactory[stateID] = [this] ()
     {
-        return State::Ptr(new T(*this, mContext));
+        return State::Ptr(new T(*this, stateContext));
     };
 }
 

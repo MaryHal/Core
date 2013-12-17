@@ -3,11 +3,13 @@
 #include "Game/TitleState.hpp"
 #include "Game/TestState.hpp"
 #include "Game/LoadingState.hpp"
+#include "Game/PatternState.hpp"
 
 class MyApp : public Application
 {
     public:
         MyApp()
+            : Application()
         {
             registerStates();
         }
@@ -17,6 +19,7 @@ class MyApp : public Application
             // stateStack.registerState<LoadingState>(States::Loading);
             stateStack.registerState<TitleState>(States::Title);
             stateStack.registerState<TestState>(States::Test);
+            stateStack.registerState<PatternState>(States::Pattern);
         }
 };
 
