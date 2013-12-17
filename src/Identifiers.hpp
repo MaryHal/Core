@@ -8,7 +8,8 @@ namespace States
         None,
         Loading,
         Title,
-        Test
+        Test,
+        Pattern
     };
 }
 

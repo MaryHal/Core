@@ -16,6 +16,7 @@ Application::Application()
 void Application::run(States::ID initialState)
 {
     stateStack.pushState(States::Title);
+    stateStack.applyPendingChanges();
 
     sf::Clock clock;
     sf::Time timeSinceLastUpdate = sf::Time::Zero;
@@ -31,10 +32,14 @@ void Application::run(States::ID initialState)
             processEvents();
             update(timePerFrame);
 
-            if (stateStack.isEmpty())
-                window.close();
-        }
+            stateStack.applyPendingChanges();
 
+            if (stateStack.isEmpty())
+            {
+                window.close();
+                break;
+            }
+        }
         render();
     }
 }
