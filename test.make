@@ -168,6 +168,7 @@ OBJECTS := \
 	$(OBJDIR)/LoadingState.o \
 	$(OBJDIR)/TestState.o \
 	$(OBJDIR)/TitleState.o \
+	$(OBJDIR)/Bullet.o \
 	$(OBJDIR)/State.o \
 	$(OBJDIR)/StateStack.o \
 	$(OBJDIR)/Application.o \
@@ -278,6 +279,9 @@ $(OBJDIR)/TestState.o: src/Game/TestState.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/TitleState.o: src/Game/TitleState.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Bullet.o: src/Game/Bullet/Bullet.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/State.o: src/System/State.cpp
