@@ -16,6 +16,7 @@ TitleState::TitleState(StateStack& stack, Context context)
         context.textures->load(Res::Textures::bg1, "data/bg/Frac2.png");
         context.textures->load(Res::Textures::bg2, "data/bg/Frac3.png");
         context.music->addSong(Res::Music::main,   "data/music/ReflectionEternal.ogg");
+        context.music->addSong(Res::Music::main2,  "data/music/Melodica.ogg");
     }
     catch (std::runtime_error& e)
     {
@@ -72,6 +73,8 @@ bool TitleState::handleEvent(const sf::Event& event)
     {
         if (event.key.code == sf::Keyboard::J)
             getContext().music->play(Res::Music::main);
+        else if (event.key.code == sf::Keyboard::K)
+            getContext().music->play(Res::Music::main2);
         else if (event.key.code == sf::Keyboard::Space)
             getContext().music->pause();
         else if (event.key.code == sf::Keyboard::T)
@@ -79,4 +82,3 @@ bool TitleState::handleEvent(const sf::Event& event)
     }
     return false;
 }
-
