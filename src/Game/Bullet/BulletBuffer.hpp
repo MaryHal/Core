@@ -3,8 +3,7 @@
 
 #include <array>
 #include <SFML/Graphics.hpp>
-
-class Bullet;
+#include "Bullet.hpp"
 
 class BulletBuffer : public sf::Drawable
 {
