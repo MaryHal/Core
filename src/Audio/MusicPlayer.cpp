@@ -56,3 +56,13 @@ void MusicPlayer::setPaused(bool paused)
         mMusic.play();
 }
 
+void MusicPlayer::absSeek(sf::Time offset)
+{
+    mMusic.setPlayingOffset(offset);
+}
+
+void MusicPlayer::relSeek(sf::Time offset)
+{
+    mMusic.setPlayingOffset(mMusic.getPlayingOffset() + offset);
+}
+

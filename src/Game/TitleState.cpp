@@ -75,6 +75,10 @@ bool TitleState::handleEvent(const sf::Event& event)
             getContext().music->play(Res::Music::main);
         else if (event.key.code == sf::Keyboard::K)
             getContext().music->play(Res::Music::main2);
+        else if (event.key.code == sf::Keyboard::A)
+            getContext().music->relSeek(sf::seconds(-2.0f));
+        else if (event.key.code == sf::Keyboard::D)
+            getContext().music->relSeek(sf::seconds(2.0f));
         else if (event.key.code == sf::Keyboard::Space)
             getContext().music->pause();
         else if (event.key.code == sf::Keyboard::T)
@@ -82,3 +86,4 @@ bool TitleState::handleEvent(const sf::Event& event)
     }
     return false;
 }
+
