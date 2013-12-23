@@ -23,6 +23,8 @@ class MusicPlayer : private sf::NonCopyable
 
     void setPaused(bool paused);
     void setVolume(float volume);
+    void absSeek(sf::Time offset);
+    void relSeek(sf::Time offset);
 
     private:
     sf::Music mMusic;
