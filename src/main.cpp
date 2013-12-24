@@ -4,6 +4,7 @@
 #include "Game/TestState.hpp"
 #include "Game/LoadingState.hpp"
 #include "Game/PatternState.hpp"
+#include "Game/MusicState.hpp"
 
 class MyApp : public Application
 {
@@ -20,6 +21,7 @@ class MyApp : public Application
             stateStack.registerState<TitleState>(States::Title);
             stateStack.registerState<TestState>(States::Test);
             stateStack.registerState<PatternState>(States::Pattern);
+            stateStack.registerState<MusicState>(States::Music);
         }
 };
 

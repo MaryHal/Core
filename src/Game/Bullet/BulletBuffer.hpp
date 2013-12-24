@@ -12,9 +12,9 @@ class BulletBuffer
         static sf::CircleShape sprite;
 
     public:
-    static void initialize();
-    static void fire();
-    static void destroy();
+        static void initialize();
+        static void fire();
+        static void destroy();
 
         static void update();
 
