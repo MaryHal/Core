@@ -9,13 +9,14 @@ namespace States
         Loading,
         Title,
         Test,
-        Pattern
+        Pattern,
+        Music
     };
 }
 
 namespace Res
 {
-    enum class Textures { bg1, bg2 };
+    enum class Textures { bg1, bg2, musicbg };
     enum class Fonts { normal };
     enum class Shaders {};
     enum class Sounds {};

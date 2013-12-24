@@ -4,6 +4,21 @@ sf::CircleShape BulletBuffer::sprite(2);
 std::array<Bullet, BulletBuffer::MAX> BulletBuffer::bullets = {};
 unsigned int BulletBuffer::used = 0;
 
+void BulletBuffer::initialize()
+{
+    bullets = {};
+    used = 0;
+}
+
+void BulletBuffer::fire()
+{
+
+}
+
+void BulletBuffer::destroy()
+{
+}
+
 void BulletBuffer::update()
 {
     for (unsigned int i = 0; i < used; ++i)
