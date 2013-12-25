@@ -152,11 +152,7 @@ ifeq ($(config),release64)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/CommandQueue.o \
-	$(OBJDIR)/Keybinding.o \
 	$(OBJDIR)/main.o \
-	$(OBJDIR)/World.o \
-	$(OBJDIR)/Entity.o \
 	$(OBJDIR)/QuadTree.o \
 	$(OBJDIR)/FpsCounter.o \
 	$(OBJDIR)/ParallelTask.o \
@@ -235,19 +231,7 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 endif
 
-$(OBJDIR)/CommandQueue.o: src/CommandQueue.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Keybinding.o: src/Keybinding.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/main.o: src/main.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/World.o: src/World.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Entity.o: src/Entity.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/QuadTree.o: src/Utils/QuadTree.cpp
