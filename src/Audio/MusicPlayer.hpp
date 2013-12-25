@@ -26,6 +26,11 @@ class MusicPlayer : private sf::NonCopyable
     void absSeek(sf::Time offset);
     void relSeek(sf::Time offset);
 
+    sf::Time getTime() const;
+    sf::Time getDuration() const;
+
+    /* sf::Music& getMusic(); */
+
     private:
     sf::Music mMusic;
     std::map<Res::Music, std::string> fileMap;

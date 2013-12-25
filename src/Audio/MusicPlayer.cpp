@@ -66,3 +66,19 @@ void MusicPlayer::relSeek(sf::Time offset)
     mMusic.setPlayingOffset(mMusic.getPlayingOffset() + offset);
 }
 
+sf::Time MusicPlayer::getTime() const
+{
+    return mMusic.getPlayingOffset();
+}
+
+sf::Time MusicPlayer::getDuration() const
+{
+    return mMusic.getDuration();
+}
+
+// sf::Music& MusicPlayer::getMusic()
+// {
+//     return mMusic;
+// }
+
+

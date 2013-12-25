@@ -8,15 +8,20 @@
 class MusicState : public State
 {
     public:
-    MusicState(StateStack& stack, Context context);
+        MusicState(StateStack& stack, Context context);
 
-    virtual void draw();
-    virtual bool update(sf::Time dt);
-    virtual bool handleEvent(const sf::Event& event);
+        virtual void draw();
+        virtual bool update(sf::Time dt);
+        virtual bool handleEvent(const sf::Event& event);
 
     private:
-    sf::Sprite bg;
-    Menu menu;
+        sf::Sprite bg;
+
+        sf::RectangleShape progressBar;
+        sf::RectangleShape fullBar;;
+        sf::Text progressText;
+
+        Menu menu;
 };
 
 #endif // _MusicState_hpp_
