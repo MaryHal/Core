@@ -65,12 +65,16 @@ void MusicPlayer::setPaused(bool paused)
 
 void MusicPlayer::absSeek(sf::Time offset)
 {
-    mMusic.setPlayingOffset(offset);
+    sf::Time current = mMusic.getPlayingOffset();
+    if (current + offset > sf::Time::Zero)
+        mMusic.setPlayingOffset(offset);
 }
 
 void MusicPlayer::relSeek(sf::Time offset)
 {
-    mMusic.setPlayingOffset(mMusic.getPlayingOffset() + offset);
+    sf::Time current = mMusic.getPlayingOffset();
+    if (current + offset > sf::Time::Zero)
+        mMusic.setPlayingOffset(mMusic.getPlayingOffset() + offset);
 }
 
 void MusicPlayer::setLoop(bool loop)
