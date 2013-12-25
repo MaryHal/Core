@@ -1,4 +1,5 @@
 #include "MusicPlayer.hpp"
+#include "../Utils/Log.hpp"
 
 MusicPlayer::MusicPlayer()
     : mMusic()
@@ -48,6 +49,12 @@ void MusicPlayer::setVolume(float volume)
     mMusic.setVolume(mVolume);
 }
 
+bool MusicPlayer::getVolume() const
+{
+    pAssert(mVolume == mMusic.getVolume(), "MusicPlayer volume level mismatch");
+    return mVolume;
+}
+
 void MusicPlayer::setPaused(bool paused)
 {
     if (paused)
@@ -66,6 +73,16 @@ void MusicPlayer::relSeek(sf::Time offset)
     mMusic.setPlayingOffset(mMusic.getPlayingOffset() + offset);
 }
 
+void MusicPlayer::setLoop(bool loop)
+{
+    mMusic.setLoop(loop);
+}
+
+bool MusicPlayer::getLoop() const
+{
+    return mMusic.getLoop();
+}
+
 sf::Time MusicPlayer::getTime() const
 {
     return mMusic.getPlayingOffset();
@@ -80,5 +97,4 @@ sf::Time MusicPlayer::getDuration() const
 // {
 //     return mMusic;
 // }
-
 
