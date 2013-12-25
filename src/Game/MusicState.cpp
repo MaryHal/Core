@@ -29,6 +29,20 @@ MusicState::MusicState(StateStack& stack, Context context)
     menu.addItem(L"Melodica", font, 16);
     menu.addItem(L"ReflectionEternal", font, 16);
     menu.build();
+
+    fullBar.setOutlineColor(sf::Color(255, 255, 255, 128));
+    fullBar.setOutlineThickness(2);
+    fullBar.setFillColor(sf::Color::Transparent);
+    fullBar.setPosition(8.0f, 48.0f);
+    fullBar.setSize(sf::Vector2f(320.0f, 8.0f));
+
+    progressBar.setFillColor(sf::Color(128, 0, 128, 200));
+    progressBar.setPosition(8.0f, 48.0f);
+    progressBar.setSize(sf::Vector2f(0.0f, 8.0f));
+
+    progressText.setFont(font);
+    progressText.setString("");
+    progressText.setPosition(8.0f, 8.0f);
 }
 
 void MusicState::draw()
@@ -36,6 +50,9 @@ void MusicState::draw()
     sf::RenderWindow& window = *getContext().window;
 
     window.draw(bg);
+    window.draw(progressText);
+    window.draw(progressBar);
+    window.draw(fullBar);
     window.draw(menu);
 }
 
@@ -56,6 +73,15 @@ bool MusicState::update(sf::Time dt)
             getContext().music->play(Res::Music::main);
         }
     }
+
+    float currentTime = getContext().music->getTime().asSeconds();
+    float duration    = getContext().music->getDuration().asSeconds();
+    float ratio       = currentTime / duration;
+    progressText.setString(std::to_string(currentTime) + 
+                           " / " +
+                           std::to_string(duration));
+
+    progressBar.setSize(sf::Vector2f(ratio * 320.0f, 8.0f));
 
     return false;
 }
