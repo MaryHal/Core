@@ -70,3 +70,4 @@ std::string numberString(int number)
 
     return result;
 }
+
