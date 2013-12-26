@@ -19,7 +19,7 @@ TitleState::TitleState(StateStack& stack, Context context)
     }
     catch (std::runtime_error& e)
     {
-        logf("Resource loading block failed: %s", e.what());
+        Console::logf("Resource loading block failed: %s", e.what());
     }
 
     bg.setTexture(context.textures->get(Res::Textures::bg1));

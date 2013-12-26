@@ -3,6 +3,8 @@
 #include "../System/ResourceIdentifiers.hpp"
 #include "../Utils/Log.hpp"
 
+#include <queue>
+
 PatternState::PatternState(StateStack& stack, Context context)
     : State(stack, context)
 {
@@ -15,16 +17,32 @@ PatternState::PatternState(StateStack& stack, Context context)
     }
     catch (std::runtime_error& e)
     {
-        logf("Resource loading block failed: %s", e.what());
+        Console::logf("Resource loading block failed: %s", e.what());
     }
+
+    Bullet::StepFunc f1 = [this](Bullet* b) 
+    {
+        b->setSpeed(30);
+        b->setWait(2);
+        b->setCircle(10, 60);
+    };
+
+    std::queue<Bullet::StepFunc> a;
+    a.push(f1);
+
+    Bullet* b = BulletBuffer::fire();
+    b->initialize(sf::Vector2f(320.0f, 320.0f), 20, 3 * 3.14/4, a);
 }
 
 void PatternState::draw()
 {
+    sf::RenderWindow& window = *getContext().window;
+    BulletBuffer::draw(window);
 }
 
 bool PatternState::update(sf::Time dt)
 {
+    BulletBuffer::update();
     return false;
 }
 

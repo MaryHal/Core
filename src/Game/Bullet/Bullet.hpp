@@ -35,11 +35,15 @@ class Bullet
         void setWait(int newWait);
 
         void stop();
+        void clear();
 
         const sf::Vector2f& getPosition() const;
 
         // Update bullet (move and perform step functions)
         void update();
+
+        void setIndex(int i);
+        const int getIndex() const;
 
     protected:
         void move();
@@ -64,6 +68,8 @@ class Bullet
 
         int wait;
         std::queue<StepFunc> stepFunctionQueue;
+
+        unsigned int index;
 };
 
 #endif // _Bullet_hpp_
