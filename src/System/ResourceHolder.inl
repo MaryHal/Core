@@ -5,7 +5,7 @@ void ResourceHolder<Resource, Identifier>::load(Identifier id, const std::string
 {
     if (resourceMap.find(id) != resourceMap.end())
     {
-        logf("Attempting to load \'%s\' a second time", filename.c_str());
+        Console::logf("Attempting to load \'%s\' a second time", filename.c_str());
         return;
     }
 
@@ -24,7 +24,7 @@ void ResourceHolder<Resource, Identifier>::load(Identifier id, const std::string
 {
     if (resourceMap.find(id) != resourceMap.end())
     {
-        logf("Attempting to load \'%s\' a second time", filename.c_str());
+        Console::logf("Attempting to load \'%s\' a second time", filename.c_str());
         return;
     }
 

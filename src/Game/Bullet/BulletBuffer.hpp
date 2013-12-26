@@ -13,13 +13,13 @@ class BulletBuffer
 
     public:
         static void initialize();
-        static void fire();
-        static void destroy();
+        static Bullet* fire();
+        static void destroy(Bullet& b);
 
         static void update();
+        static void draw(sf::RenderTarget& target);
 
     private:
-        static void draw(sf::RenderTarget& target, sf::RenderStates states);
         static void swap(int index1, int index2);
 
     private:

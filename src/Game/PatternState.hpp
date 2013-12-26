@@ -3,15 +3,17 @@
 
 #include "../System/State.hpp"
 #include <SFML/Graphics.hpp>
+#include "Bullet/Bullet.hpp"
+#include "Bullet/BulletBuffer.hpp"
 
 class PatternState : public State
 {
     public:
-    PatternState(StateStack& stack, Context context);
+        PatternState(StateStack& stack, Context context);
 
-    virtual void draw();
-    virtual bool update(sf::Time dt);
-    virtual bool handleEvent(const sf::Event& event);
+        virtual void draw();
+        virtual bool update(sf::Time dt);
+        virtual bool handleEvent(const sf::Event& event);
 
     private:
 };

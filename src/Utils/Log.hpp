@@ -13,7 +13,11 @@ void failedAssert(const std::string& condition,
 #define pAssert(x,y) {}
 #endif
 
-void logf(const char* format, ...);
-void log(const std::string& str);
+class Console
+{
+    public:
+        static void logf(const char* format, ...);
+        static void log(const std::string& str);
+};
 
 #endif // _Log_hpp_

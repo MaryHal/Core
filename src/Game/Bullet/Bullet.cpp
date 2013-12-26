@@ -95,15 +95,38 @@ void Bullet::stop()
     accelLife = 0;
 }
 
+void Bullet::clear()
+{
+    stop();
+
+    // Clear step function queue
+    std::queue<StepFunc>().swap(stepFunctionQueue);
+}
+
 void Bullet::update()
 {
     move();
     step();
 }
 
+const sf::Vector2f& Bullet::getPosition() const
+{
+    return position;
+}
+
+void Bullet::setIndex(int i)
+{
+    index = i;
+}
+
+const int Bullet::getIndex() const
+{
+    return index;
+}
+
 void Bullet::move()
 {
-    // TODO: Cache speed * std::sin/code(angle) so we don't have to calculate it every time.
+    // TODO: Cache (speed * std::sin/code(angle)) so we don't have to calculate it every time.
     // (Only if we aren't chaning speed/angle of course)
     position.x += speed * std::cos(angle);
     position.y += speed * std::sin(angle);
@@ -129,10 +152,5 @@ void Bullet::step()
         stepFunctionQueue.front()(this);
         stepFunctionQueue.pop();
     }
-}
-
-const sf::Vector2f& Bullet::getPosition() const
-{
-    return position;
 }
 

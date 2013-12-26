@@ -8,14 +8,14 @@ void failedAssert(const std::string& condition,
                   const char* file,
                   int line)
 {
-    logf("## Failed Assertion ##");
-    logf("Condition: (%s)", condition.c_str());
-    logf("Assertion: %s", message.c_str());
-    logf("At: %s:%d", file, line);
+    Console::logf("## Failed Assertion ##");
+    Console::logf("Condition: (%s)", condition.c_str());
+    Console::logf("Assertion: %s", message.c_str());
+    Console::logf("At: %s:%d", file, line);
     exit(1);
 }
 
-void logf(const char *format, ...)
+void Console::logf(const char *format, ...)
 {
     char sz[1024];
     va_list marker;
@@ -29,7 +29,7 @@ void logf(const char *format, ...)
     log(str);
 }
 
-void log(const std::string& str)
+void Console::log(const std::string& str)
 {
     fprintf(stdout, "%s\n", str.c_str());
 }

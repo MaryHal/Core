@@ -72,3 +72,4 @@ void StateStack::registerState(States::ID stateID)
 }
 
 #endif // _StateStack_hpp_
+
