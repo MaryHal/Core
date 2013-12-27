@@ -22,16 +22,19 @@ PatternState::PatternState(StateStack& stack, Context context)
 
     Bullet::StepFunc f1 = [this](Bullet* b) 
     {
-        b->setSpeed(30);
-        b->setWait(2);
-        b->setCircle(10, 60);
+        b->setWait(20);
+        b->setSpeed(10);
+        b->setCircle(0.2, 180);
     };
 
     std::queue<Bullet::StepFunc> a;
     a.push(f1);
 
-    Bullet* b = BulletBuffer::fire();
-    b->initialize(sf::Vector2f(320.0f, 320.0f), 20, 3 * 3.14/4, a);
+    for (float x = 0.0f; x < 3.14 * 2; x += 3.14 / 2)
+    {
+        Bullet* b = BulletBuffer::fire();
+        b->initialize(sf::Vector2f(320.0f, 320.0f), 5, x, a);
+    }
 }
 
 void PatternState::draw()
