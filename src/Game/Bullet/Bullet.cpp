@@ -103,12 +103,6 @@ void Bullet::clear()
     std::queue<StepFunc>().swap(stepFunctionQueue);
 }
 
-void Bullet::update()
-{
-    move();
-    step();
-}
-
 const sf::Vector2f& Bullet::getPosition() const
 {
     return position;

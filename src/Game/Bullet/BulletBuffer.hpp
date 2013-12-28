@@ -8,6 +8,7 @@
 class BulletBuffer
 {
     public:
+        static const std::queue<Bullet::StepFunc> nullList;
         static const int MAX = 1024;
         static sf::CircleShape sprite;
 

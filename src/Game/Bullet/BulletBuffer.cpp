@@ -1,7 +1,9 @@
 #include "BulletBuffer.hpp"
 #include "../../Utils/Log.hpp"
 
+const std::queue<Bullet::StepFunc> BulletBuffer::nullList;
 sf::CircleShape BulletBuffer::sprite(2);
+
 std::array<Bullet, BulletBuffer::MAX> BulletBuffer::bullets = {};
 unsigned int BulletBuffer::used = 0;
 
@@ -31,7 +33,7 @@ void BulletBuffer::update()
 {
     for (unsigned int i = 0; i < used; ++i)
     {
-        bullets[i].update();
+        bullets[i].move();
         sf::Vector2f pos = bullets[i].getPosition();
 
         bool xValid = (pos.x < 640.0f);
@@ -41,6 +43,8 @@ void BulletBuffer::update()
         {
             BulletBuffer::destroy(bullets[i]);
         }
+
+        bullets[i].step();
     }
 }
 

@@ -39,13 +39,9 @@ class Bullet
 
         const sf::Vector2f& getPosition() const;
 
-        // Update bullet (move and perform step functions)
-        void update();
-
         void setIndex(int i);
         const int getIndex() const;
 
-    protected:
         void move();
         void step();
 
