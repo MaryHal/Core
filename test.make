@@ -159,6 +159,7 @@ OBJECTS := \
 	$(OBJDIR)/StringUtils.o \
 	$(OBJDIR)/Log.o \
 	$(OBJDIR)/BinaryHeap.o \
+	$(OBJDIR)/Math.o \
 	$(OBJDIR)/MusicPlayer.o \
 	$(OBJDIR)/PatternState.o \
 	$(OBJDIR)/LoadingState.o \
@@ -167,6 +168,7 @@ OBJECTS := \
 	$(OBJDIR)/MusicState.o \
 	$(OBJDIR)/Bullet.o \
 	$(OBJDIR)/BulletBuffer.o \
+	$(OBJDIR)/easy.o \
 	$(OBJDIR)/State.o \
 	$(OBJDIR)/StateStack.o \
 	$(OBJDIR)/Application.o \
@@ -252,6 +254,9 @@ $(OBJDIR)/Log.o: src/Utils/Log.cpp
 $(OBJDIR)/BinaryHeap.o: src/Utils/BinaryHeap.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Math.o: src/Math/Math.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/MusicPlayer.o: src/Audio/MusicPlayer.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -274,6 +279,9 @@ $(OBJDIR)/Bullet.o: src/Game/Bullet/Bullet.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/BulletBuffer.o: src/Game/Bullet/BulletBuffer.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/easy.o: src/Game/Bullet/Patterns/easy.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/State.o: src/System/State.cpp

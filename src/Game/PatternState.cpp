@@ -3,7 +3,7 @@
 #include "../System/ResourceIdentifiers.hpp"
 #include "../Utils/Log.hpp"
 
-#include <queue>
+#include "Bullet/Patterns/easy.hpp"
 
 PatternState::PatternState(StateStack& stack, Context context)
     : State(stack, context)
@@ -20,34 +20,13 @@ PatternState::PatternState(StateStack& stack, Context context)
         Console::logf("Resource loading block failed: %s", e.what());
     }
 
-    Bullet::StepFunc f1 = [this](Bullet* b) 
-    {
-        b->setWait(20);
-    };
-    Bullet::StepFunc f2 = [this](Bullet* b) 
-    {
-        b->stop();
-    };
-    Bullet::StepFunc f3 = [this](Bullet* b) 
-    {
-        b->setSpeed(10);
-    };
-    Bullet::StepFunc f4 = [this](Bullet* b) 
-    {
-        b->setCircle(0.2, 180);
-    };
-
-    std::queue<Bullet::StepFunc> a;
-    a.push(f1);
-    a.push(f2);
-    a.push(f3);
-    a.push(f4);
-
-    for (float x = 0.0f; x < 3.14 * 2; x += 3.14 / 2)
-    {
-        Bullet* b = BulletBuffer::fire();
-        b->initialize(sf::Vector2f(320.0f, 320.0f), 4, x, a);
-    }
+    // for (float x = 0.0f; x < 3.14 * 2; x += 3.14 / 2)
+    // {
+    //     Bullet* b = BulletBuffer::fire();
+    //     b->initialize(sf::Vector2f(320.0f, 320.0f), 4, x, a);
+    // }
+    BulletBuffer::initialize();
+    Bullet* b =  genBulletFunc_2f8ce762a4f0544ddd5536127bb805a1(320.0f, 160.0f);
 }
 
 void PatternState::draw()
