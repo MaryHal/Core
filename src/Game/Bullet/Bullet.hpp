@@ -8,6 +8,7 @@
 class Bullet
 {
     public:
+        static constexpr float DEFAULT_ANGLE = 180.0f;
         typedef std::function<void(Bullet*)> StepFunc;
 
     public:
@@ -16,7 +17,7 @@ class Bullet
 
         void initialize(sf::Vector2f position,
                         float speed, float angle,
-                        std::queue<StepFunc> stepFunctions);
+                        const StepFunc* stepFunctions);
 
         // Methods to interface with bullets from step functions
         void setCircle(float speed, int life);
@@ -24,7 +25,9 @@ class Bullet
         const int getAccelLife() const;
 
         void setAngle(float newAngle);
+        float getAngle();
         void setSpeed(float newSpeed);
+        float getSpeed();
         void setSpeedAndAngle(float newSpeed, float newAngle);
 
         const int getLife() const;
@@ -39,11 +42,13 @@ class Bullet
 
         const sf::Vector2f& getPosition() const;
 
-        void setIndex(int i);
-        const int getIndex() const;
-
         void move();
         void step();
+
+        unsigned int index;
+        bool active;
+        float lastAngle;
+        float lastSpeed;
 
     private:
         sf::Vector2f position;
@@ -63,9 +68,7 @@ class Bullet
         int life;
 
         int wait;
-        std::queue<StepFunc> stepFunctionQueue;
-
-        unsigned int index;
+        const StepFunc* stepFunctionList; 
 };
 
 #endif // _Bullet_hpp_

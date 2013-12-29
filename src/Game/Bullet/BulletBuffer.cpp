@@ -5,34 +5,40 @@ const std::queue<Bullet::StepFunc> BulletBuffer::nullList;
 sf::CircleShape BulletBuffer::sprite(2);
 
 std::array<Bullet, BulletBuffer::MAX> BulletBuffer::bullets = {};
-unsigned int BulletBuffer::used = 0;
+std::stack<Bullet*> BulletBuffer::unused;
 
 void BulletBuffer::initialize()
 {
-    bullets = {};
-    used = 0;
+    for (unsigned int i = BulletBuffer::MAX - 1; i > 0; --i)
+    {
+        bullets[i].initialize(sf::Vector2f(0.0f, 0.0f), 0.0f, 0.0f, nullptr);
+        unused.push(&bullets[i]);
+    }
 }
 
-Bullet* BulletBuffer::fire()
+Bullet* BulletBuffer::makeNewBullet()
 {
-    Bullet& b = bullets[used];
-    b.setIndex(used);
-    used++;
+    Bullet* b = unused.top();
+    b->active = true;
+    unused.pop();
 
-    return &b;
+    return b;
 }
 
-void BulletBuffer::destroy(Bullet& b)
+void BulletBuffer::destroy(Bullet* b)
 {
-    b.clear();
-    swap(used, b.getIndex());
-    --used;
+    b->active = false;
+    unused.push(b);
 }
 
 void BulletBuffer::update()
 {
-    for (unsigned int i = 0; i < used; ++i)
+    Console::logf("%d", BulletBuffer::MAX - unused.size());
+    for (unsigned int i = 0; i < BulletBuffer::MAX; ++i)
     {
+        if (!bullets[i].active)
+            return;
+
         bullets[i].move();
         sf::Vector2f pos = bullets[i].getPosition();
 
@@ -41,7 +47,7 @@ void BulletBuffer::update()
 
         if ((xValid & yValid) == 0) 
         {
-            BulletBuffer::destroy(bullets[i]);
+            BulletBuffer::destroy(&bullets[i]);
         }
 
         bullets[i].step();
@@ -50,8 +56,11 @@ void BulletBuffer::update()
 
 void BulletBuffer::draw(sf::RenderTarget& target)
 {
-    for (unsigned int i = 0; i < used; ++i)
+    for (unsigned int i = 0; i < BulletBuffer::MAX; ++i)
     {
+        if (!bullets[i].active)
+            return;
+
         BulletBuffer::sprite.setPosition(bullets[i].getPosition());
         BulletBuffer::sprite.setFillColor(sf::Color(255, 255, 255, 255));
         target.draw(BulletBuffer::sprite);

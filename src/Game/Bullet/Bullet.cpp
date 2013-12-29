@@ -11,11 +11,14 @@ Bullet::~Bullet()
 
 void Bullet::initialize(sf::Vector2f position,
                         float speed, float angle,
-                        std::queue<StepFunc> stepFunctions)
+                        const StepFunc* stepFunctions)
 {
     this->position = position;
     this->speed = speed;
     this->angle = angle;
+
+    lastSpeed = speed;
+    lastAngle = angle;
 
     circleSpeed = 0;
     circleLife = 0;
@@ -25,7 +28,7 @@ void Bullet::initialize(sf::Vector2f position,
 
     life = 0;
     wait = 0;
-    this->stepFunctionQueue = stepFunctions;
+    this->stepFunctionList = stepFunctions;
 }
 
 void Bullet::setCircle(float speed, int life)
@@ -50,9 +53,19 @@ void Bullet::setAngle(float newAngle)
     angle = newAngle;
 }
 
+float Bullet::getAngle()
+{
+    return angle;
+}
+
 void Bullet::setSpeed(float newSpeed)
 {
     speed = newSpeed;
+}
+
+float Bullet::getSpeed()
+{
+    return speed;
 }
 
 void Bullet::setSpeedAndAngle(float newSpeed, float newAngle)
@@ -99,23 +112,14 @@ void Bullet::clear()
 {
     stop();
 
-    // Clear step function queue
-    std::queue<StepFunc>().swap(stepFunctionQueue);
+    // Clear step function list
+    // std::queue<StepFunc>().swap(stepFunctionQueue);
+    stepFunctionList = nullptr;
 }
 
 const sf::Vector2f& Bullet::getPosition() const
 {
     return position;
-}
-
-void Bullet::setIndex(int i)
-{
-    index = i;
-}
-
-const int Bullet::getIndex() const
-{
-    return index;
 }
 
 void Bullet::move()
@@ -141,10 +145,10 @@ void Bullet::move()
 void Bullet::step()
 {
     wait -= (wait > 0);
-    while (wait == 0 && !stepFunctionQueue.empty())
+    while (wait == 0 && stepFunctionList != nullptr)
     {
-        stepFunctionQueue.front()(this);
-        stepFunctionQueue.pop();
+        (*stepFunctionList)(this);
+        ++stepFunctionList;
     }
 }
 
