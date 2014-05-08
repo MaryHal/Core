@@ -1,0 +1,127 @@
+[
+{
+  "directory": "/home/sanford/code/current/tripping-octo-avenger",
+  "command": "g++ -MMD -MP -DDEBUG -g -Wall -std=c++11 -o obj/Debug/main.o -c src/main.cpp",
+  "file": "/home/sanford/code/current/tripping-octo-avenger/src/main.cpp"
+}
+,
+{
+  "directory": "/home/sanford/code/current/tripping-octo-avenger",
+  "command": "g++ -MMD -MP -DDEBUG -g -Wall -std=c++11 -o obj/Debug/QuadTree.o -c src/Utils/QuadTree.cpp",
+  "file": "/home/sanford/code/current/tripping-octo-avenger/src/Utils/QuadTree.cpp"
+}
+,
+{
+  "directory": "/home/sanford/code/current/tripping-octo-avenger",
+  "command": "g++ -MMD -MP -DDEBUG -g -Wall -std=c++11 -o obj/Debug/FpsCounter.o -c src/Utils/FpsCounter.cpp",
+  "file": "/home/sanford/code/current/tripping-octo-avenger/src/Utils/FpsCounter.cpp"
+}
+,
+{
+  "directory": "/home/sanford/code/current/tripping-octo-avenger",
+  "command": "g++ -MMD -MP -DDEBUG -g -Wall -std=c++11 -o obj/Debug/ParallelTask.o -c src/Utils/ParallelTask.cpp",
+  "file": "/home/sanford/code/current/tripping-octo-avenger/src/Utils/ParallelTask.cpp"
+}
+,
+{
+  "directory": "/home/sanford/code/current/tripping-octo-avenger",
+  "command": "g++ -MMD -MP -DDEBUG -g -Wall -std=c++11 -o obj/Debug/StringUtils.o -c src/Utils/StringUtils.cpp",
+  "file": "/home/sanford/code/current/tripping-octo-avenger/src/Utils/StringUtils.cpp"
+}
+,
+{
+  "directory": "/home/sanford/code/current/tripping-octo-avenger",
+  "command": "g++ -MMD -MP -DDEBUG -g -Wall -std=c++11 -o obj/Debug/Log.o -c src/Utils/Log.cpp",
+  "file": "/home/sanford/code/current/tripping-octo-avenger/src/Utils/Log.cpp"
+}
+,
+{
+  "directory": "/home/sanford/code/current/tripping-octo-avenger",
+  "command": "g++ -MMD -MP -DDEBUG -g -Wall -std=c++11 -o obj/Debug/BinaryHeap.o -c src/Utils/BinaryHeap.cpp",
+  "file": "/home/sanford/code/current/tripping-octo-avenger/src/Utils/BinaryHeap.cpp"
+}
+,
+{
+  "directory": "/home/sanford/code/current/tripping-octo-avenger",
+  "command": "g++ -MMD -MP -DDEBUG -g -Wall -std=c++11 -o obj/Debug/Math.o -c src/Math/Math.cpp",
+  "file": "/home/sanford/code/current/tripping-octo-avenger/src/Math/Math.cpp"
+}
+,
+{
+  "directory": "/home/sanford/code/current/tripping-octo-avenger",
+  "command": "g++ -MMD -MP -DDEBUG -g -Wall -std=c++11 -o obj/Debug/MusicPlayer.o -c src/Audio/MusicPlayer.cpp",
+  "file": "/home/sanford/code/current/tripping-octo-avenger/src/Audio/MusicPlayer.cpp"
+}
+,
+{
+  "directory": "/home/sanford/code/current/tripping-octo-avenger",
+  "command": "g++ -MMD -MP -DDEBUG -g -Wall -std=c++11 -o obj/Debug/PatternState.o -c src/Game/PatternState.cpp",
+  "file": "/home/sanford/code/current/tripping-octo-avenger/src/Game/PatternState.cpp"
+}
+,
+{
+  "directory": "/home/sanford/code/current/tripping-octo-avenger",
+  "command": "g++ -MMD -MP -DDEBUG -g -Wall -std=c++11 -o obj/Debug/LoadingState.o -c src/Game/LoadingState.cpp",
+  "file": "/home/sanford/code/current/tripping-octo-avenger/src/Game/LoadingState.cpp"
+}
+,
+{
+  "directory": "/home/sanford/code/current/tripping-octo-avenger",
+  "command": "g++ -MMD -MP -DDEBUG -g -Wall -std=c++11 -o obj/Debug/TestState.o -c src/Game/TestState.cpp",
+  "file": "/home/sanford/code/current/tripping-octo-avenger/src/Game/TestState.cpp"
+}
+,
+{
+  "directory": "/home/sanford/code/current/tripping-octo-avenger",
+  "command": "g++ -MMD -MP -DDEBUG -g -Wall -std=c++11 -o obj/Debug/TitleState.o -c src/Game/TitleState.cpp",
+  "file": "/home/sanford/code/current/tripping-octo-avenger/src/Game/TitleState.cpp"
+}
+,
+{
+  "directory": "/home/sanford/code/current/tripping-octo-avenger",
+  "command": "g++ -MMD -MP -DDEBUG -g -Wall -std=c++11 -o obj/Debug/MusicState.o -c src/Game/MusicState.cpp",
+  "file": "/home/sanford/code/current/tripping-octo-avenger/src/Game/MusicState.cpp"
+}
+,
+{
+  "directory": "/home/sanford/code/current/tripping-octo-avenger",
+  "command": "g++ -MMD -MP -DDEBUG -g -Wall -std=c++11 -o obj/Debug/Bullet.o -c src/Game/Bullet/Bullet.cpp",
+  "file": "/home/sanford/code/current/tripping-octo-avenger/src/Game/Bullet/Bullet.cpp"
+}
+,
+{
+  "directory": "/home/sanford/code/current/tripping-octo-avenger",
+  "command": "g++ -MMD -MP -DDEBUG -g -Wall -std=c++11 -o obj/Debug/BulletBuffer.o -c src/Game/Bullet/BulletBuffer.cpp",
+  "file": "/home/sanford/code/current/tripping-octo-avenger/src/Game/Bullet/BulletBuffer.cpp"
+}
+,
+{
+  "directory": "/home/sanford/code/current/tripping-octo-avenger",
+  "command": "g++ -MMD -MP -DDEBUG -g -Wall -std=c++11 -o obj/Debug/easy.o -c src/Game/Bullet/Patterns/easy.cpp",
+  "file": "/home/sanford/code/current/tripping-octo-avenger/src/Game/Bullet/Patterns/easy.cpp"
+}
+,
+{
+  "directory": "/home/sanford/code/current/tripping-octo-avenger",
+  "command": "g++ -MMD -MP -DDEBUG -g -Wall -std=c++11 -o obj/Debug/State.o -c src/System/State.cpp",
+  "file": "/home/sanford/code/current/tripping-octo-avenger/src/System/State.cpp"
+}
+,
+{
+  "directory": "/home/sanford/code/current/tripping-octo-avenger",
+  "command": "g++ -MMD -MP -DDEBUG -g -Wall -std=c++11 -o obj/Debug/StateStack.o -c src/System/StateStack.cpp",
+  "file": "/home/sanford/code/current/tripping-octo-avenger/src/System/StateStack.cpp"
+}
+,
+{
+  "directory": "/home/sanford/code/current/tripping-octo-avenger",
+  "command": "g++ -MMD -MP -DDEBUG -g -Wall -std=c++11 -o obj/Debug/Application.o -c src/System/Application.cpp",
+  "file": "/home/sanford/code/current/tripping-octo-avenger/src/System/Application.cpp"
+}
+,
+{
+  "directory": "/home/sanford/code/current/tripping-octo-avenger",
+  "command": "g++ -MMD -MP -DDEBUG -g -Wall -std=c++11 -o obj/Debug/Menu.o -c src/GUI/Menu.cpp",
+  "file": "/home/sanford/code/current/tripping-octo-avenger/src/GUI/Menu.cpp"
+}
+]
