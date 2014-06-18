@@ -1,6 +1,5 @@
-tripping-octo-avenger
-=====================
+CoreFw
+======
 
-SFML stuff. Github offered me a pretty cool name though.
+SFML Game Framework using C++11.
 
-Development on this has halted due to problems with my laptop's hardware and the SFML library.
