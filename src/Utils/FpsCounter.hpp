@@ -11,7 +11,7 @@ class FpsCounter
         ~FpsCounter();
         void calculateFps(sf::Time elapsedTime);
 
-        const unsigned int getFps() const;
+        unsigned int getFps();
 
     private:
         sf::Time updateTime;

@@ -22,7 +22,7 @@ class Bullet
         // Methods to interface with bullets from step functions
         void setCircle(float speed, int life);
         void setAcceleration(float speed, int life);
-        const int getAccelLife() const;
+        int getAccelLife();
 
         void setAngle(float newAngle);
         float getAngle();
@@ -30,11 +30,11 @@ class Bullet
         float getSpeed();
         void setSpeedAndAngle(float newSpeed, float newAngle);
 
-        const int getLife() const;
+        int getLife();
         void setLife(int newLife);
         void decreaseLife();
 
-        const int getWait() const;
+        int getWait();
         void setWait(int newWait);
 
         void stop();

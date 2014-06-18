@@ -79,7 +79,7 @@ void Menu::draw(sf::RenderTarget& target, sf::RenderStates states) const
     }
 }
 
-const bool Menu::isSelected() const
+const bool Menu::isSelected()
 {
     return selected;
 }

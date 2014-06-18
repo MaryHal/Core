@@ -19,7 +19,7 @@ class Menu : public sf::Drawable, public sf::Transformable
         bool handleEvent(const sf::Event& event);
         bool update(sf::Time dt);
 
-        const bool isSelected() const;
+        const bool isSelected();
         const sf::String getSelection();
 
     private:

@@ -27,7 +27,7 @@ void FpsCounter::calculateFps(sf::Time elapsedTime)
     }
 }
 
-const unsigned int FpsCounter::getFps() const
+unsigned int FpsCounter::getFps()
 {
     return fps;
 }

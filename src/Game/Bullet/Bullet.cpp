@@ -43,7 +43,7 @@ void Bullet::setAcceleration(float speed, int life)
     accelLife = life;
 }
 
-const int Bullet::getAccelLife() const
+int Bullet::getAccelLife()
 {
     return accelLife;
 }
@@ -74,7 +74,7 @@ void Bullet::setSpeedAndAngle(float newSpeed, float newAngle)
     angle = newAngle;
 }
 
-const int Bullet::getLife() const
+int Bullet::getLife()
 {
     return life;
 }
@@ -89,7 +89,7 @@ void Bullet::decreaseLife()
     life -= (life > 0);
 }
 
-const int Bullet::getWait() const
+int Bullet::getWait()
 {
     return wait;
 }
