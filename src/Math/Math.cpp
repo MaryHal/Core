@@ -8,7 +8,7 @@ unsigned int Math::nextPow2(register unsigned int n)
     --n;
 
     // Shift bits then OR data
-    for (unsigned int i = 1; i < sizeof(unsigned int); i << 1)
+    for (unsigned int i = 1; i < sizeof(unsigned int); i <<= 1)
         n |= (n >> i);
 
     // flip the last bit back over.

@@ -14,7 +14,6 @@ MusicState::MusicState(StateStack& stack, Context context)
     {
         context.textures->load(Res::Textures::musicbg, "data/bg/Frac5.png");
 
-        context.music->addSong(Res::Music::main,   "data/music/ReflectionEternal.ogg");
         context.music->addSong(Res::Music::main2,  "data/music/Melodica.ogg");
     }
     catch (std::runtime_error& e)
@@ -27,7 +26,6 @@ MusicState::MusicState(StateStack& stack, Context context)
     const sf::Font& font = context.fonts->get(Res::Fonts::normal);
     menu.setPosition(128.0f, 300.0f);
     menu.addItem(L"Melodica", font, 16);
-    menu.addItem(L"ReflectionEternal", font, 16);
     menu.build();
 
     fullBar.setOutlineColor(sf::Color(255, 255, 255, 128));

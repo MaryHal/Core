@@ -9,8 +9,7 @@
 class QuadTreeNode
 {
     public:
-        QuadTreeNode(float x, float y, float w, float h);
-        QuadTreeNode(const sf::FloatRect& area);
+        QuadTreeNode();
         ~QuadTreeNode();
 
         bool insert(sf::Vector2f* point);
@@ -20,7 +19,7 @@ class QuadTreeNode
 
     protected:
         void splitNode();
-        QuadTreeNode* getChild(float x, float y);
+        QuadTreeNode* getChild();
 
     private:
         std::vector<sf::Vector2f*> items;
@@ -35,8 +34,7 @@ class QuadTree
     public:
         QuadTree();
         bool insert(sf::Vector2f point);
-        std::vector<sf::Vector2f*> get(float x, float y, float w, float h);
-        std::vector<sf::Vector2f*> get(const sf::FloatRect& area);
+        std::vector<sf::Vector2f*> get();
 
     private:
         QuadTreeNode* root;

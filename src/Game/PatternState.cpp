@@ -26,7 +26,6 @@ PatternState::PatternState(StateStack& stack, Context context)
     //     b->initialize(sf::Vector2f(320.0f, 320.0f), 4, x, a);
     // }
     BulletBuffer::initialize();
-    Bullet* b =  genBulletFunc_2f8ce762a4f0544ddd5536127bb805a1(320.0f, 160.0f);
 }
 
 void PatternState::draw()
