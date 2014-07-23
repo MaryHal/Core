@@ -3,7 +3,7 @@
 #include "../System/ResourceIdentifiers.hpp"
 #include "../Utils/Log.hpp"
 
-#include "Bullet/Patterns/easy.hpp"
+/* #include "Bullet/bullet.hpp" */
 
 PatternState::PatternState(StateStack& stack, Context context)
     : State(stack, context)
@@ -25,18 +25,18 @@ PatternState::PatternState(StateStack& stack, Context context)
     //     Bullet* b = BulletBuffer::fire();
     //     b->initialize(sf::Vector2f(320.0f, 320.0f), 4, x, a);
     // }
-    BulletBuffer::initialize();
+    /* BulletBuffer::initialize(); */
 }
 
 void PatternState::draw()
 {
     sf::RenderWindow& window = *getContext().window;
-    BulletBuffer::draw(window);
+    /* BulletBuffer::draw(window); */
 }
 
 bool PatternState::update(sf::Time dt)
 {
-    BulletBuffer::update();
+    /* BulletBuffer::update(); */
     return false;
 }
 
