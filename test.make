@@ -153,7 +153,6 @@ endif
 
 OBJECTS := \
 	$(OBJDIR)/main.o \
-	$(OBJDIR)/QuadTree.o \
 	$(OBJDIR)/FpsCounter.o \
 	$(OBJDIR)/ParallelTask.o \
 	$(OBJDIR)/StringUtils.o \
@@ -166,9 +165,11 @@ OBJECTS := \
 	$(OBJDIR)/TestState.o \
 	$(OBJDIR)/TitleState.o \
 	$(OBJDIR)/MusicState.o \
-	$(OBJDIR)/Bullet.o \
-	$(OBJDIR)/BulletBuffer.o \
-	$(OBJDIR)/easy.o \
+	$(OBJDIR)/fixed.o \
+	$(OBJDIR)/mt19937ar.o \
+	$(OBJDIR)/stepfunc.o \
+	$(OBJDIR)/bullet.o \
+	$(OBJDIR)/fixed_table.o \
 	$(OBJDIR)/State.o \
 	$(OBJDIR)/StateStack.o \
 	$(OBJDIR)/Application.o \
@@ -236,9 +237,6 @@ endif
 $(OBJDIR)/main.o: src/main.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/QuadTree.o: src/Utils/QuadTree.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/FpsCounter.o: src/Utils/FpsCounter.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -275,13 +273,19 @@ $(OBJDIR)/TitleState.o: src/Game/TitleState.cpp
 $(OBJDIR)/MusicState.o: src/Game/MusicState.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Bullet.o: src/Game/Bullet/Bullet.cpp
+$(OBJDIR)/fixed.o: src/Game/Bullet/fixed.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/BulletBuffer.o: src/Game/Bullet/BulletBuffer.cpp
+$(OBJDIR)/mt19937ar.o: src/Game/Bullet/mt19937ar.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/easy.o: src/Game/Bullet/Patterns/easy.cpp
+$(OBJDIR)/stepfunc.o: src/Game/Bullet/stepfunc.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/bullet.o: src/Game/Bullet/bullet.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/fixed_table.o: src/Game/Bullet/fixed_table.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/State.o: src/System/State.cpp

@@ -3,8 +3,6 @@
 
 #include "../System/State.hpp"
 #include <SFML/Graphics.hpp>
-#include "Bullet/Bullet.hpp"
-#include "Bullet/BulletBuffer.hpp"
 
 class PatternState : public State
 {
