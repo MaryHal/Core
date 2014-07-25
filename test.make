@@ -24,12 +24,12 @@ ifeq ($(config),debug)
   TARGETDIR  = bin
   TARGET     = $(TARGETDIR)/linux_Test64
   DEFINES   += -DDEBUG
-  INCLUDES  += 
+  INCLUDES  += -Iext/libbulletml/src
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -std=c++11
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += 
-  LIBS      += -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
+  LDFLAGS   += -Lext/libbulletml/lib
+  LIBS      += -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system -lbulletml
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -46,12 +46,12 @@ ifeq ($(config),release)
   TARGETDIR  = bin
   TARGET     = $(TARGETDIR)/linux_Test64
   DEFINES   += 
-  INCLUDES  += 
+  INCLUDES  += -Iext/libbulletml/src
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -Wall -std=c++11
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -s
-  LIBS      += -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
+  LDFLAGS   += -s -Lext/libbulletml/lib
+  LIBS      += -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system -lbulletml
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -68,12 +68,12 @@ ifeq ($(config),debug32)
   TARGETDIR  = bin
   TARGET     = $(TARGETDIR)/linux_Test32
   DEFINES   += -DDEBUG
-  INCLUDES  += 
+  INCLUDES  += -Iext/libbulletml/src
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -m32 -std=c++11
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -m32 -L/usr/lib32
-  LIBS      += -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
+  LDFLAGS   += -m32 -L/usr/lib32 -Lext/libbulletml/lib
+  LIBS      += -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system -lbulletml
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -90,12 +90,12 @@ ifeq ($(config),release32)
   TARGETDIR  = bin
   TARGET     = $(TARGETDIR)/linux_Test32
   DEFINES   += 
-  INCLUDES  += 
+  INCLUDES  += -Iext/libbulletml/src
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -Wall -m32 -std=c++11
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -s -m32 -L/usr/lib32
-  LIBS      += -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
+  LDFLAGS   += -s -m32 -L/usr/lib32 -Lext/libbulletml/lib
+  LIBS      += -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system -lbulletml
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -112,12 +112,12 @@ ifeq ($(config),debug64)
   TARGETDIR  = bin
   TARGET     = $(TARGETDIR)/linux_Test64
   DEFINES   += -DDEBUG
-  INCLUDES  += 
+  INCLUDES  += -Iext/libbulletml/src
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -m64 -std=c++11
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -m64 -L/usr/lib64
-  LIBS      += -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
+  LDFLAGS   += -m64 -L/usr/lib64 -Lext/libbulletml/lib
+  LIBS      += -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system -lbulletml
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -134,12 +134,12 @@ ifeq ($(config),release64)
   TARGETDIR  = bin
   TARGET     = $(TARGETDIR)/linux_Test64
   DEFINES   += 
-  INCLUDES  += 
+  INCLUDES  += -Iext/libbulletml/src
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -Wall -m64 -std=c++11
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -s -m64 -L/usr/lib64
-  LIBS      += -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
+  LDFLAGS   += -s -m64 -L/usr/lib64 -Lext/libbulletml/lib
+  LIBS      += -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system -lbulletml
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -165,11 +165,9 @@ OBJECTS := \
 	$(OBJDIR)/TestState.o \
 	$(OBJDIR)/TitleState.o \
 	$(OBJDIR)/MusicState.o \
-	$(OBJDIR)/fixed.o \
-	$(OBJDIR)/mt19937ar.o \
-	$(OBJDIR)/stepfunc.o \
-	$(OBJDIR)/bullet.o \
-	$(OBJDIR)/fixed_table.o \
+	$(OBJDIR)/Bullet.o \
+	$(OBJDIR)/Mover.o \
+	$(OBJDIR)/BulletManager.o \
 	$(OBJDIR)/State.o \
 	$(OBJDIR)/StateStack.o \
 	$(OBJDIR)/Application.o \
@@ -273,19 +271,13 @@ $(OBJDIR)/TitleState.o: src/Game/TitleState.cpp
 $(OBJDIR)/MusicState.o: src/Game/MusicState.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/fixed.o: src/Game/Bullet/fixed.cpp
+$(OBJDIR)/Bullet.o: src/Game/Bullet/Bullet.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/mt19937ar.o: src/Game/Bullet/mt19937ar.cpp
+$(OBJDIR)/Mover.o: src/Game/Bullet/Mover.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/stepfunc.o: src/Game/Bullet/stepfunc.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/bullet.o: src/Game/Bullet/bullet.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/fixed_table.o: src/Game/Bullet/fixed_table.cpp
+$(OBJDIR)/BulletManager.o: src/Game/Bullet/BulletManager.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/State.o: src/System/State.cpp
