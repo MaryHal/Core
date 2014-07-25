@@ -4,6 +4,13 @@
 #include "../System/State.hpp"
 #include <SFML/Graphics.hpp>
 
+#include "Bullet/BulletManager.hpp"
+#include <bulletmlparser.h>
+#include <bulletmlparser-tinyxml.h>
+#include <bulletmlparser-tinyxml2.h>
+
+#include "../Utils/MakeUnique.hpp"
+
 class PatternState : public State
 {
     public:
@@ -14,6 +21,11 @@ class PatternState : public State
         virtual bool handleEvent(const sf::Event& event);
 
     private:
+        BulletManager manager;
+        std::unique_ptr<Mover> ship;
+        std::unique_ptr<Mover> boss;
+        std::unique_ptr<BulletMLParserTinyXML> parser;
+        std::unique_ptr<BulletMLParserTinyXML2> parser2;
 };
 
 #endif // _PatternState_hpp_

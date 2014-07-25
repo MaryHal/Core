@@ -3,8 +3,6 @@
 #include "../System/ResourceIdentifiers.hpp"
 #include "../Utils/Log.hpp"
 
-/* #include "Bullet/bullet.hpp" */
-
 PatternState::PatternState(StateStack& stack, Context context)
     : State(stack, context)
 {
@@ -20,23 +18,27 @@ PatternState::PatternState(StateStack& stack, Context context)
         Console::logf("Resource loading block failed: %s", e.what());
     }
 
-    // for (float x = 0.0f; x < 3.14 * 2; x += 3.14 / 2)
-    // {
-    //     Bullet* b = BulletBuffer::fire();
-    //     b->initialize(sf::Vector2f(320.0f, 320.0f), 4, x, a);
-    // }
-    /* BulletBuffer::initialize(); */
+    parser = make_unique<BulletMLParserTinyXML>("data/pattern/10flower.xml");
+    parser2 = make_unique<BulletMLParserTinyXML2>("data/pattern/10flower.xml");
+    parser->parse();
+    parser2->parse();
+
+    ship = make_unique<Mover>(320, 120, 0, 0);
+    boss = make_unique<Mover>(320, 370, 0, 0);
+    manager.createBullet(parser.get(), ship.get(), boss.get());
 }
 
 void PatternState::draw()
 {
-    sf::RenderWindow& window = *getContext().window;
-    /* BulletBuffer::draw(window); */
+    sf::RenderWindow& window = *(getContext().window);
+    window.draw(manager);
+    window.draw(*ship);
+    window.draw(*boss);
 }
 
 bool PatternState::update(sf::Time dt)
 {
-    /* BulletBuffer::update(); */
+    manager.tick();
     return false;
 }
 
@@ -44,5 +46,4 @@ bool PatternState::handleEvent(const sf::Event& event)
 {
     return false;
 }
-
 
