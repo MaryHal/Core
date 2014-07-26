@@ -23,5 +23,7 @@ void Mover::draw(sf::RenderTarget& target, sf::RenderStates states) const
 }
 
 Shot::Shot(double x, double y, double d, double s) : Mover(x, y, d, s)
-{}
+{
+    style.setFillColor(sf::Color::Cyan);
+}
 

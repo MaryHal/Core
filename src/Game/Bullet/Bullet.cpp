@@ -52,7 +52,7 @@ void BulletCommand::createBullet(BulletMLState* state, double direction, double 
 
 int BulletCommand::getTurn() 
 {
-    return turn;
+    return BulletCommand::turn;
 }
 
 void BulletCommand::doVanish() 

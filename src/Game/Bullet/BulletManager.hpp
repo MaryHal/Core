@@ -1,5 +1,5 @@
-#ifndef _BulletManager_h_
-#define _BuleltManager_h_
+#ifndef _BulletManager_hpp_
+#define _BulletManager_hpp_
 
 #include "Mover.hpp"
 
@@ -27,5 +27,5 @@ class BulletManager : public sf::Drawable, public sf::Transformable
         /* void checkCollision(Ship* target, double hitDistSq); */
 };
 
-#endif // _BulletManager_h_
+#endif // _BulletManager_hpp_
 

@@ -9,6 +9,7 @@
 #include <bulletmlparser-tinyxml.h>
 #include <bulletmlparser-tinyxml2.h>
 
+#include <vector>
 #include "../Utils/MakeUnique.hpp"
 
 class PatternState : public State
@@ -24,8 +25,7 @@ class PatternState : public State
         BulletManager manager;
         std::unique_ptr<Mover> ship;
         std::unique_ptr<Mover> boss;
-        std::unique_ptr<BulletMLParserTinyXML> parser;
-        std::unique_ptr<BulletMLParserTinyXML2> parser2;
+        std::vector<std::unique_ptr<BulletMLParser>> parsers;
 };
 
 #endif // _PatternState_hpp_

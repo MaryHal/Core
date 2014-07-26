@@ -1,5 +1,5 @@
-#ifndef _Bullet_h_
-#define _Bullet_h_
+#ifndef _Bullet_hpp_
+#define _Bullet_hpp_
 
 #include <bulletmlrunner.h>
 
@@ -44,5 +44,5 @@ class BulletCommand : public BulletMLRunner
         BulletManager* mOwner;
 };
 
-#endif // _Bullet_h_
+#endif // _Bullet_hpp_
 
