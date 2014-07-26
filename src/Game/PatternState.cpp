@@ -5,6 +5,8 @@
 
 #include "Bullet/Bullet.hpp"
 
+#include <bulletmlparser-tinyxml2.h>
+
 PatternState::PatternState(StateStack& stack, Context context)
     : State(stack, context)
 {
@@ -20,14 +22,21 @@ PatternState::PatternState(StateStack& stack, Context context)
         Console::logf("Resource loading block failed: %s", e.what());
     }
 
-    parsers.push_back(make_unique<BulletMLParserTinyXML>("data/pattern/10flower.xml"));
-    parsers.push_back(make_unique<BulletMLParserTinyXML>("data/pattern/circle_fireworks.xml"));
-    parsers.push_back(make_unique<BulletMLParserTinyXML>("data/pattern/hakkyou.xml"));
-    parsers.push_back(make_unique<BulletMLParserTinyXML>("data/pattern/otk2-hanabi.xml"));
-    parsers.push_back(make_unique<BulletMLParserTinyXML>("data/pattern/self-mis02.xml"));
+    std::vector<std::string> xmlFiles
+    {
+        "data/pattern/10flower.xml",
+            "data/pattern/circle_fireworks.xml",
+            "data/pattern/hakkyou.xml",
+            "data/pattern/otk2-hanabi.xml",
+            "data/pattern/self-mis02.xml"
+    };
 
-    for (auto& parser : parsers)
-        parser->parse();
+    // Load patterns from list of files
+    for (const std::string& filename : xmlFiles)
+    {
+        parsers.push_back(make_unique<BulletMLParserTinyXML2>(filename.c_str()));
+        parsers.back()->parse();
+    }
 
     ship = make_unique<Mover>(320, 120, 0, 0);
     boss = make_unique<Mover>(320, 370, 0, 0);
@@ -64,7 +73,7 @@ bool PatternState::handleEvent(const sf::Event& event)
         if (event.key.code == sf::Keyboard::T)
             manager.createBullet(parsers[4].get(), ship.get(), boss.get());
 
-        Console::logf("%d %d %d", BulletCommand::turn, manager.mCommands.size(), manager.mShots.size());
+        /* Console::logf("%d %d %d", BulletCommand::turn, manager.mCommands.size(), manager.mShots.size()); */
     }
 
     return false;

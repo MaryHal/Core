@@ -6,8 +6,6 @@
 
 #include "Bullet/BulletManager.hpp"
 #include <bulletmlparser.h>
-#include <bulletmlparser-tinyxml.h>
-#include <bulletmlparser-tinyxml2.h>
 
 #include <vector>
 #include "../Utils/MakeUnique.hpp"

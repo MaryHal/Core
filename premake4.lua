@@ -6,7 +6,7 @@ solution "Pattern"
         language "C++"
         buildoptions { "-std=c++11" }
 
-        includedirs { "ext/libbulletml/src" }
+        includedirs { "ext/libbulletml/src", "./ext/sol" }
         files { "src/**" }
 
         targetdir "bin"
@@ -15,7 +15,7 @@ solution "Pattern"
         ---------------------------------------
         -- Link static libraries and config
         libdirs { "ext/libbulletml/lib" }
-        links { "sfml-graphics", "sfml-audio", "sfml-window", "sfml-system", "bulletml" }
+        links { "sfml-graphics", "sfml-audio", "sfml-window", "sfml-system", "bulletml", "lua" }
 
         configuration "linux"
             targetprefix "linux_"

@@ -5,7 +5,7 @@ const int Application::framesPerSecond = 60;
 const sf::Time Application::timePerFrame = sf::seconds(1.0f / 60.0f);
 
 Application::Application()
-    : window(sf::VideoMode(640, 480, 32), "Testing...", sf::Style::Close),
+    : window(sf::VideoMode(640, 480, 32), "BR", sf::Style::Default),
     stateStack(State::Context(window, textures, fonts, music))
 {
     window.setFramerateLimit(framesPerSecond);
@@ -15,7 +15,7 @@ Application::Application()
 
 void Application::run(States::ID initialState)
 {
-    stateStack.pushState(States::Title);
+    stateStack.pushState(initialState);
     stateStack.applyPendingChanges();
 
     sf::Clock clock;
