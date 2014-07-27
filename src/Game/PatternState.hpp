@@ -4,6 +4,7 @@
 #include "../System/State.hpp"
 #include <SFML/Graphics.hpp>
 
+#include "../GUI/Menu.hpp"
 #include "Bullet/BulletManager.hpp"
 #include <bulletmlparser.h>
 
@@ -23,7 +24,16 @@ class PatternState : public State
         BulletManager manager;
         std::unique_ptr<Mover> ship;
         std::unique_ptr<Mover> boss;
+
+        std::vector<std::string> xmlFiles;
         std::vector<std::unique_ptr<BulletMLParser>> parsers;
+
+        bool menuVisible;
+        Menu menu;
+
+        sf::Text info;
+        sf::Text help;
+        sf::String currentFile;
 };
 
 #endif // _PatternState_hpp_

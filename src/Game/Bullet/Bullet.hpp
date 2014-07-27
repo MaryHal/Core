@@ -11,6 +11,7 @@ class BulletCommand : public BulletMLRunner
 {
     public:
         static int turn;
+        static double rank;
 
         // root bullet
         BulletCommand(BulletMLParser* parser, Mover* bullet, Mover* target, BulletManager* owner);

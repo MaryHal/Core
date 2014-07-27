@@ -4,15 +4,17 @@
 State::Context::Context(sf::RenderWindow& window,
                         TextureHolder& textures,
                         FontHolder& fonts,
-                        MusicPlayer& music)
+                        MusicPlayer& music,
+                        FpsCounter& fps)
     : window(&window)
     , textures(&textures)
     , fonts(&fonts)
     , music(&music)
+    , fps(&fps)
 {
 }
 
-State::State(StateStack& stack, Context context)
+State::State(StateStack& stack, Context& context)
     : stack(&stack)
     , context(context)
 {
@@ -37,7 +39,7 @@ void State::requestStateClear()
     stack->clearStates();
 }
 
-State::Context State::getContext() const
+const State::Context& State::getContext()
 {
     return context;
 }

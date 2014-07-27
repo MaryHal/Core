@@ -5,6 +5,7 @@
 #include "../../Math/Math.hpp"
 
 int BulletCommand::turn = 0;
+double BulletCommand::rank = 0.5;
 
 BulletCommand::BulletCommand(BulletMLParser* parser, Mover* bullet, Mover* target, BulletManager* owner)
 : BulletMLRunner(parser), mMover(bullet), mTarget(target), mOwner(owner)
@@ -37,7 +38,7 @@ double BulletCommand::getDefaultSpeed()
 
 double BulletCommand::getRank() 
 {
-    return 0.5;
+    return BulletCommand::rank;
 }
 
 void BulletCommand::createSimpleBullet(double direction, double speed) 

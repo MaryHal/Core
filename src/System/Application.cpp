@@ -2,11 +2,11 @@
 #include "../Identifiers.hpp"
 
 const int Application::framesPerSecond = 60;
-const sf::Time Application::timePerFrame = sf::seconds(1.0f / 60.0f);
+const sf::Time Application::timePerFrame = sf::seconds(1.0f / framesPerSecond);
 
 Application::Application()
     : window(sf::VideoMode(640, 480, 32), "BR", sf::Style::Default),
-    stateStack(State::Context(window, textures, fonts, music))
+    stateStack(State::Context(window, textures, fonts, music, fps))
 {
     window.setFramerateLimit(framesPerSecond);
     window.setVerticalSyncEnabled(false);
@@ -25,6 +25,7 @@ void Application::run(States::ID initialState)
     {
         sf::Time dt = clock.restart();
         timeSinceLastUpdate += dt;
+        fps.calculateFps(dt);
 
         while (timeSinceLastUpdate > timePerFrame)
         {

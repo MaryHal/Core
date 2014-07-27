@@ -13,14 +13,16 @@ class Menu : public sf::Drawable, public sf::Transformable
 
     public:
         Menu();
-        void addItem(sf::String string, const sf::Font& font, unsigned int size=20);
+        void addItem(const sf::String& str, const sf::Font& font, unsigned int size=20);
+        void addList(const std::vector<std::string>& list, const sf::Font& font, unsigned int size=20);
         void build();
 
         bool handleEvent(const sf::Event& event);
         bool update(sf::Time dt);
 
-        const bool isSelected();
+        bool isSelected();
         const sf::String getSelection();
+        unsigned int getIndex();
 
     private:
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;

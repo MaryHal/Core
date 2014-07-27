@@ -3,6 +3,7 @@
 
 #include "ResourceIdentifiers.hpp"
 #include "../Audio/MusicPlayer.hpp"
+#include "../Utils/FpsCounter.hpp"
 
 #include <SFML/System/Time.hpp>
 #include <SFML/Window/Event.hpp>
@@ -26,17 +27,19 @@ class State
         Context(sf::RenderWindow& window,
                 TextureHolder& textures,
                 FontHolder& fonts,
-                MusicPlayer& music);
+                MusicPlayer& music,
+                FpsCounter& fps);
 
         sf::RenderWindow* window;
         TextureHolder* textures;
         FontHolder* fonts;
         MusicPlayer* music;
+        FpsCounter* fps;
     };
 
 
     public:
-    State(StateStack& stack, Context context);
+    State(StateStack& stack, Context& context);
     virtual ~State();
 
     virtual void draw() = 0;
@@ -48,7 +51,7 @@ class State
     void requestStackPop();
     void requestStateClear();
 
-    Context getContext() const;
+    const Context& getContext();
 
     private:
     StateStack* stack;

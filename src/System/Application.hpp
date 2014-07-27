@@ -3,6 +3,7 @@
 
 #include "ResourceIdentifiers.hpp"
 #include "../Audio/MusicPlayer.hpp"
+#include "../Utils/FpsCounter.hpp"
 
 #include "StateStack.hpp"
 
@@ -27,6 +28,7 @@ class Application
         TextureHolder textures;
         FontHolder fonts;
         MusicPlayer music;
+        FpsCounter fps;
 
         static const int framesPerSecond;
         static const sf::Time timePerFrame;

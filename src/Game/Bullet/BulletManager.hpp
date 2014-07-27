@@ -21,6 +21,7 @@ class BulletManager : public sf::Drawable, public sf::Transformable
         BulletCommand* createBullet(BulletMLParser* parser, Mover* origin, Mover* target);
         Shot* createProjectile(double x, double y,double d, double s);
         void destroyProjectile(Shot* projectile);
+        void clearAll();
 
         void tick();
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;

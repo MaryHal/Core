@@ -25,7 +25,7 @@ BulletCommand* BulletManager::createBullet(BulletMLParser* parser, Mover* origin
 void BulletManager::tick()
 {
     uint size = mShots.size();
-    for (uint i = 0; i < size; ++i)
+    for (unsigned int i = 0; i < size; ++i)
     {
         if (mShots[i]->dead)
         {
@@ -41,7 +41,7 @@ void BulletManager::tick()
     }
 
     size = mCommands.size();
-    for (uint i = 0; i < size; ++i)
+    for (unsigned int i = 0; i < size; ++i)
     {
         if (mCommands[i]->isDead())
         {
@@ -60,14 +60,14 @@ void BulletManager::draw(sf::RenderTarget& target, sf::RenderStates states) cons
 {
     states.transform *= getTransform();
 
-    for (uint i = 0; i < mShots.size(); ++i)
+    for (Shot* shot : mShots)
     {
-        target.draw(*mShots[i]);
-        /* mShots[i]->draw(); */
+        if (!shot->dead)
+            target.draw(*shot);
     }
 }
 
-Shot* BulletManager::createProjectile(double x, double y,double d, double s)
+Shot* BulletManager::createProjectile(double x, double y, double d, double s)
 {
     Shot* ret;
     if (mPool.empty())
@@ -91,6 +91,21 @@ Shot* BulletManager::createProjectile(double x, double y,double d, double s)
 void BulletManager::destroyProjectile(Shot* projectile)
 {
     projectile->dead = true;
+}
+
+void BulletManager::clearAll()
+{
+    for (BulletCommand* command : mCommands)
+    {
+        delete command;
+    }
+    mCommands.clear();
+
+    for (Shot* shot : mShots)
+    {
+        delete shot;
+    }
+    mShots.clear();
 }
 
 /* void BulletManager::checkCollision(Ship* target, double hitDistSq) */

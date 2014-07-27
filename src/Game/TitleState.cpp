@@ -28,7 +28,7 @@ TitleState::TitleState(StateStack& stack, Context context)
     text.setFont(font);
     text.setPosition(5.0f, 100.0f);
     text.setCharacterSize(32);
-    text.setString(L"我是美国人.\n私はアメリカ人です.\n나는 미국 해요");
+    text.setString(L"你好世界");
 
     menu.setPosition(128.0f, 300.0f);
     menu.addItem(L"Test", font, 16);

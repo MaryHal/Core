@@ -6,10 +6,18 @@ Menu::Menu()
 {
 }
 
-void Menu::addItem(sf::String string, const sf::Font& font, unsigned int size)
+void Menu::addItem(const sf::String& str, const sf::Font& font, unsigned int size)
 {
-    sf::Text text(string, font, size);
+    sf::Text text(str, font, size);
     items.push_back(text);
+}
+
+void Menu::addList(const std::vector<std::string>& list, const sf::Font& font, unsigned int size)
+{
+    for (const std::string& str : list)
+    {
+        addItem(str, font, size);
+    }
 }
 
 void Menu::build()
@@ -79,9 +87,14 @@ void Menu::draw(sf::RenderTarget& target, sf::RenderStates states) const
     }
 }
 
-const bool Menu::isSelected()
+bool Menu::isSelected()
 {
     return selected;
+}
+
+unsigned int Menu::getIndex()
+{
+    return index;
 }
 
 const sf::String Menu::getSelection()
