@@ -34,6 +34,7 @@ class BulletCommand : public BulletMLRunner
         virtual double getBulletSpeedX();
         virtual double getBulletSpeedY();
 
+        const Mover& getMover() const;
         bool isDead();
 
         // If you want to customize random generator

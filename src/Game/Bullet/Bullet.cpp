@@ -2,7 +2,10 @@
 #include "Mover.hpp"
 #include "BulletManager.hpp"
 
-#include "../../Math/Math.hpp"
+#include <cmath>
+
+double dtor(double x) { return x*M_PI/180; }
+double rtod(double x) { return x*180/M_PI; }
 
 int BulletCommand::turn = 0;
 double BulletCommand::rank = 0.5;
@@ -16,62 +19,62 @@ BulletCommand::BulletCommand(BulletMLState* state, Mover* bullet, Mover* target,
 
 {}
 
-double BulletCommand::getBulletDirection() 
+double BulletCommand::getBulletDirection()
 {
     return mMover->d;
 }
 
-double BulletCommand::getAimDirection() 
+double BulletCommand::getAimDirection()
 {
-    return Math::radToDeg(M_PI-atan2(mTarget->x - mMover->x, mTarget->y - mMover->y));
+    return rtod(M_PI-atan2(mTarget->x - mMover->x, mTarget->y - mMover->y));
 }
 
-double BulletCommand::getBulletSpeed() 
+double BulletCommand::getBulletSpeed()
 {
     return mMover->s;
 }
 
-double BulletCommand::getDefaultSpeed() 
+double BulletCommand::getDefaultSpeed()
 {
     return 1.0;
 }
 
-double BulletCommand::getRank() 
+double BulletCommand::getRank()
 {
     return BulletCommand::rank;
 }
 
-void BulletCommand::createSimpleBullet(double direction, double speed) 
+void BulletCommand::createSimpleBullet(double direction, double speed)
 {
-    mOwner->createProjectile(mMover->x, mMover->y, Math::degToRad(direction), speed);
+    mOwner->createProjectile(mMover->x, mMover->y, dtor(direction), speed);
 }
 
 void BulletCommand::createBullet(BulletMLState* state, double direction, double speed)
 {
-    mOwner->createBullet(state, mMover->x, mMover->y, Math::degToRad(direction), speed, mTarget);
+    mOwner->createBullet(state, mMover->x, mMover->y, dtor(direction), speed, mTarget);
 }
 
-int BulletCommand::getTurn() 
+int BulletCommand::getTurn()
 {
     return BulletCommand::turn;
 }
 
-void BulletCommand::doVanish() 
+void BulletCommand::doVanish()
 {
     mMover->dead = true;
 }
 
-void BulletCommand::doChangeDirection(double direction) 
+void BulletCommand::doChangeDirection(double direction)
 {
-    mMover->d = Math::degToRad(direction);
+    mMover->d = dtor(direction);
 }
 
-void BulletCommand::doChangeSpeed(double speed) 
+void BulletCommand::doChangeSpeed(double speed)
 {
     mMover->s = speed;
 }
 
-void BulletCommand::doAccelX(double speedx) 
+void BulletCommand::doAccelX(double speedx)
 {
     double sx = getBulletSpeedX();
     double sy = getBulletSpeedY();
@@ -80,7 +83,7 @@ void BulletCommand::doAccelX(double speedx)
     mMover->s = sqrt(sx*sx+sy*sy);
 }
 
-void BulletCommand::doAccelY(double speedy) 
+void BulletCommand::doAccelY(double speedy)
 {
     double sx = getBulletSpeedX();
     double sy = getBulletSpeedY();
@@ -94,9 +97,14 @@ double BulletCommand::getBulletSpeedX()
     return mMover->s * sin(mMover->d);
 }
 
-double BulletCommand::getBulletSpeedY() 
+double BulletCommand::getBulletSpeedY()
 {
     return -mMover->s * cos(mMover->d);
+}
+
+const Mover& BulletCommand::getMover() const
+{
+    return *mMover;
 }
 
 bool BulletCommand::isDead()

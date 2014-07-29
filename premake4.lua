@@ -15,7 +15,7 @@ solution "Pattern"
         ---------------------------------------
         -- Link static libraries and config
         libdirs { "ext/libbulletml/lib" }
-        links { "sfml-graphics", "sfml-audio", "sfml-window", "sfml-system", "bulletml", "lua" }
+        links { "sfml-graphics", "sfml-audio", "sfml-window", "sfml-system", "bulletml_d", "lua" }
 
         configuration "linux"
             targetprefix "linux_"

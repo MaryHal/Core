@@ -26,6 +26,7 @@ PatternState::PatternState(StateStack& stack, Context context)
 
     xmlFiles = 
     {
+        "5x5wide.xml",
         "10flower.xml",
         "circle_fireworks.xml",
         "dis_bee_hakkyou.xml",
@@ -33,6 +34,7 @@ PatternState::PatternState(StateStack& stack, Context context)
         "las1.xml",
         "otk2-hanabi.xml",
         "self-mis02.xml",
+        "sample.xml",
         "tsx_evac02.xml",
         "tsx_sanada.xml",
     };

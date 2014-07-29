@@ -35,9 +35,7 @@ void BulletManager::tick()
             --size;
         }
         if (i < size)
-        {
             mShots[i]->tick();
-        }
     }
 
     size = mCommands.size();
@@ -50,7 +48,8 @@ void BulletManager::tick()
             mCommands.pop_back();
             --size;
         }
-        if (i < size) mCommands[i]->run();
+        if (i < size)
+            mCommands[i]->run();
     }
 
     BulletCommand::turn++;
@@ -62,8 +61,8 @@ void BulletManager::draw(sf::RenderTarget& target, sf::RenderStates states) cons
 
     for (Shot* shot : mShots)
     {
-        if (!shot->dead)
-            target.draw(*shot);
+        /* if (!shot->dead) */
+        target.draw(*shot);
     }
 }
 
@@ -108,22 +107,3 @@ void BulletManager::clearAll()
     mShots.clear();
 }
 
-/* void BulletManager::checkCollision(Ship* target, double hitDistSq) */
-/* { */
-/*     double nx; */
-/*     double ny; */
-
-/*     double dseg; */
-/*     double dline; */
-/*     for (uint i = 0; i < mShots.size(); ++i) */
-/*     { */
-/*         nx = mShots[i]->x + (mShots[i]->s * sin(mShots[i]->d)); */
-/*         ny = mShots[i]->y + (-mShots[i]->s * cos(mShots[i]->d)); */
-
-/*         distanceFromLine(target->x, target->y, mShots[i]->x, mShots[i]->y, nx, ny, dseg, dline); */
-/*         if (dseg <= hitDistSq) */
-/*         { */
-/*             target->hit(mShots[i]); */
-/*         } */
-/*     } */
-/* } */
