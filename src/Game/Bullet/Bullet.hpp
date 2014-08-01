@@ -1,49 +1,20 @@
 #ifndef _Bullet_hpp_
 #define _Bullet_hpp_
 
-#include <bulletmlrunner.h>
-
-class Bullet;
 class Mover;
-class BulletManager;
 
-class BulletCommand : public BulletMLRunner 
+class Bullet
 {
     public:
         static int turn;
         static double rank;
 
-        // root bullet
-        BulletCommand(BulletMLParser* parser, Mover* bullet, Mover* target, BulletManager* owner);
-        // child bullet
-        BulletCommand(BulletMLState* state, Mover* bullet, Mover* target, BulletManager* owner);
+    public:
+        Bullet(Mover* bullet, Mover* target);
 
-        virtual double getBulletDirection();
-        virtual double getAimDirection();
-        virtual double getBulletSpeed();
-        virtual double getDefaultSpeed();
-        virtual double getRank();
-        virtual void createSimpleBullet(double direction, double speed);
-        virtual void createBullet(BulletMLState* state, double direction, double speed);
-        virtual int getTurn();
-        virtual void doVanish();
-        virtual void doChangeDirection(double direction);
-        virtual void doChangeSpeed(double speed);
-        virtual void doAccelX(double speedx);
-        virtual void doAccelY(double speedy);
-        virtual double getBulletSpeedX();
-        virtual double getBulletSpeedY();
-
-        const Mover& getMover() const;
-        bool isDead();
-
-        // If you want to customize random generator
-        //virtual double getRand();
-
-    private:
+    public:
         Mover* mMover;
         Mover* mTarget;
-        BulletManager* mOwner;
 };
 
 #endif // _Bullet_hpp_

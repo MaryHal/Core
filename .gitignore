@@ -12,7 +12,14 @@
 *.la
 *.a
 
+.ycm_extra_conf.py
+.ycm_extra_conf.pyc
+.clang_complete
+project.el
+
 bin/
 build/
 data/
 obj/
+
+ext/sol/

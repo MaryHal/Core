@@ -31,8 +31,9 @@ class PatternState : public State
         bool menuVisible;
         Menu menu;
 
-        sf::Text info;
         sf::Text help;
+        sf::Text barrageInfo;
+        sf::Text bulletInfo;
         sf::String currentFile;
 };
 

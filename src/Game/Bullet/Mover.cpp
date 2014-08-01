@@ -1,14 +1,14 @@
 #include "Mover.hpp"
 
 Mover::Mover(double x0, double y0, double d0, double s0)
-: x(x0), y(y0), d(d0), s(s0)
+    : x(x0), y(y0), d(d0), s(s0)
 {
     style.setRadius(3);
     style.setFillColor(sf::Color::Magenta);
     style.setPosition(x, y);
 }
 
-void Mover::tick() 
+void Mover::tick()
 {
     x += s * sin(d);
     y -= s * cos(d);
@@ -26,4 +26,3 @@ Shot::Shot(double x, double y, double d, double s) : Mover(x, y, d, s)
 {
     style.setFillColor(sf::Color::Cyan);
 }
-

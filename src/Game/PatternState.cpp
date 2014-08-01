@@ -4,7 +4,7 @@
 #include "../Utils/Log.hpp"
 #include "../Utils/StringUtils.hpp"
 
-#include "Bullet/Bullet.hpp"
+#include "Bullet/BulletCommand.hpp"
 #include <bulletmlparser-tinyxml2.h>
 
 #include <SFML/System/Vector2.hpp>
@@ -24,7 +24,7 @@ PatternState::PatternState(StateStack& stack, Context context)
         Console::logf("Resource loading block failed: %s", e.what());
     }
 
-    xmlFiles = 
+    xmlFiles =
     {
         "5x5wide.xml",
         "10flower.xml",
@@ -37,6 +37,7 @@ PatternState::PatternState(StateStack& stack, Context context)
         "sample.xml",
         "tsx_evac02.xml",
         "tsx_sanada.xml",
+        "progear.xml",
     };
 
     // Load patterns from list of files
@@ -48,10 +49,13 @@ PatternState::PatternState(StateStack& stack, Context context)
     }
 
     const sf::Font& font = context.fonts->get(Res::Fonts::normal);
-    info.setFont(font);
-    info.setPosition(8.0f, 8.0f);
-    info.setCharacterSize(11);
-    info.setString(formatString("File: %s\nRank: %.2f", currentFile.toAnsiString().c_str(), BulletCommand::rank));
+    barrageInfo.setFont(font);
+    barrageInfo.setPosition(8.0f, 8.0f);
+    barrageInfo.setCharacterSize(11);
+
+    bulletInfo.setFont(font);
+    bulletInfo.setPosition(8.0f, 370.0f);
+    bulletInfo.setCharacterSize(11);
 
     help.setFont(font);
     help.setPosition(8.0f, 432.0f);
@@ -68,6 +72,8 @@ PatternState::PatternState(StateStack& stack, Context context)
     boss = make_unique<Mover>(320, 120, 0, 0);
     ship->dead = false;
     boss->dead = false;
+
+    // Console::logf("%f %d", ship->x, ship->dead);
 }
 
 void PatternState::draw()
@@ -80,12 +86,19 @@ void PatternState::draw()
     if (menuVisible)
         window.draw(menu);
 
-    window.draw(info);
+    window.draw(barrageInfo);
+    window.draw(bulletInfo);
     window.draw(help);
 }
 
 bool PatternState::update(sf::Time dt)
 {
+    barrageInfo.setString(formatString("File: %s\nRank: %.2f", currentFile.toAnsiString().c_str(), Bullet::rank));
+    bulletInfo.setString(formatString("CommandCount: %d\nBulletCount %d\nPoolSize: %d",
+                                      manager.mCommands.size(),
+                                      manager.mShots.size(),
+                                      manager.mPool.size()));
+
     /* Console::logf("%d %d %d", manager.mShots.size(), manager.mPool.size(), manager.mCommands.size()); */
     sf::Vector2i mousePos = sf::Mouse::getPosition(*getContext().window);
     ship->x = mousePos.x;
@@ -109,8 +122,6 @@ bool PatternState::handleEvent(const sf::Event& event)
         int index = menu.getIndex();
 
         manager.createBullet(parsers[index].get(), boss.get(), ship.get());
-
-        info.setString(formatString("File: %s\nRank: %.2f", currentFile.toAnsiString().c_str(), BulletCommand::rank));
     }
 
     if (event.type == sf::Event::KeyPressed)
@@ -128,18 +139,15 @@ bool PatternState::handleEvent(const sf::Event& event)
         double dr = 0.1;
         if (event.key.code == sf::Keyboard::Left)
         {
-            if (BulletCommand::rank - dr >= 0.0)
-                BulletCommand::rank -= dr;
+            if (Bullet::rank - dr >= 0.0)
+                Bullet::rank -= dr;
         }
         if (event.key.code == sf::Keyboard::Right)
         {
-            if (BulletCommand::rank + dr <= 1.0)
-                BulletCommand::rank += dr;
+            if (Bullet::rank + dr <= 1.0)
+                Bullet::rank += dr;
         }
-
-        info.setString(formatString("File: %s\nRank: %.2f", currentFile.toAnsiString().c_str(), BulletCommand::rank));
     }
 
     return false;
 }
-

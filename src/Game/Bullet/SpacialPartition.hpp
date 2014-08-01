@@ -1,7 +1,7 @@
 #ifndef _SpacialPartition_hpp_
 #define _SpacialPartition_hpp_
 
-#include "Bullet.hpp"
+#include "BulletCommand.hpp"
 
 class SpacialPartition
 {

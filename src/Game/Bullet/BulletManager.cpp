@@ -1,5 +1,6 @@
 #include "BulletManager.hpp"
 #include "Bullet.hpp"
+#include "BulletCommand.hpp"
 
 BulletManager::BulletManager()
 {
@@ -52,7 +53,7 @@ void BulletManager::tick()
             mCommands[i]->run();
     }
 
-    BulletCommand::turn++;
+    Bullet::turn++;
 }
 
 void BulletManager::draw(sf::RenderTarget& target, sf::RenderStates states) const

@@ -1,3 +1,6 @@
+#ifndef _MakeUnique_hpp_
+#define _MakeUnique_hpp_
+
 #include <memory>
 #include <type_traits>
 #include <utility>
@@ -21,3 +24,4 @@ std::unique_ptr<T> make_unique(Args&&... args) {
    return make_unique_helper<T>(std::is_array<T>(), std::forward<Args>(args)...);
 }
 
+#endif // _MakeUnique_hpp_

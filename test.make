@@ -169,7 +169,9 @@ OBJECTS := \
 	$(OBJDIR)/SpacialPartition.o \
 	$(OBJDIR)/Bullet.o \
 	$(OBJDIR)/Mover.o \
+	$(OBJDIR)/BulletCommand.o \
 	$(OBJDIR)/BulletManager.o \
+	$(OBJDIR)/BulletLua.o \
 	$(OBJDIR)/State.o \
 	$(OBJDIR)/StateStack.o \
 	$(OBJDIR)/Application.o \
@@ -285,7 +287,13 @@ $(OBJDIR)/Bullet.o: src/Game/Bullet/Bullet.cpp
 $(OBJDIR)/Mover.o: src/Game/Bullet/Mover.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/BulletCommand.o: src/Game/Bullet/BulletCommand.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/BulletManager.o: src/Game/Bullet/BulletManager.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/BulletLua.o: src/Game/Bullet/BulletLua.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/State.o: src/System/State.cpp
