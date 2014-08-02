@@ -13,6 +13,9 @@ namespace sol
 
 class BulletLua : public Bullet
 {
+    private:
+        static BulletLua* current;
+
     public:
         BulletLua(Mover* bullet, Mover* target);
         BulletLua(const std::string& filename, Mover* bullet, Mover* target);
@@ -22,11 +25,11 @@ class BulletLua : public Bullet
         void tick();
         void __debugRun(const std::string& code);
 
-        void setPos(double x, double y);
-        void setVel(double vx, double vy);
-        void vanish();
-
     private:
+        void initLua();
+        void setBullet();
+
+    public:
         std::shared_ptr<sol::state> luaState;
         std::string curFunc;
 };

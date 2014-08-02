@@ -17,10 +17,12 @@ TestState::TestState(StateStack& stack, Context context)
     ship->dead = false;
     boss->dead = false;
 
-    bossBullet = make_unique<BulletLua>(boss.get(), ship.get());
-    shipBullet = make_unique<BulletLua>(ship.get(), boss.get());
+    controller1 = make_unique<BulletLua>(boss.get(), ship.get());
+    controller2 = make_unique<BulletLua>(controller1->luaState, "", ship.get(), boss.get());
 
-    bossBullet->__debugRun("dir = 0");
+    controller1->__debugRun("dir = 0");
+    controller1->__debugRun("setPos(100.0, 100.0)");
+    controller2->__debugRun("setPos(400.0, 400.0)");
 }
 
 void TestState::draw()
@@ -34,9 +36,12 @@ void TestState::draw()
 
 bool TestState::update(sf::Time dt)
 {
-    bossBullet->__debugRun("setPos(100*math.sin(dir)+320, 100*math.cos(dir) + 120) dir = dir + math.pi / 90");
-    shipBullet->tick();
-    bossBullet->tick();
+    controller1->__debugRun("setVel(2 * math.cos(dir), 2 * math.sin(dir))");
+    controller2->__debugRun("setVel(2 * math.cos(dir), 2 * math.sin(dir))");
+    controller2->__debugRun("dir = dir + math.pi / 180");
+
+    controller1->tick();
+    controller2->tick();
     return false;
 }
 

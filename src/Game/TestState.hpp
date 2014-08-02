@@ -23,8 +23,8 @@ class TestState : public State
 
         std::unique_ptr<Mover> ship;
         std::unique_ptr<Mover> boss;
-        std::unique_ptr<BulletLua> shipBullet;
-        std::unique_ptr<BulletLua> bossBullet;
+        std::unique_ptr<BulletLua> controller1;
+        std::unique_ptr<BulletLua> controller2;
 };
 
 #endif // _TestState_hpp_

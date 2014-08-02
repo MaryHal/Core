@@ -8,7 +8,6 @@ namespace Math
     unsigned int nextPow2(register unsigned int n);
     bool checkPow2(unsigned int n);
 
-
     void distanceFromLine(double cx, double cy, double ax, double ay,
             double bx, double by, double &distanceSegment,
             double &distanceLine);

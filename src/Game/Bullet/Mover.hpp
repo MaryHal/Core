@@ -20,7 +20,7 @@ class Mover : public sf::Drawable, public sf::Transformable
         bool dead;
 };
 
-class Shot : public Mover 
+class Shot : public Mover
 {
     public:
         Shot(double x, double y, double d, double s);
