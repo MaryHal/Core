@@ -9,12 +9,12 @@ double rtod(double x) { return x*180/M_PI; }
 
 BulletCommand::BulletCommand(BulletMLParser* parser, Mover* bullet, Mover* target, BulletManager* owner)
     : BulletMLRunner(parser)
-    , Bullet(bullet, target), mOwner(owner)
+    , Bullet(bullet, target, owner)
 {}
 
 BulletCommand::BulletCommand(BulletMLState* state, Mover* bullet, Mover* target, BulletManager* owner)
     : BulletMLRunner(state)
-    , Bullet(bullet, target), mOwner(owner)
+    , Bullet(bullet, target, owner)
 {}
 
 double BulletCommand::getBulletDirection()

@@ -13,6 +13,10 @@ void Mover::tick()
     x += s * sin(d);
     y -= s * cos(d);
     style.setPosition(x, y);
+
+    if (x < 0.0 || x > 640.0 ||
+        y < 0.0 || y > 480.0)
+        dead = true;
 }
 
 void Mover::draw(sf::RenderTarget& target, sf::RenderStates states) const

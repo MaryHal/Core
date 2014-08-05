@@ -38,7 +38,7 @@ class BulletCommand : public BulletMLRunner, Bullet
         //virtual double getRand();
 
     private:
-        BulletManager* mOwner;
+        // BulletManager* mOwner;
 };
 
 #endif // _BulletCommand_hpp_

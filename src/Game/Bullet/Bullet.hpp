@@ -2,6 +2,7 @@
 #define _Bullet_hpp_
 
 class Mover;
+class BulletManager;
 
 class Bullet
 {
@@ -10,12 +11,12 @@ class Bullet
         static double rank;
 
     public:
-        Bullet(Mover* bullet, Mover* target);
+        Bullet(Mover* bullet, Mover* target, BulletManager* owner);
 
     public:
         Mover* mMover;
         Mover* mTarget;
+        BulletManager* mOwner;
 };
 
 #endif // _Bullet_hpp_
-

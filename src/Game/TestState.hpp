@@ -4,11 +4,6 @@
 #include "../System/State.hpp"
 #include <SFML/Graphics.hpp>
 
-#include "Bullet/Mover.hpp"
-#include "Bullet/BulletLua.hpp"
-
-#include "../Utils/MakeUnique.hpp"
-
 class TestState : public State
 {
     public:
@@ -20,11 +15,6 @@ class TestState : public State
 
     private:
         sf::Sprite bg;
-
-        std::unique_ptr<Mover> ship;
-        std::unique_ptr<Mover> boss;
-        std::unique_ptr<BulletLua> controller1;
-        std::unique_ptr<BulletLua> controller2;
 };
 
 #endif // _TestState_hpp_
