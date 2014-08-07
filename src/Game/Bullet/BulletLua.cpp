@@ -174,10 +174,10 @@ void BulletLua::initLua()
                                const std::string& funcName)
                            {
                                BulletLua* c = BulletLua::current;
-                               c->mOwner->createBullet(c, funcName,
-                                                       x, y,
-                                                       d, s,
-                                                       c->mTarget);
+                               // c->mOwner->createBullet(c, funcName,
+                               //                         x, y,
+                               //                         d, s,
+                               //                         c->mTarget);
                            });
 
     luaState->set_function("fire",
@@ -185,10 +185,10 @@ void BulletLua::initLua()
                                const std::string& funcName)
                            {
                                BulletLua* c = BulletLua::current;
-                               c->mOwner->createBullet(c, funcName,
-                                                       c->mMover->x, c->mMover->y,
-                                                       d, s,
-                                                       c->mTarget);
+                               // c->mOwner->createBullet(c, funcName,
+                               //                         c->mMover->x, c->mMover->y,
+                               //                         d, s,
+                               //                         c->mTarget);
                            });
 
     luaState->set_function("vanish",

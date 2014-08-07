@@ -94,10 +94,10 @@ void PatternState::draw()
 bool PatternState::update(sf::Time dt)
 {
     barrageInfo.setString(formatString("File: %s\nRank: %.2f", currentFile.toAnsiString().c_str(), Bullet::rank));
-    bulletInfo.setString(formatString("CommandCount: %d/%d\nBulletCount %d/%d\nPoolSize: %d/%d",
-                                      manager.mCommands.size(), manager.mCommands.capacity(),
-                                      manager.mShots.size(), manager.mShots.capacity(),
-                                      manager.mPool.size(), manager.mPool.capacity()));
+    // bulletInfo.setString(formatString("CommandCount: %d/%d\nBulletCount %d/%d\nPoolSize: %d/%d",
+    //                                   manager.mCommands.size(), manager.mCommands.capacity(),
+    //                                   manager.mShots.size(), manager.mShots.capacity(),
+    //                                   manager.mPool.size(), manager.mPool.capacity()));
 
     /* Console::logf("%d %d %d", manager.mShots.size(), manager.mPool.size(), manager.mCommands.size()); */
     sf::Vector2i mousePos = sf::Mouse::getPosition(*getContext().window);

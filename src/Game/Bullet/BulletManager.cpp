@@ -2,36 +2,42 @@
 
 #include "Bullet.hpp"
 #include "BulletCommand.hpp"
-#include "BulletLua.hpp"
+// #include "BulletLua.hpp"
 
 #include "../../Utils/Log.hpp"
 
 BulletManager::BulletManager()
 {
-    mLuaCommands.reserve(1024);
+    // mLuaCommands.reserve(1024);
     mCommands.reserve(1024);
     mShots.reserve(1024);
     mPool.reserve(1024);
 }
 
-BulletLua* BulletManager::createBullet(BulletLua* bullet, const std::string& func, double x, double y, double d, double s, Mover* target)
-{
-    Mover* shot_ = createProjectile(x, y, d, s);
-    BulletLua* ret;
-    ret = new BulletLua(bullet->getLuaState(), func, shot_, target, this);
-    mLuaCommands.push_back(ret);
-    return ret;
-}
+// BulletLua* BulletManager::createBullet(BulletLua* bullet, const std::string& func,
+//                                        double x, double y, double d, double s,
+//                                        Mover* target)
+// {
+//     Mover* shot_ = createProjectile(x, y, d, s);
+//     BulletLua* ret;
+//     ret = new BulletLua(bullet->getLuaState(), func, shot_, target, this);
+//     mLuaCommands.push_back(ret);
+//     return ret;
+// }
 
-BulletLua* BulletManager::createBullet(const std::string& luaFile, Mover* origin, Mover* target)
-{
-    BulletLua* ret;
-    ret = new BulletLua(luaFile, origin, target, this);
-    mLuaCommands.push_back(ret);
-    return ret;
-}
+// BulletLua* BulletManager::createBullet(const std::string& luaFile,
+//                                        Mover* origin,
+//                                        Mover* target)
+// {
+//     BulletLua* ret;
+//     ret = new BulletLua(luaFile, origin, target, this);
+//     mLuaCommands.push_back(ret);
+//     return ret;
+// }
 
-BulletCommand* BulletManager::createBullet(BulletMLState* state, double x, double y, double d, double s, Mover* target)
+BulletCommand* BulletManager::createBullet(BulletMLState* state,
+                                           double x, double y, double d, double s,
+                                           Mover* target)
 {
     Mover* shot_ = createProjectile(x, y, d, s);
     BulletCommand* ret;
@@ -40,7 +46,9 @@ BulletCommand* BulletManager::createBullet(BulletMLState* state, double x, doubl
     return ret;
 }
 
-BulletCommand* BulletManager::createBullet(BulletMLParser* parser, Mover* origin, Mover* target)
+BulletCommand* BulletManager::createBullet(BulletMLParser* parser,
+                                           Mover* origin,
+                                           Mover* target)
 {
     BulletCommand* ret;
     ret = new BulletCommand(parser, origin, target, this);
@@ -78,19 +86,19 @@ void BulletManager::tick()
             mCommands[i]->run();
     }
 
-    size = mLuaCommands.size();
-    for (unsigned int i = 0; i < size; ++i)
-    {
-        if (mLuaCommands[i]->isDead())
-        {
-            delete mLuaCommands[i];
-            mLuaCommands[i] = mLuaCommands.back();
-            mLuaCommands.pop_back();
-            --size;
-        }
-        if (i < size)
-            mLuaCommands[i]->run();
-    }
+    // size = mLuaCommands.size();
+    // for (unsigned int i = 0; i < size; ++i)
+    // {
+    //     if (mLuaCommands[i]->isDead())
+    //     {
+    //         delete mLuaCommands[i];
+    //         mLuaCommands[i] = mLuaCommands.back();
+    //         mLuaCommands.pop_back();
+    //         --size;
+    //     }
+    //     if (i < size)
+    //         mLuaCommands[i]->run();
+    // }
 
     Bullet::turn++;
 }
@@ -140,11 +148,11 @@ void BulletManager::clearAll()
     }
     mCommands.clear();
 
-    for (BulletLua* command : mLuaCommands)
-    {
-        delete command;
-    }
-    mLuaCommands.clear();
+    // for (BulletLua* command : mLuaCommands)
+    // {
+    //     delete command;
+    // }
+    // mLuaCommands.clear();
 
     for (Shot* shot : mShots)
     {

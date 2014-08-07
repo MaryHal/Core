@@ -9,7 +9,7 @@ SpacialPartition::SpacialPartition()
     // std::memset(bulletCount, 0, sizeof(int) * 7 * 5);
 }
 
-void SpacialPartition::addBullet(const BulletCommand& bullet)
+void SpacialPartition::addBullet()
 {
     // int x = bullet.getMover().x / tileSize;
     // int y = bullet.getMover().y / tileSize;
@@ -22,4 +22,3 @@ void SpacialPartition::reset()
 {
     // std::memset(bulletCount, 0, sizeof(int) * 7 * 5);
 }
-

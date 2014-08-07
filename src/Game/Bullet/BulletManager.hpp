@@ -11,19 +11,19 @@ class BulletMLState;
 class BulletMLParser;
 class BulletCommand;
 
-class BulletLua;
+// class BulletLua;
 
 class BulletManager : public sf::Drawable, public sf::Transformable
 {
     public:
         BulletManager();
-        std::vector<BulletLua*> mLuaCommands;
+        // std::vector<BulletLua*> mLuaCommands;
         std::vector<BulletCommand*> mCommands;
         std::vector<Shot*> mShots;
         std::vector<Shot*> mPool;
 
-        BulletLua* createBullet(const std::string& luaFile, Mover* origin, Mover* target);
-        BulletLua* createBullet(BulletLua* bullet, const std::string& func, double x, double y, double d, double s, Mover* target);
+        // BulletLua* createBullet(const std::string& luaFile, Mover* origin, Mover* target);
+        // BulletLua* createBullet(BulletLua* bullet, const std::string& func, double x, double y, double d, double s, Mover* target);
 
         BulletCommand* createBullet(BulletMLState* state, double x, double y, double d, double s, Mover* target);
         BulletCommand* createBullet(BulletMLParser* parser, Mover* origin, Mover* target);
