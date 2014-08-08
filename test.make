@@ -166,8 +166,10 @@ OBJECTS := \
 	$(OBJDIR)/TestState.o \
 	$(OBJDIR)/TitleState.o \
 	$(OBJDIR)/MusicState.o \
+	$(OBJDIR)/BulletLuaManager.o \
 	$(OBJDIR)/SpacialPartition.o \
 	$(OBJDIR)/Bullet.o \
+	$(OBJDIR)/BulletMLManager.o \
 	$(OBJDIR)/Mover.o \
 	$(OBJDIR)/BulletCommand.o \
 	$(OBJDIR)/BulletManager.o \
@@ -278,10 +280,16 @@ $(OBJDIR)/TitleState.o: src/Game/TitleState.cpp
 $(OBJDIR)/MusicState.o: src/Game/MusicState.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/BulletLuaManager.o: src/Game/Bullet/BulletLuaManager.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/SpacialPartition.o: src/Game/Bullet/SpacialPartition.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Bullet.o: src/Game/Bullet/Bullet.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/BulletMLManager.o: src/Game/Bullet/BulletMLManager.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Mover.o: src/Game/Bullet/Mover.cpp

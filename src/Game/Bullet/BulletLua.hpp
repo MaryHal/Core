@@ -6,7 +6,7 @@
 #include <string>
 #include <memory>
 
-class BulletManager;
+class BulletLuaManager;
 
 namespace sol
 {
@@ -20,13 +20,13 @@ class BulletLua : public Bullet
 
     public:
         BulletLua(Mover* bullet, Mover* target,
-                  BulletManager* owner);
+                  BulletLuaManager* owner);
         BulletLua(const std::string& filename,
                   Mover* bullet, Mover* target,
-                  BulletManager* owner);
+                  BulletLuaManager* owner);
         BulletLua(std::shared_ptr<sol::state> lua, const std::string& func,
                   Mover* bullet, Mover* target,
-                  BulletManager* owner);
+                  BulletLuaManager* owner);
 
         std::shared_ptr<sol::state> getLuaState();
         bool isDead();
@@ -40,6 +40,7 @@ class BulletLua : public Bullet
     private:
         std::shared_ptr<sol::state> luaState;
         std::string funcName;
+        BulletLuaManager* mOwner;
 };
 
 #endif // _BulletLua_hpp_

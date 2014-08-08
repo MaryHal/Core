@@ -1,20 +1,21 @@
 #include "BulletCommand.hpp"
+
 #include "Mover.hpp"
-#include "BulletManager.hpp"
+#include "BulletMLManager.hpp"
 
 #include <cmath>
 
 double dtor(double x) { return x*M_PI/180; }
 double rtod(double x) { return x*180/M_PI; }
 
-BulletCommand::BulletCommand(BulletMLParser* parser, Mover* bullet, Mover* target, BulletManager* owner)
+BulletCommand::BulletCommand(BulletMLParser* parser, Mover* bullet, Mover* target, BulletMLManager* owner)
     : BulletMLRunner(parser)
-    , Bullet(bullet, target, owner)
+    , Bullet(bullet, target), mOwner(owner)
 {}
 
-BulletCommand::BulletCommand(BulletMLState* state, Mover* bullet, Mover* target, BulletManager* owner)
+BulletCommand::BulletCommand(BulletMLState* state, Mover* bullet, Mover* target, BulletMLManager* owner)
     : BulletMLRunner(state)
-    , Bullet(bullet, target, owner)
+    , Bullet(bullet, target), mOwner(owner)
 {}
 
 double BulletCommand::getBulletDirection()

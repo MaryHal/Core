@@ -1,5 +1,5 @@
 #include "BulletLua.hpp"
-#include "BulletManager.hpp"
+#include "BulletLuaManager.hpp"
 
 #include <sol.hpp>
 #include "Mover.hpp"
@@ -10,20 +10,22 @@
 BulletLua* BulletLua::current = nullptr;
 
 BulletLua::BulletLua(Mover* bullet, Mover* target,
-                     BulletManager* owner)
-    : Bullet(bullet, target, owner),
+                     BulletLuaManager* owner)
+    : Bullet(bullet, target),
       luaState(new sol::state),
-      funcName("")
+      funcName(""),
+      mOwner(owner)
 {
     initLua();
 }
 
 BulletLua::BulletLua(const std::string& filename,
                      Mover* bullet, Mover* target,
-                     BulletManager* owner)
-    : Bullet(bullet, target, owner),
+                     BulletLuaManager* owner)
+    : Bullet(bullet, target),
       luaState(new sol::state),
-      funcName("main")
+      funcName("main"),
+      mOwner(owner)
 {
     luaState->open_file(filename);
 
@@ -32,10 +34,11 @@ BulletLua::BulletLua(const std::string& filename,
 
 BulletLua::BulletLua(std::shared_ptr<sol::state> lua, const std::string& func,
                      Mover* bullet, Mover* target,
-                     BulletManager* owner)
-    : Bullet(bullet, target, owner),
+                     BulletLuaManager* owner)
+    : Bullet(bullet, target),
       luaState(lua),
-      funcName(func)
+      funcName(func),
+      mOwner(owner)
 {
 }
 

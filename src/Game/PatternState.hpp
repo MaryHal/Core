@@ -5,7 +5,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "../GUI/Menu.hpp"
-#include "Bullet/BulletManager.hpp"
+#include "Bullet/BulletMLManager.hpp"
 #include <bulletmlparser.h>
 
 #include <vector>
@@ -21,7 +21,7 @@ class PatternState : public State
         virtual bool handleEvent(const sf::Event& event);
 
     private:
-        BulletManager manager;
+        BulletMLManager manager;
         std::unique_ptr<Mover> ship;
         std::unique_ptr<Mover> boss;
 

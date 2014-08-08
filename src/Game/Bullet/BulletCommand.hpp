@@ -5,15 +5,15 @@
 #include "Bullet.hpp"
 
 class Mover;
-class BulletManager;
+class BulletMLManager;
 
 class BulletCommand : public BulletMLRunner, Bullet
 {
     public:
         // root bullet
-        BulletCommand(BulletMLParser* parser, Mover* bullet, Mover* target, BulletManager* owner);
+        BulletCommand(BulletMLParser* parser, Mover* bullet, Mover* target, BulletMLManager* owner);
         // child bullet
-        BulletCommand(BulletMLState* state, Mover* bullet, Mover* target, BulletManager* owner);
+        BulletCommand(BulletMLState* state, Mover* bullet, Mover* target, BulletMLManager* owner);
 
         virtual double getBulletDirection();
         virtual double getAimDirection();
@@ -38,7 +38,7 @@ class BulletCommand : public BulletMLRunner, Bullet
         //virtual double getRand();
 
     private:
-        // BulletManager* mOwner;
+        BulletMLManager* mOwner;
 };
 
 #endif // _BulletCommand_hpp_

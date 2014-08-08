@@ -11,12 +11,11 @@ class Bullet
         static double rank;
 
     public:
-        Bullet(Mover* bullet, Mover* target, BulletManager* owner);
+        Bullet(Mover* bullet, Mover* target);
 
     public:
         Mover* mMover;
         Mover* mTarget;
-        BulletManager* mOwner;
 };
 
 #endif // _Bullet_hpp_
