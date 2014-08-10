@@ -4,6 +4,8 @@
 #include "../System/State.hpp"
 #include <SFML/Graphics.hpp>
 
+#include "Bullet/BulletLuaManager.hpp"
+
 class TestState : public State
 {
     public:
@@ -15,6 +17,7 @@ class TestState : public State
 
     private:
         sf::Sprite bg;
+        BulletLuaManager manager;
 };
 
 #endif // _TestState_hpp_

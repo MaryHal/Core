@@ -1,10 +1,10 @@
 #ifndef _BulletLua_hpp_
 #define _BulletLua_hpp_
 
-#include "Bullet.hpp"
-
 #include <string>
 #include <memory>
+
+#include "Mover.hpp"
 
 class BulletLuaManager;
 
@@ -13,24 +13,30 @@ namespace sol
     class state;
 };
 
-class BulletLua : public Bullet
+class BulletLua
 {
     private:
         static BulletLua* current;
 
     public:
-        BulletLua(Mover* bullet, Mover* target,
-                  BulletLuaManager* owner);
-        BulletLua(const std::string& filename,
-                  Mover* bullet, Mover* target,
-                  BulletLuaManager* owner);
-        BulletLua(std::shared_ptr<sol::state> lua, const std::string& func,
-                  Mover* bullet, Mover* target,
-                  BulletLuaManager* owner);
+        BulletLua();
+
+        void set(const std::string& filename,
+                 Mover* origin, Mover* target,
+                 BulletLuaManager* owner);
+
+        void set(std::shared_ptr<sol::state> lua,
+                 const std::string& func,
+                 Mover* origin, Mover* target,
+                 BulletLuaManager* owner);
 
         std::shared_ptr<sol::state> getLuaState();
-        bool isDead();
+        int getTurn() const;
+        bool isDead() const;
+
         void run();
+        const Mover& getMover() const;
+
         void __debugRun(const std::string& code);
 
     private:
@@ -38,8 +44,14 @@ class BulletLua : public Bullet
         void setFunctionName(const std::string& funcName);
 
     private:
+        Mover mMover;
+        Mover mTarget;
+
         std::shared_ptr<sol::state> luaState;
         std::string funcName;
+
+        int turn;
+
         BulletLuaManager* mOwner;
 };
 
