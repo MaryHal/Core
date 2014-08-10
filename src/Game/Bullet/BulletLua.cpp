@@ -189,6 +189,13 @@ void BulletLua::initLua()
                                c->mMover.d = Math::degToRad(dir);
                            });
 
+    luaState->set_function("setRelDir",
+                           [&](double dir)
+                           {
+                               BulletLua* c = BulletLua::current;
+                               c->mMover.d += Math::degToRad(dir);
+                           });
+
     luaState->set_function("setAimDir",
                            [&]()
                            {
@@ -202,6 +209,13 @@ void BulletLua::initLua()
                            {
                                BulletLua* c = BulletLua::current;
                                c->mMover.s = s;
+                           });
+
+    luaState->set_function("setRelSpeed",
+                           [&](double s)
+                           {
+                               BulletLua* c = BulletLua::current;
+                               c->mMover.s += s;
                            });
 
     luaState->set_function("setFunction",
