@@ -1,19 +1,18 @@
-#ifndef _BulletCommand_hpp_
-#define _BulletCommand_hpp_
+#ifndef _BulletML_hpp_
+#define _BulletML_hpp_
 
 #include <bulletmlrunner.h>
-#include "Bullet.hpp"
 
 class Mover;
 class BulletMLManager;
 
-class BulletCommand : public BulletMLRunner, Bullet
+class BulletML : public BulletMLRunner
 {
     public:
         // root bullet
-        BulletCommand(BulletMLParser* parser, Mover* bullet, Mover* target, BulletMLManager* owner);
+        BulletML(BulletMLParser* parser, Mover* bullet, Mover* target, BulletMLManager* owner);
         // child bullet
-        BulletCommand(BulletMLState* state, Mover* bullet, Mover* target, BulletMLManager* owner);
+        BulletML(BulletMLState* state, Mover* bullet, Mover* target, BulletMLManager* owner);
 
         virtual double getBulletDirection();
         virtual double getAimDirection();
@@ -38,7 +37,10 @@ class BulletCommand : public BulletMLRunner, Bullet
         //virtual double getRand();
 
     private:
+        Mover* mMover;
+        Mover* mTarget;
+
         BulletMLManager* mOwner;
 };
 
-#endif // _BulletCommand_hpp_
+#endif // _BulletML_hpp_

@@ -19,6 +19,14 @@ class BulletLua
         static BulletLua* current;
 
     public:
+        struct Bullet
+        {
+            public:
+                float x, y;
+                float vx, vy;
+        };
+
+    public:
         BulletLua();
 
         void set(const std::string& filename,

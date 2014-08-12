@@ -1,7 +1,9 @@
 #include "BulletMLManager.hpp"
 
-#include "Bullet.hpp"
-#include "BulletCommand.hpp"
+#include "BulletML.hpp"
+
+int BulletMLManager::turn = 0;
+float BulletMLManager::rank = 0.8;
 
 BulletMLManager::BulletMLManager()
 {
@@ -10,23 +12,23 @@ BulletMLManager::BulletMLManager()
     mPool.reserve(1024);
 }
 
-BulletCommand* BulletMLManager::createBullet(BulletMLState* state,
+BulletML* BulletMLManager::createBullet(BulletMLState* state,
                                            double x, double y, double d, double s,
                                            Mover* target)
 {
     Mover* shot_ = createProjectile(x, y, d, s);
-    BulletCommand* ret;
-    ret = new BulletCommand(state, shot_, target, this);
+    BulletML* ret;
+    ret = new BulletML(state, shot_, target, this);
     mCommands.push_back(ret);
     return ret;
 }
 
-BulletCommand* BulletMLManager::createBullet(BulletMLParser* parser,
+BulletML* BulletMLManager::createBullet(BulletMLParser* parser,
                                            Mover* origin,
                                            Mover* target)
 {
-    BulletCommand* ret;
-    ret = new BulletCommand(parser, origin, target, this);
+    BulletML* ret;
+    ret = new BulletML(parser, origin, target, this);
     mCommands.push_back(ret);
     return ret;
 }
@@ -61,7 +63,7 @@ void BulletMLManager::tick()
             mCommands[i]->run();
     }
 
-    Bullet::turn++;
+    BulletMLManager::turn++;
 }
 
 void BulletMLManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -103,7 +105,7 @@ void BulletMLManager::destroyProjectile(Shot* projectile)
 
 void BulletMLManager::clearAll()
 {
-    for (BulletCommand* command : mCommands)
+    for (BulletML* command : mCommands)
     {
         delete command;
     }

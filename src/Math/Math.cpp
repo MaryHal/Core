@@ -30,7 +30,6 @@ float Math::degToRad(float deg)
     return PI / 180 * deg;
 }
 
-
 float Math::sin(float deg)
 {
     return std::sin(degToRad(deg));
@@ -56,9 +55,9 @@ float Math::arcCos(float value)
     return radToDeg(std::acos(value));
 }
 
-float Math::arcTan2(float valY, float valX)
+float Math::arcTan2(float x, float y)
 {
-    return radToDeg(std::atan2(valY, valX));
+    return radToDeg(std::atan2(y, x));
 }
 
 float Math::sqrt(float value)
@@ -111,3 +110,24 @@ void Math::distanceFromLine(double cx, double cy, double ax, double ay,
 
     return;
 }
+
+float Math::getMagnitude(float x, float y)
+{
+    return std::sqrt(x*x + y*y);
+}
+
+float Math::getDirection(float x, float y)
+{
+    return std::atan2(y, x);
+}
+
+/* float Math::getX(float d, float m) */
+/* { */
+/*     return m * cos(d); */
+/* } */
+
+/* float Math::getY(float d, float m) */
+/* { */
+/*     return m * sin(d); */
+/* } */
+

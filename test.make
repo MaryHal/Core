@@ -168,11 +168,10 @@ OBJECTS := \
 	$(OBJDIR)/MusicState.o \
 	$(OBJDIR)/BulletLuaManager.o \
 	$(OBJDIR)/SpacialPartition.o \
-	$(OBJDIR)/Bullet.o \
 	$(OBJDIR)/BulletMLManager.o \
 	$(OBJDIR)/Mover.o \
-	$(OBJDIR)/BulletCommand.o \
 	$(OBJDIR)/BulletManager.o \
+	$(OBJDIR)/BulletML.o \
 	$(OBJDIR)/BulletLua.o \
 	$(OBJDIR)/State.o \
 	$(OBJDIR)/StateStack.o \
@@ -286,19 +285,16 @@ $(OBJDIR)/BulletLuaManager.o: src/Game/Bullet/BulletLuaManager.cpp
 $(OBJDIR)/SpacialPartition.o: src/Game/Bullet/SpacialPartition.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Bullet.o: src/Game/Bullet/Bullet.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/BulletMLManager.o: src/Game/Bullet/BulletMLManager.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Mover.o: src/Game/Bullet/Mover.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/BulletCommand.o: src/Game/Bullet/BulletCommand.cpp
+$(OBJDIR)/BulletManager.o: src/Game/Bullet/BulletManager.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/BulletManager.o: src/Game/Bullet/BulletManager.cpp
+$(OBJDIR)/BulletML.o: src/Game/Bullet/BulletML.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/BulletLua.o: src/Game/Bullet/BulletLua.cpp

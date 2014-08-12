@@ -2,6 +2,8 @@
 
 #include "../../Utils/Log.hpp"
 
+float BulletLuaManager::rank = 0.8;
+
 BulletLuaManager::BulletLuaManager(unsigned int initialCapacity)
     : bullets(initialCapacity)
 {

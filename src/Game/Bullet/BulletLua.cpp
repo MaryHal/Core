@@ -1,8 +1,6 @@
 #include "BulletLua.hpp"
 #include "BulletLuaManager.hpp"
 
-#include "Bullet.hpp"
-
 #include <sol.hpp>
 #include "Mover.hpp"
 
@@ -163,7 +161,7 @@ void BulletLua::initLua()
     luaState->set_function("getRank",
                            [&]()
                            {
-                               return Bullet::rank;
+                               return BulletLuaManager::rank;
                            });
 
     luaState->set_function("setPos",

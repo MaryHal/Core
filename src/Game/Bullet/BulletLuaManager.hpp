@@ -13,6 +13,9 @@
 class BulletLuaManager : public BulletManager
 {
     public:
+        static float rank;
+
+    public:
         BulletLuaManager(unsigned int initialCapacity=4096);
 
         // Root Bullet

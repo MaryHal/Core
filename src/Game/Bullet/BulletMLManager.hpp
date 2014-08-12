@@ -8,18 +8,23 @@
 
 class BulletMLState;
 class BulletMLParser;
-class BulletCommand;
+
+class BulletML;
 
 class BulletMLManager : public BulletManager
 {
     public:
+        static int turn;
+        static float rank;
+
+    public:
         BulletMLManager();
-        std::vector<BulletCommand*> mCommands;
+        std::vector<BulletML*> mCommands;
         std::vector<Shot*> mShots;
         std::vector<Shot*> mPool;
 
-        BulletCommand* createBullet(BulletMLState* state, double x, double y, double d, double s, Mover* target);
-        BulletCommand* createBullet(BulletMLParser* parser, Mover* origin, Mover* target);
+        BulletML* createBullet(BulletMLState* state, double x, double y, double d, double s, Mover* target);
+        BulletML* createBullet(BulletMLParser* parser, Mover* origin, Mover* target);
         Shot* createProjectile(double x, double y,double d, double s);
         void destroyProjectile(Shot* projectile);
         void clearAll();

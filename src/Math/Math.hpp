@@ -8,10 +8,6 @@ namespace Math
     unsigned int nextPow2(register unsigned int n);
     bool checkPow2(unsigned int n);
 
-    void distanceFromLine(double cx, double cy, double ax, double ay,
-            double bx, double by, double &distanceSegment,
-            double &distanceLine);
-
     static constexpr float PI = 3.14159265f;
     static constexpr float TWO_PI = (PI * 2.0f);
 
@@ -23,8 +19,19 @@ namespace Math
     float tan(float deg);
     float arcSin(float value);
     float arcCos(float value);
-    float arcTan2(float valY, float valX);
+    float arcTan2(float x, float y);
     float sqrt(float value);
+
+    void distanceFromLine(double cx, double cy, double ax, double ay,
+            double bx, double by, double &distanceSegment,
+            double &distanceLine);
+
+    // Coordinate conversion
+    float getMagnitude(float x, float y);
+    float getDirection(float x, float y);
+
+    /* float getX(float d, float m); */
+    /* float getY(float d, float m); */
 };
 
 #endif // _Math_hpp_

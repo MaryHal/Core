@@ -4,7 +4,7 @@
 #include "../Utils/Log.hpp"
 #include "../Utils/StringUtils.hpp"
 
-#include "Bullet/BulletCommand.hpp"
+#include "Bullet/BulletML.hpp"
 #include <bulletmlparser-tinyxml2.h>
 
 #include <SFML/System/Vector2.hpp>
@@ -93,7 +93,7 @@ void PatternState::draw()
 
 bool PatternState::update(sf::Time dt)
 {
-    barrageInfo.setString(formatString("File: %s\nRank: %.2f", currentFile.toAnsiString().c_str(), Bullet::rank));
+    barrageInfo.setString(formatString("File: %s\nRank: %.2f", currentFile.toAnsiString().c_str(), BulletMLManager::rank));
     // bulletInfo.setString(formatString("CommandCount: %d/%d\nBulletCount %d/%d\nPoolSize: %d/%d",
     //                                   manager.mCommands.size(), manager.mCommands.capacity(),
     //                                   manager.mShots.size(), manager.mShots.capacity(),
@@ -139,13 +139,13 @@ bool PatternState::handleEvent(const sf::Event& event)
         double dr = 0.1;
         if (event.key.code == sf::Keyboard::Left)
         {
-            if (Bullet::rank - dr >= 0.0)
-                Bullet::rank -= dr;
+            if (BulletMLManager::rank - dr >= 0.0)
+                BulletMLManager::rank -= dr;
         }
         if (event.key.code == sf::Keyboard::Right)
         {
-            if (Bullet::rank + dr <= 1.0)
-                Bullet::rank += dr;
+            if (BulletMLManager::rank + dr <= 1.0)
+                BulletMLManager::rank += dr;
         }
     }
 
