@@ -2,9 +2,6 @@
 #include "BulletLuaManager.hpp"
 
 #include <sol.hpp>
-#include "Mover.hpp"
-
-#include "../../Math/Math.hpp"
 
 // This pointer should point to the currently "processing" bullet.
 // The reason for this is that the functions generated for our lua state
@@ -22,7 +19,7 @@ BulletLua::BulletLua()
 }
 
 void BulletLua::set(const std::string& filename,
-                    Mover* origin, Mover* target,
+                    Bullet* origin, Bullet* target,
                     BulletLuaManager* owner)
 {
     // Copy Movers
@@ -43,7 +40,7 @@ void BulletLua::set(const std::string& filename,
 
 void BulletLua::set(std::shared_ptr<sol::state> lua,
                     const std::string& func,
-                    Mover* origin, Mover* target,
+                    Bullet* origin, Bullet* target,
                     BulletLuaManager* owner)
 {
     // Copy Movers
@@ -62,14 +59,15 @@ void BulletLua::set(std::shared_ptr<sol::state> lua,
 void BulletLua::set(std::shared_ptr<sol::state> lua,
                     const std::string& func,
                     double x, double y, double d, double s,
-                    Mover* target,
+                    Bullet* target,
                     BulletLuaManager* owner)
 {
     // Copy Movers
     mMover.x = x;
     mMover.y = y;
-    mMover.d = d;
-    mMover.s = s;
+    mMover.setSpeedAndDirection(s, d);
+    /* mMover.vx = vx; */
+    /* mMover.vy = vy; */
 
     mTarget = *target;
 
@@ -106,7 +104,10 @@ void BulletLua::run()
         luaState->get<sol::function>(funcName).call();
 
     // Move everything
-    mMover.tick();
+    mMover.x += mMover.vx;
+    mMover.y += mMover.vy;
+
+    mMover.sprite.setPosition(mMover.x, mMover.y);
 
     if (mMover.x < -120.0 || mMover.x > 760.0 ||
         mMover.y < -120.0 || mMover.y > 600.0)
@@ -117,7 +118,7 @@ void BulletLua::run()
     turn++;
 }
 
-const Mover& BulletLua::getMover() const
+const Bullet& BulletLua::getMover() const
 {
     return mMover;
 }
@@ -156,28 +157,28 @@ void BulletLua::initLua()
                            [&]()
                            {
                                BulletLua* c = BulletLua::current;
-                               return c->mMover.s * sin(c->mMover.d);
+                               return c->mMover.vx;
                            });
 
     luaState->set_function("getVelY",
                            [&]()
                            {
                                BulletLua* c = BulletLua::current;
-                               return c->mMover.s * cos(c->mMover.d);
+                               return c->mMover.vy;
                            });
 
     luaState->set_function("getSpeed",
                            [&]()
                            {
                                BulletLua* c = BulletLua::current;
-                               return c->mMover.s;
+                               return c->mMover.getSpeed();
                            });
 
     luaState->set_function("getDir",
                            [&]()
                            {
                                BulletLua* c = BulletLua::current;
-                               return c->mMover.d;
+                               return c->mMover.getDirection();
                            });
 
     luaState->set_function("getTurn",
@@ -205,44 +206,43 @@ void BulletLua::initLua()
                            [&](double vx, double vy)
                            {
                                BulletLua* c = BulletLua::current;
-                               c->mMover.d = atan2(vy, vx);
-                               c->mMover.s = sqrt(vx*vx+vy*vy);
+                               c->mMover.vx = vx;
+                               c->mMover.vy = vy;
                            });
 
     luaState->set_function("setDir",
                            [&](double dir)
                            {
                                BulletLua* c = BulletLua::current;
-                               c->mMover.d = Math::degToRad(dir);
+                               c->mMover.setDirection(dir);
                            });
 
-    luaState->set_function("setRelDir",
+    luaState->set_function("setDirRel",
                            [&](double dir)
                            {
                                BulletLua* c = BulletLua::current;
-                               c->mMover.d += Math::degToRad(dir);
+                               c->mMover.setDirectionRelative(dir);
                            });
 
-    luaState->set_function("setAimDir",
+    luaState->set_function("setDirAim",
                            [&]()
                            {
                                BulletLua* c = BulletLua::current;
-                               c->mMover.d = Math::PI - atan2(c->mTarget.x - c->mMover.x,
-                                                              c->mTarget.y - c->mMover.y);
+                               c->mMover.setDirectionAim(c->mTarget.x, c->mTarget.y);
                            });
 
     luaState->set_function("setSpeed",
                            [&](double s)
                            {
                                BulletLua* c = BulletLua::current;
-                               c->mMover.s = s;
+                               c->mMover.setSpeed(s);
                            });
 
-    luaState->set_function("setRelSpeed",
+    luaState->set_function("setSpeedRel",
                            [&](double s)
                            {
                                BulletLua* c = BulletLua::current;
-                               c->mMover.s += s;
+                               c->mMover.setSpeedRelative(s);
                            });
 
     luaState->set_function("setFunction",
@@ -279,14 +279,7 @@ void BulletLua::initLua()
                            {
                                BulletLua* c = BulletLua::current;
                                c->mMover.dead = true;
-                               /* c->mOwner->pushToStack(c); */
                            });
-
-    /* luaState->set_function("quit", */
-    /*                        [&]() */
-    /*                        { */
-    /*                            BulletLua */
-    /*                        }); */
 }
 
 void BulletLua::setFunctionName(const std::string& funcName)

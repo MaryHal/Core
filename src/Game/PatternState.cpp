@@ -4,7 +4,7 @@
 #include "../Utils/Log.hpp"
 #include "../Utils/StringUtils.hpp"
 
-#include "Bullet/BulletML.hpp"
+#include "Bullet/BulletML/BulletML.hpp"
 #include <bulletmlparser-tinyxml2.h>
 
 #include <SFML/System/Vector2.hpp>

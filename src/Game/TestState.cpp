@@ -18,8 +18,8 @@ TestState::TestState(StateStack& stack, Context context)
     debugText.setPosition(8.0f, 8.0f);
     debugText.setCharacterSize(11);
 
-    Mover origin(320.0, 120.0, 0.0, 0.0);
-    Mover target(320.0, 320.0, 0.0, 0.0);
+    Bullet origin(320.0, 120.0, 0.0, 0.0);
+    Bullet target(320.0, 320.0, 0.0, 0.0);
     manager.createBullet("data/lua/test.lua", &origin, &target);
 }
 

@@ -1,7 +1,5 @@
 #include "BulletLuaManager.hpp"
 
-#include "../../Utils/Log.hpp"
-
 float BulletLuaManager::rank = 0.8;
 
 BulletLuaManager::BulletLuaManager(unsigned int initialCapacity)
@@ -17,14 +15,14 @@ BulletLuaManager::~BulletLuaManager()
     }
 }
 
-void BulletLuaManager::createBullet(const std::string& filename, Mover* origin, Mover* target)
+void BulletLuaManager::createBullet(const std::string& filename, Bullet* origin, Bullet* target)
 {
     BulletLua* b = getFreeBullet();
     b->set(filename, origin, target, this);
     bullets.push_back(b);
 }
 
-void BulletLuaManager::createBullet(std::shared_ptr<sol::state> lua, const std::string& func, Mover* origin, Mover* target)
+void BulletLuaManager::createBullet(std::shared_ptr<sol::state> lua, const std::string& func, Bullet* origin, Bullet* target)
 {
     BulletLua* b = getFreeBullet();
     b->set(lua, func, origin, target, this);
@@ -32,7 +30,7 @@ void BulletLuaManager::createBullet(std::shared_ptr<sol::state> lua, const std::
 }
 
 void BulletLuaManager::createBullet(std::shared_ptr<sol::state> lua, const std::string& func,
-                  double x, double y, double d, double s, Mover* target)
+                  double x, double y, double d, double s, Bullet* target)
 {
     BulletLua* b = getFreeBullet();
     b->set(lua, func, x, y, d, s, target, this);
@@ -61,7 +59,7 @@ void BulletLuaManager::draw(sf::RenderTarget& target, sf::RenderStates states) c
 {
     for (auto& bullet : bullets)
     {
-        target.draw(bullet->getMover());
+        target.draw(bullet->getMover().sprite);
     }
 }
 

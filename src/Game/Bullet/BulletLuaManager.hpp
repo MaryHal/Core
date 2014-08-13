@@ -1,9 +1,10 @@
 #ifndef _BulletLuaManager_hpp_
 #define _BulletLuaManager_hpp_
 
-#include "BulletManager.hpp"
 #include "BulletLua.hpp"
+#include "BulletManager.hpp"
 
+#include <vector>
 #include <list>
 #include <stack>
 #include <string>
@@ -21,12 +22,12 @@ class BulletLuaManager : public BulletManager
         ~BulletLuaManager();
 
         // Root Bullet
-        void createBullet(const std::string& filename, Mover* origin, Mover* target);
+        void createBullet(const std::string& filename, Bullet* origin, Bullet* target);
 
         // Child Bullets
-        void createBullet(std::shared_ptr<sol::state> lua, const std::string& func, Mover* origin, Mover* target);
+        void createBullet(std::shared_ptr<sol::state> lua, const std::string& func, Bullet* origin, Bullet* target);
         void createBullet(std::shared_ptr<sol::state> lua, const std::string& func,
-                          double x, double y, double d, double s, Mover* target);
+                          double x, double y, double d, double s, Bullet* target);
 
         virtual void tick();
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;

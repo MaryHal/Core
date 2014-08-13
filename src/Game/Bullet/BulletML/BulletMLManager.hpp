@@ -1,7 +1,7 @@
 #ifndef _BulletMLManager_hpp_
 #define _BulletMLManager_hpp_
 
-#include "BulletManager.hpp"
+#include "../BulletManager.hpp"
 #include "Mover.hpp"
 
 #include <list>

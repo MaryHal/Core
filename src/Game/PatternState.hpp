@@ -5,7 +5,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "../GUI/Menu.hpp"
-#include "Bullet/BulletMLManager.hpp"
+#include "Bullet/BulletML/BulletMLManager.hpp"
 #include <bulletmlparser.h>
 
 #include <vector>
