@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
     /* Console::logf("%d %d %d", preferences.getWidth(), preferences.getHeight(), preferences.getType()); */
 
     MyApp app;
-    app.run(States::Title);
+    app.run(States::Title, false);
 
     return 0;
 }

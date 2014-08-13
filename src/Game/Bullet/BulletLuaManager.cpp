@@ -5,12 +5,15 @@
 float BulletLuaManager::rank = 0.8;
 
 BulletLuaManager::BulletLuaManager(unsigned int initialCapacity)
-    : bullets(initialCapacity)
 {
-    // Throw all bullets into free stack
-    for (auto iter = bullets.rend(); iter != bullets.rbegin(); --iter)
+    increaseCapacity(initialCapacity);
+}
+
+BulletLuaManager::~BulletLuaManager()
+{
+    for (auto iter = blocks.begin(); iter != blocks.end(); ++iter)
     {
-        freeBullets.push(&*iter);
+        delete [] *iter;
     }
 }
 
@@ -18,29 +21,38 @@ void BulletLuaManager::createBullet(const std::string& filename, Mover* origin, 
 {
     BulletLua* b = getFreeBullet();
     b->set(filename, origin, target, this);
+    bullets.push_back(b);
 }
 
 void BulletLuaManager::createBullet(std::shared_ptr<sol::state> lua, const std::string& func, Mover* origin, Mover* target)
 {
     BulletLua* b = getFreeBullet();
     b->set(lua, func, origin, target, this);
+    bullets.push_back(b);
 }
 
 void BulletLuaManager::createBullet(std::shared_ptr<sol::state> lua, const std::string& func,
                   double x, double y, double d, double s, Mover* target)
 {
     BulletLua* b = getFreeBullet();
-    Mover m(x, y, d, s);
-    b->set(lua, func, &m, target, this);
+    b->set(lua, func, x, y, d, s, target, this);
+    bullets.push_back(b);
 }
 
 void BulletLuaManager::tick()
 {
-    for (auto& bullet : bullets)
+    for (auto iter = bullets.begin(); iter != bullets.end(); ++iter)
     {
-        if (!bullet.isDead())
+        BulletLua* bullet = *iter;
+
+        if (bullet->isDead())
         {
-            bullet.run();
+            freeBullets.push(bullet);
+            iter = bullets.erase(iter);
+        }
+        else
+        {
+            bullet->run();
         }
     }
 }
@@ -49,40 +61,43 @@ void BulletLuaManager::draw(sf::RenderTarget& target, sf::RenderStates states) c
 {
     for (auto& bullet : bullets)
     {
-        if (!bullet.isDead())
-        {
-            target.draw(bullet.getMover());
-        }
+        target.draw(bullet->getMover());
     }
+}
+
+unsigned int BulletLuaManager::bulletCount() const
+{
+    return bullets.size();
+}
+
+unsigned int BulletLuaManager::freeCount() const
+{
+    return freeBullets.size();
+}
+
+unsigned int BulletLuaManager::blockCount() const
+{
+    return blocks.size();
 }
 
 BulletLua* BulletLuaManager::getFreeBullet()
 {
-    BulletLua* bullet;
-
     if (freeBullets.empty())
-    {
-        bullets.emplace_back();
-        bullet = &bullets.back();
-    }
-    else
-    {
-        bullet = freeBullets.top();
-        freeBullets.pop();
-    }
+        increaseCapacity();
+
+    BulletLua* bullet = freeBullets.top();
+    freeBullets.pop();
 
     return bullet;
 }
 
-void BulletLuaManager::printSizes()
+void BulletLuaManager::increaseCapacity(unsigned int blockSize)
 {
-    Console::log("------------------");
-    Console::logf("Vector Size: %d", bullets.size());
-    Console::logf("Free Size:   %d", freeBullets.size());
-}
+    blocks.push_back(new BulletLua[blockSize]);
 
-void BulletLuaManager::pushToStack(BulletLua* b)
-{
-    freeBullets.push(b);
+    // Throw all bullets into free stack
+    for (unsigned int i = 0; i < blockSize; ++i)
+    {
+        freeBullets.push(&blocks.back()[i]);
+    }
 }
-

@@ -4,7 +4,7 @@
 #include "BulletManager.hpp"
 #include "BulletLua.hpp"
 
-#include <vector>
+#include <list>
 #include <stack>
 #include <string>
 
@@ -14,9 +14,11 @@ class BulletLuaManager : public BulletManager
 {
     public:
         static float rank;
+        static constexpr unsigned int BLOCK_SIZE = 1024;
 
     public:
-        BulletLuaManager(unsigned int initialCapacity=4096);
+        BulletLuaManager(unsigned int initialCapacity=1024);
+        ~BulletLuaManager();
 
         // Root Bullet
         void createBullet(const std::string& filename, Mover* origin, Mover* target);
@@ -29,16 +31,21 @@ class BulletLuaManager : public BulletManager
         virtual void tick();
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
-        void printSizes();
-
-        void pushToStack(BulletLua* b);
+        unsigned int bulletCount() const;
+        unsigned int freeCount() const;
+        unsigned int blockCount() const;
 
     private:
         BulletLua* getFreeBullet();
 
+        // Allocate a block of BLOCK_SIZE Bullets and add it to freeBullets
+        void increaseCapacity(unsigned int blockSize=BLOCK_SIZE);
+
     private:
-        std::vector<BulletLua> bullets;
+        std::list<BulletLua*> bullets;
         std::stack<BulletLua*> freeBullets;
+
+        std::vector<BulletLua*> blocks;
 };
 
 #endif /* _BulletLuaManager_hpp_ */

@@ -62,7 +62,7 @@ PatternState::PatternState(StateStack& stack, Context context)
     help.setCharacterSize(11);
     help.setString("Enter - run bullet file\nc - clear bullets\nh - toggle menu");
 
-    menu.setPosition(8.0f, 42.0f);
+    menu.setPosition(8.0f, 56.0f);
     menu.addList(xmlFiles, font, 10);
     menu.build();
 
@@ -93,11 +93,11 @@ void PatternState::draw()
 
 bool PatternState::update(sf::Time dt)
 {
-    barrageInfo.setString(formatString("File: %s\nRank: %.2f", currentFile.toAnsiString().c_str(), BulletMLManager::rank));
-    // bulletInfo.setString(formatString("CommandCount: %d/%d\nBulletCount %d/%d\nPoolSize: %d/%d",
-    //                                   manager.mCommands.size(), manager.mCommands.capacity(),
-    //                                   manager.mShots.size(), manager.mShots.capacity(),
-    //                                   manager.mPool.size(), manager.mPool.capacity()));
+    barrageInfo.setString(formatString("Fps: %d\nFile: %s\nRank: %.2f", getContext().fps->getFps(), currentFile.toAnsiString().c_str(), BulletMLManager::rank));
+    bulletInfo.setString(formatString("CommandCount: %d/%d\nBulletCount %d/%d\nPoolSize: %d/%d",
+                                      manager.mCommands.size(), manager.mCommands.capacity(),
+                                      manager.mShots.size(), manager.mShots.capacity(),
+                                      manager.mPool.size(), manager.mPool.capacity()));
 
     /* Console::logf("%d %d %d", manager.mShots.size(), manager.mPool.size(), manager.mCommands.size()); */
     sf::Vector2i mousePos = sf::Mouse::getPosition(*getContext().window);

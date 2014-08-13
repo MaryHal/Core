@@ -16,6 +16,7 @@ BulletLua* BulletLua::current = nullptr;
 BulletLua::BulletLua()
     : mMover(0.0, 0.0, 0.0, 0.0),
       mTarget(0.0, 0.0, 0.0, 0.0),
+      funcName(""),
       turn(0)
 {
 }
@@ -58,6 +59,29 @@ void BulletLua::set(std::shared_ptr<sol::state> lua,
     mOwner = owner;
 }
 
+void BulletLua::set(std::shared_ptr<sol::state> lua,
+                    const std::string& func,
+                    double x, double y, double d, double s,
+                    Mover* target,
+                    BulletLuaManager* owner)
+{
+    // Copy Movers
+    mMover.x = x;
+    mMover.y = y;
+    mMover.d = d;
+    mMover.s = s;
+
+    mTarget = *target;
+
+    mMover.dead = false;
+
+    luaState = lua;
+    funcName = func;
+    turn = 0;
+
+    mOwner = owner;
+}
+
 std::shared_ptr<sol::state> BulletLua::getLuaState()
 {
     return luaState;
@@ -84,12 +108,10 @@ void BulletLua::run()
     // Move everything
     mMover.tick();
 
-
-    if (mMover.x < 0.0 || mMover.x > 640.0 ||
-        mMover.y < 0.0 || mMover.y > 480.0)
+    if (mMover.x < -120.0 || mMover.x > 760.0 ||
+        mMover.y < -120.0 || mMover.y > 600.0)
     {
         mMover.dead = true;
-        mOwner->pushToStack(this);
     }
 
     turn++;
@@ -121,6 +143,13 @@ void BulletLua::initLua()
                            [&]()
                            {
                                return BulletLua::current->mMover.y;
+                           });
+
+    luaState->set_function("getPosition",
+                           [&]()
+                           {
+                               BulletLua* c = BulletLua::current;
+                               return std::make_tuple(c->mMover.x, c->mMover.y);
                            });
 
     luaState->set_function("getVelX",
@@ -250,7 +279,7 @@ void BulletLua::initLua()
                            {
                                BulletLua* c = BulletLua::current;
                                c->mMover.dead = true;
-                               c->mOwner->pushToStack(c);
+                               /* c->mOwner->pushToStack(c); */
                            });
 
     /* luaState->set_function("quit", */

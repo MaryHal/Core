@@ -24,6 +24,7 @@ class BulletLua
             public:
                 float x, y;
                 float vx, vy;
+                bool dead;
         };
 
     public:
@@ -36,6 +37,12 @@ class BulletLua
         void set(std::shared_ptr<sol::state> lua,
                  const std::string& func,
                  Mover* origin, Mover* target,
+                 BulletLuaManager* owner);
+
+        void set(std::shared_ptr<sol::state> lua,
+                 const std::string& func,
+                 double x, double y, double d, double s,
+                 Mover* target,
                  BulletLuaManager* owner);
 
         std::shared_ptr<sol::state> getLuaState();

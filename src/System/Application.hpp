@@ -13,7 +13,7 @@ class Application
 {
     public:
         Application();
-        void run(States::ID initialState);
+        void run(States::ID initialState, bool timeIndependent);
         virtual void registerStates() = 0;
 
     private:

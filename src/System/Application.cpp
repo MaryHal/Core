@@ -13,7 +13,7 @@ Application::Application()
     window.setKeyRepeatEnabled(false);
 }
 
-void Application::run(States::ID initialState)
+void Application::run(States::ID initialState, bool timeIndependent)
 {
     stateStack.pushState(initialState);
     stateStack.applyPendingChanges();
@@ -27,7 +27,7 @@ void Application::run(States::ID initialState)
         timeSinceLastUpdate += dt;
         fps.calculateFps(dt);
 
-        while (timeSinceLastUpdate > timePerFrame)
+        do
         {
             timeSinceLastUpdate -= timePerFrame;
             processEvents();
@@ -40,7 +40,8 @@ void Application::run(States::ID initialState)
                 window.close();
                 break;
             }
-        }
+        } while (timeIndependent && timeSinceLastUpdate > timePerFrame);
+
         render();
     }
 }
