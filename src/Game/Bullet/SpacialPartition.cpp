@@ -36,8 +36,8 @@ bool SpacialPartition::checkCollision(Bullet& b)
 
     for (int i = 0; i < bulletCount[x][y]; i++)
     {
-        thatBullet.left = space[x][y][i]->x;
-        thatBullet.top  = space[x][y][i]->y;
+        thatBullet.left = space[x][y][i]->x - 2;
+        thatBullet.top  = space[x][y][i]->y - 2;
 
         if (thisBullet.intersects(thatBullet))
             return true;
@@ -45,4 +45,3 @@ bool SpacialPartition::checkCollision(Bullet& b)
 
     return false;
 }
-

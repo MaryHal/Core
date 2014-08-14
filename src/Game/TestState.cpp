@@ -13,7 +13,7 @@ TestState::TestState(StateStack& stack, Context context)
 {
     try
     {
-        context.textures->load(Res::Textures::bullet, "data/texture/bullet.png");
+        context.textures->load(Res::Textures::bullet, "data/texture/bullet2.png");
     }
     catch (std::runtime_error& e)
     {
@@ -53,8 +53,8 @@ bool TestState::update(sf::Time dt)
     ship->y = mousePos.y;
 
     manager.tick();
-    /* if (manager.checkCollision(*ship.get())) */
-    /*     hitCount++; */
+    if (manager.checkCollision(*ship.get()))
+        hitCount++;
 
     debugText.setString(formatString("Fps: %d\nBullets: %d\nFree: %d\nBlocks: %d\nHits: %d",
                                      getContext().fps->getFps(),

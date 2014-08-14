@@ -8,9 +8,8 @@
 #include <vector>
 #include <list>
 #include <stack>
-#include <string>
 
-// #include <memory>
+#include <string>
 
 class BulletLuaManager : public BulletManager
 {
@@ -19,7 +18,7 @@ class BulletLuaManager : public BulletManager
         static constexpr unsigned int BLOCK_SIZE = 1024;
 
     public:
-        BulletLuaManager(unsigned int initialCapacity=1024);
+        BulletLuaManager(unsigned int initialCapacity=4096);
         ~BulletLuaManager();
 
         // Root Bullet

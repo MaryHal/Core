@@ -18,5 +18,3 @@ class BulletManager : public sf::Drawable, public sf::Transformable
 };
 
 #endif // _BulletManager_hpp_
-
-

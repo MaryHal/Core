@@ -47,7 +47,7 @@ void BulletLuaManager::setTexture(sf::Texture& tex)
 void BulletLuaManager::tick()
 {
     vertices.clear();
-    /* collision.reset(); */
+    collision.reset();
 
     for (auto iter = bullets.begin(); iter != bullets.end(); ++iter)
     {
@@ -62,35 +62,41 @@ void BulletLuaManager::tick()
         {
             bullet->run();
             const Bullet* b = &bullet->getMover();
+            float rad = std::sqrt(8*8 + 8*8);
+            float dir = b->getDirection() + 3.1415f;
 
-            sf::Vertex v1(sf::Vector2f(b->x       , b->y),
-                          sf::Color(255, 255, 255),
+            sf::Vertex v1(sf::Vector2f(b->x +  rad * sin(dir - 3.1415f/4), 
+                                       b->y + -rad * cos(dir - 3.1415f/4)),
+                          sf::Color(255, 255, 255, 200),
                           sf::Vector2f(0.0f, 0.0f));
-            sf::Vertex v2(sf::Vector2f(b->x + 12.0f, b->y),
-                          sf::Color(255, 255, 255),
-                          sf::Vector2f(8.0f, 0.0f));
-            sf::Vertex v3(sf::Vector2f(b->x + 12.0f, b->y + 12.0f),
-                          sf::Color(255, 255, 255),
-                          sf::Vector2f(8.0f, 8.0f));
-            sf::Vertex v4(sf::Vector2f(b->x       , b->y + 12.0f),
-                          sf::Color(255, 255, 255),
-                          sf::Vector2f(0.0f, 8.0f));
+            sf::Vertex v2(sf::Vector2f(b->x +  rad * sin(dir + 3.1415f/4), 
+                                       b->y + -rad * cos(dir + 3.1415f/4)),
+                          sf::Vector2f(32.0f, 0.0f));
+            sf::Vertex v3(sf::Vector2f(b->x +  rad * sin(dir + 3 * 3.1415f/4), 
+                                       b->y + -rad * cos(dir + 3 * 3.1415f/4)),
+                          sf::Color(255, 255, 255, 200),
+                          sf::Vector2f(32.0f, 32.0f));
+            sf::Vertex v4(sf::Vector2f(b->x +  rad * sin(dir + 5 * 3.1415f/4), 
+                                       b->y + -rad * cos(dir + 5 * 3.1415f/4)),
+                          sf::Color(255, 255, 255, 200),
+                          sf::Vector2f(0.0f, 32.0f));
             vertices.append(v1);
             vertices.append(v2);
             vertices.append(v3);
             vertices.append(v4);
 
-            /* collision.addBullet(&bullet->getMover()); */
+            collision.addBullet(&bullet->getMover());
         }
     }
 }
 
 void BulletLuaManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    /* for (auto& bullet : bullets) */
-    /* { */
-    /*     target.draw(bullet->getMover().sprite); */
-    /* } */
+    // for (auto& bullet : bullets)
+    // {
+    //     target.draw(bullet->getMover().sprite);
+    // }
+
     if (bulletTexture != nullptr)
         states.texture = bulletTexture;
     target.draw(vertices, states);
@@ -140,4 +146,3 @@ void BulletLuaManager::increaseCapacity(unsigned int blockSize)
     vertexCount += blockSize * 4;
     vertices.resize(vertexCount);
 }
-

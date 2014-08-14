@@ -2,8 +2,8 @@
 
 #include <cmath>
 
-    Bullet::Bullet(float x, float y, float vx, float vy)
-: x(x), y(y), vx(vx), vy(vy), dead(true)
+Bullet::Bullet(float x, float y, float vx, float vy)
+    : x(x), y(y), vx(vx), vy(vy), dead(true)
 {
 }
 
@@ -29,7 +29,7 @@ void Bullet::setSpeedRelative(float speed)
     vy = (vy * (speed + mag)) / mag;
 }
 
-float Bullet::getSpeed()
+float Bullet::getSpeed() const
 {
     return std::sqrt(vx * vx + vy * vy);
 }
@@ -51,8 +51,7 @@ void Bullet::setDirectionAim(float tx, float ty)
     setDirection(3.1415f - std::atan2(tx - x, ty - y));
 }
 
-float Bullet::getDirection()
+float Bullet::getDirection() const
 {
     return -std::atan2(vx, vy);
 }
-

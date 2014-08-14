@@ -103,7 +103,6 @@ void BulletLua::run()
     if (!funcName.empty())
         luaState->get<sol::function>(funcName).call();
 
-    // Move everything
     mMover.x += mMover.vx;
     mMover.y += mMover.vy;
 

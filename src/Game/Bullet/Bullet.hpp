@@ -16,13 +16,12 @@ struct Bullet
 
         void setSpeed(float speed);
         void setSpeedRelative(float speed);
-        float getSpeed();
+        float getSpeed() const;
 
         void setDirection(float dir);
         void setDirectionRelative(float dir);
         void setDirectionAim(float tx, float ty);
-        float getDirection();
+        float getDirection() const;
 };
 
 #endif // _Bullet_hpp_
-
