@@ -18,6 +18,7 @@ class TestState : public State
 
     private:
         sf::Sprite bg;
+
         sf::Text debugText;
         int hitCount;
 

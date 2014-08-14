@@ -39,6 +39,11 @@ void BulletLuaManager::createBullet(std::shared_ptr<sol::state> lua, const std::
     bullets.push_back(b);
 }
 
+void BulletLuaManager::setTexture(sf::Texture& tex)
+{
+    bulletTexture = &tex;
+}
+
 void BulletLuaManager::tick()
 {
     vertices.clear();
@@ -59,13 +64,17 @@ void BulletLuaManager::tick()
             const Bullet* b = &bullet->getMover();
 
             sf::Vertex v1(sf::Vector2f(b->x       , b->y),
-                          sf::Color(200, 200, 200));
-            sf::Vertex v2(sf::Vector2f(b->x + 4.0f, b->y),
-                          sf::Color(200, 200, 200));
-            sf::Vertex v3(sf::Vector2f(b->x + 4.0f, b->y + 4.0f),
-                          sf::Color(200, 200, 200));
-            sf::Vertex v4(sf::Vector2f(b->x       , b->y + 4.0f),
-                          sf::Color(200, 200, 200));
+                          sf::Color(255, 255, 255),
+                          sf::Vector2f(0.0f, 0.0f));
+            sf::Vertex v2(sf::Vector2f(b->x + 12.0f, b->y),
+                          sf::Color(255, 255, 255),
+                          sf::Vector2f(8.0f, 0.0f));
+            sf::Vertex v3(sf::Vector2f(b->x + 12.0f, b->y + 12.0f),
+                          sf::Color(255, 255, 255),
+                          sf::Vector2f(8.0f, 8.0f));
+            sf::Vertex v4(sf::Vector2f(b->x       , b->y + 12.0f),
+                          sf::Color(255, 255, 255),
+                          sf::Vector2f(0.0f, 8.0f));
             vertices.append(v1);
             vertices.append(v2);
             vertices.append(v3);
@@ -82,7 +91,9 @@ void BulletLuaManager::draw(sf::RenderTarget& target, sf::RenderStates states) c
     /* { */
     /*     target.draw(bullet->getMover().sprite); */
     /* } */
-    target.draw(vertices);
+    if (bulletTexture != nullptr)
+        states.texture = bulletTexture;
+    target.draw(vertices, states);
 }
 
 bool BulletLuaManager::checkCollision(Bullet& b)

@@ -11,7 +11,17 @@
 TestState::TestState(StateStack& stack, Context context)
     : State(stack, context)
 {
+    try
+    {
+        context.textures->load(Res::Textures::bullet, "data/texture/bullet.png");
+    }
+    catch (std::runtime_error& e)
+    {
+        Console::logf("Resource loading block failed: %s", e.what());
+    }
+
     bg.setTexture(context.textures->get(Res::Textures::bg2));
+    manager.setTexture(context.textures->get(Res::Textures::bullet));
 
     const sf::Font& font = context.fonts->get(Res::Fonts::normal);
     debugText.setFont(font);

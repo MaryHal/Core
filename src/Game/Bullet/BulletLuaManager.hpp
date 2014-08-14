@@ -30,6 +30,8 @@ class BulletLuaManager : public BulletManager
         void createBullet(std::shared_ptr<sol::state> lua, const std::string& func,
                           double x, double y, double d, double s, Bullet* target);
 
+        void setTexture(sf::Texture& tex);
+
         virtual void tick();
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
         virtual bool checkCollision(Bullet& b);
@@ -50,6 +52,7 @@ class BulletLuaManager : public BulletManager
 
         std::list<BulletLua*> blocks;
 
+        sf::Texture* bulletTexture;
         sf::VertexArray vertices;
         unsigned int vertexCount;
 

@@ -16,7 +16,7 @@ namespace States
 
 namespace Res
 {
-    enum class Textures { bg1, bg2, musicbg };
+    enum class Textures { bg1, bg2, musicbg, bullet };
     enum class Fonts { normal };
     enum class Shaders {};
     enum class Sounds {};
