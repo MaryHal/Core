@@ -3,6 +3,8 @@
 float BulletLuaManager::rank = 0.8;
 
 BulletLuaManager::BulletLuaManager(unsigned int initialCapacity)
+    : vertices(sf::Quads),
+    vertexCount(0)
 {
     increaseCapacity(initialCapacity);
 }
@@ -39,7 +41,8 @@ void BulletLuaManager::createBullet(std::shared_ptr<sol::state> lua, const std::
 
 void BulletLuaManager::tick()
 {
-    collision.reset();
+    vertices.clear();
+    /* collision.reset(); */
 
     for (auto iter = bullets.begin(); iter != bullets.end(); ++iter)
     {
@@ -53,17 +56,33 @@ void BulletLuaManager::tick()
         else
         {
             bullet->run();
-            collision.addBullet(&bullet->getMover());
+            const Bullet* b = &bullet->getMover();
+
+            sf::Vertex v1(sf::Vector2f(b->x       , b->y),
+                          sf::Color(200, 200, 200));
+            sf::Vertex v2(sf::Vector2f(b->x + 4.0f, b->y),
+                          sf::Color(200, 200, 200));
+            sf::Vertex v3(sf::Vector2f(b->x + 4.0f, b->y + 4.0f),
+                          sf::Color(200, 200, 200));
+            sf::Vertex v4(sf::Vector2f(b->x       , b->y + 4.0f),
+                          sf::Color(200, 200, 200));
+            vertices.append(v1);
+            vertices.append(v2);
+            vertices.append(v3);
+            vertices.append(v4);
+
+            /* collision.addBullet(&bullet->getMover()); */
         }
     }
 }
 
 void BulletLuaManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    for (auto& bullet : bullets)
-    {
-        target.draw(bullet->getMover().sprite);
-    }
+    /* for (auto& bullet : bullets) */
+    /* { */
+    /*     target.draw(bullet->getMover().sprite); */
+    /* } */
+    target.draw(vertices);
 }
 
 bool BulletLuaManager::checkCollision(Bullet& b)
@@ -106,4 +125,8 @@ void BulletLuaManager::increaseCapacity(unsigned int blockSize)
     {
         freeBullets.push(&blocks.back()[i]);
     }
+
+    vertexCount += blockSize * 4;
+    vertices.resize(vertexCount);
 }
+

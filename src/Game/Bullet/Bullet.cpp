@@ -3,8 +3,7 @@
 #include <cmath>
 
     Bullet::Bullet(float x, float y, float vx, float vy)
-: x(x), y(y), vx(vx), vy(vy), dead(true),
-    sprite(sf::Vector2f(4.0f, 4.0f))
+: x(x), y(y), vx(vx), vy(vy), dead(true)
 {
 }
 

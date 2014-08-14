@@ -10,8 +10,6 @@ struct Bullet
         float vx, vy;
         bool dead;
 
-        sf::RectangleShape sprite;
-
         Bullet(float x, float y, float vx, float vy);
 
         void setSpeedAndDirection(float speed, float dir);

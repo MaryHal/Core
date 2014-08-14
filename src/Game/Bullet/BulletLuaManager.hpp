@@ -50,6 +50,9 @@ class BulletLuaManager : public BulletManager
 
         std::list<BulletLua*> blocks;
 
+        sf::VertexArray vertices;
+        unsigned int vertexCount;
+
         SpacialPartition collision;
 };
 

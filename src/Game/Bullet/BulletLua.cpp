@@ -107,7 +107,7 @@ void BulletLua::run()
     mMover.x += mMover.vx;
     mMover.y += mMover.vy;
 
-    mMover.sprite.setPosition(mMover.x, mMover.y);
+    /* mMover.sprite.setPosition(mMover.x, mMover.y); */
 
     if (mMover.x < -120.0 || mMover.x > 760.0 ||
         mMover.y < -120.0 || mMover.y > 600.0)
