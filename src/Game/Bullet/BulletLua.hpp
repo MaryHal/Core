@@ -51,7 +51,7 @@ class BulletLua
 
     private:
         Bullet mMover;
-        Bullet mTarget;
+        Bullet* mTarget;
 
         std::shared_ptr<sol::state> luaState;
         std::string funcName;

@@ -4,20 +4,45 @@
 
 SpacialPartition::SpacialPartition()
 {
-    /* std::memset(space, 0, sizeof(BulletCommand*) * 7 * 5 * 100); */
-    // std::memset(bulletCount, 0, sizeof(int) * 7 * 5);
+    reset();
 }
 
-void SpacialPartition::addBullet()
+void SpacialPartition::addBullet(const Bullet* bullet)
 {
-    // int x = bullet.getMover().x / tileSize;
-    // int y = bullet.getMover().y / tileSize;
+    int x = bullet->x / tileSize;
+    int y = bullet->y / tileSize;
 
-    // space[x][y][bulletCount[x][y]] = &bullet;
-    // bulletCount[x][y]++;
+    if (x < 0 || x > WIDTH || y < 0 || y > HEIGHT)
+        return;
+
+    space[x][y][bulletCount[x][y]] = bullet;
+    bulletCount[x][y]++;
 }
 
+// Call once per frame
 void SpacialPartition::reset()
 {
-    // std::memset(bulletCount, 0, sizeof(int) * 7 * 5);
+    std::memset(space, 0, sizeof(Bullet*) * WIDTH * HEIGHT * CAP);
+    std::memset(bulletCount, 0, sizeof(int) * WIDTH * HEIGHT);
 }
+
+bool SpacialPartition::checkCollision(Bullet& b)
+{
+    int x = b.x / tileSize;
+    int y = b.y / tileSize;
+
+    sf::FloatRect thisBullet(b.x, b.y, 4, 4);
+    sf::FloatRect thatBullet(0.0f, 0.0f, 4, 4);
+
+    for (int i = 0; i < bulletCount[x][y]; i++)
+    {
+        thatBullet.left = space[x][y][i]->x;
+        thatBullet.top  = space[x][y][i]->y;
+
+        if (thisBullet.intersects(thatBullet))
+            return true;
+    }
+
+    return false;
+}
+

@@ -39,6 +39,8 @@ void BulletLuaManager::createBullet(std::shared_ptr<sol::state> lua, const std::
 
 void BulletLuaManager::tick()
 {
+    collision.reset();
+
     for (auto iter = bullets.begin(); iter != bullets.end(); ++iter)
     {
         BulletLua* bullet = *iter;
@@ -51,6 +53,7 @@ void BulletLuaManager::tick()
         else
         {
             bullet->run();
+            collision.addBullet(&bullet->getMover());
         }
     }
 }
@@ -61,6 +64,11 @@ void BulletLuaManager::draw(sf::RenderTarget& target, sf::RenderStates states) c
     {
         target.draw(bullet->getMover().sprite);
     }
+}
+
+bool BulletLuaManager::checkCollision(Bullet& b)
+{
+    return collision.checkCollision(b);
 }
 
 unsigned int BulletLuaManager::bulletCount() const

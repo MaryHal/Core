@@ -3,6 +3,7 @@
 
 #include "BulletLua.hpp"
 #include "BulletManager.hpp"
+#include "SpacialPartition.hpp"
 
 #include <vector>
 #include <list>
@@ -31,6 +32,7 @@ class BulletLuaManager : public BulletManager
 
         virtual void tick();
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+        virtual bool checkCollision(Bullet& b);
 
         unsigned int bulletCount() const;
         unsigned int freeCount() const;
@@ -46,7 +48,10 @@ class BulletLuaManager : public BulletManager
         std::list<BulletLua*> bullets;
         std::stack<BulletLua*> freeBullets;
 
-        std::vector<BulletLua*> blocks;
+        std::list<BulletLua*> blocks;
+
+        SpacialPartition collision;
 };
 
 #endif /* _BulletLuaManager_hpp_ */
+

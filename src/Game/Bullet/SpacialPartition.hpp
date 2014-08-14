@@ -1,21 +1,26 @@
 #ifndef _SpacialPartition_hpp_
 #define _SpacialPartition_hpp_
 
-class Mover;
+#include "Bullet.hpp"
 
 class SpacialPartition
 {
     public:
         SpacialPartition();
 
-        void addBullet();
+        void addBullet(const Bullet* bullet);
         void reset();
 
-    private:
-        static const unsigned int tileSize = 100;
+        bool checkCollision(Bullet& b);
 
-        const Mover* space[7][5][100];
-        int bulletCount[7][5];
+    private:
+        static constexpr unsigned int tileSize = 100;
+        static constexpr int WIDTH  = 640 / tileSize + 3;
+        static constexpr int HEIGHT = 480/ tileSize + 3;
+        static constexpr int CAP = 1000;
+
+        const Bullet* space[WIDTH][HEIGHT][CAP];
+        int bulletCount[WIDTH][HEIGHT];
 };
 
 #endif // _SpacialPartition_hpp_

@@ -12,7 +12,7 @@ BulletLua* BulletLua::current = nullptr;
 
 BulletLua::BulletLua()
     : mMover(0.0, 0.0, 0.0, 0.0),
-      mTarget(0.0, 0.0, 0.0, 0.0),
+      mTarget(nullptr),
       funcName(""),
       turn(0)
 {
@@ -24,7 +24,7 @@ void BulletLua::set(const std::string& filename,
 {
     // Copy Movers
     mMover = *origin;
-    mTarget = *target;
+    mTarget = target;
 
     mMover.dead = false;
 
@@ -45,7 +45,7 @@ void BulletLua::set(std::shared_ptr<sol::state> lua,
 {
     // Copy Movers
     mMover = *origin;
-    mTarget = *target;
+    mTarget = target;
 
     mMover.dead = false;
 
@@ -69,7 +69,7 @@ void BulletLua::set(std::shared_ptr<sol::state> lua,
     /* mMover.vx = vx; */
     /* mMover.vy = vy; */
 
-    mTarget = *target;
+    mTarget = target;
 
     mMover.dead = false;
 
@@ -228,7 +228,7 @@ void BulletLua::initLua()
                            [&]()
                            {
                                BulletLua* c = BulletLua::current;
-                               c->mMover.setDirectionAim(c->mTarget.x, c->mTarget.y);
+                               c->mMover.setDirectionAim(c->mTarget->x, c->mTarget->y);
                            });
 
     luaState->set_function("setSpeed",
@@ -260,7 +260,7 @@ void BulletLua::initLua()
                                c->mOwner->createBullet(c->luaState, funcName,
                                                        x, y,
                                                        d, s,
-                                                       &c->mTarget);
+                                                       c->mTarget);
                            });
 
     luaState->set_function("fire",
@@ -271,7 +271,7 @@ void BulletLua::initLua()
                                c->mOwner->createBullet(c->luaState, funcName,
                                                        c->mMover.x, c->mMover.y,
                                                        d, s,
-                                                       &c->mTarget);
+                                                       c->mTarget);
                            });
 
     luaState->set_function("vanish",

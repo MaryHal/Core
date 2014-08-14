@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Bullet/BulletLuaManager.hpp"
+#include "../Utils/MakeUnique.hpp"
 
 class TestState : public State
 {
@@ -18,7 +19,10 @@ class TestState : public State
     private:
         sf::Sprite bg;
         sf::Text debugText;
+        int hitCount;
 
+        std::unique_ptr<Bullet> boss;
+        std::unique_ptr<Bullet> ship;
         BulletLuaManager manager;
 };
 

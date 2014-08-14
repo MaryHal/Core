@@ -18,9 +18,12 @@ TestState::TestState(StateStack& stack, Context context)
     debugText.setPosition(8.0f, 8.0f);
     debugText.setCharacterSize(11);
 
-    Bullet origin(320.0, 120.0, 0.0, 0.0);
-    Bullet target(320.0, 320.0, 0.0, 0.0);
-    manager.createBullet("data/lua/test.lua", &origin, &target);
+    hitCount = 0;
+
+    boss = make_unique<Bullet>(320.0f, 120.0f, 0.0f, 0.0f);
+    ship = make_unique<Bullet>(320.0f, 370.0f, 0.0f, 0.0f);
+
+    manager.createBullet("data/lua/test.lua", boss.get(), ship.get());
 }
 
 void TestState::draw()
@@ -35,12 +38,21 @@ void TestState::draw()
 
 bool TestState::update(sf::Time dt)
 {
-    debugText.setString(formatString("Fps: %d\nBullets: %d\nFree: %d\nBlocks: %d",
+    sf::Vector2i mousePos = sf::Mouse::getPosition(*getContext().window);
+    ship->x = mousePos.x;
+    ship->y = mousePos.y;
+
+    manager.tick();
+    if (manager.checkCollision(*ship.get()))
+        hitCount++;
+
+    debugText.setString(formatString("Fps: %d\nBullets: %d\nFree: %d\nBlocks: %d\nHits: %d",
                                      getContext().fps->getFps(),
                                      manager.bulletCount(),
                                      manager.freeCount(),
-                                     manager.blockCount()));
-    manager.tick();
+                                     manager.blockCount(),
+                                     hitCount));
+
     return false;
 }
 
