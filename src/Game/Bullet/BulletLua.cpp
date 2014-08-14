@@ -3,6 +3,8 @@
 
 #include <sol.hpp>
 
+#include "../../Utils/Log.hpp"
+
 // This pointer should point to the currently "processing" bullet.
 // The reason for this is that the functions generated for our lua state
 // are generated at compile time. This means that while many objects can
@@ -177,6 +179,7 @@ void BulletLua::initLua()
                            [&]()
                            {
                                BulletLua* c = BulletLua::current;
+                               Console::logf("%f", c->mMover.getDirection());
                                return c->mMover.getDirection();
                            });
 

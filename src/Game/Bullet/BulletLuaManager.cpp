@@ -63,7 +63,7 @@ void BulletLuaManager::tick()
             bullet->run();
             const Bullet* b = &bullet->getMover();
             float rad = std::sqrt(8*8 + 8*8);
-            float dir = b->getDirection() + 3.1415f;
+            float dir = b->getDirection();
 
             sf::Vertex v1(sf::Vector2f(b->x +  rad * sin(dir - 3.1415f/4), 
                                        b->y + -rad * cos(dir - 3.1415f/4)),

@@ -53,5 +53,5 @@ void Bullet::setDirectionAim(float tx, float ty)
 
 float Bullet::getDirection() const
 {
-    return -std::atan2(vx, vy);
+    return 3.1415f - std::atan2(vx, vy);
 }
