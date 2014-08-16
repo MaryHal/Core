@@ -3,7 +3,7 @@
 #include "../../Math/Math.hpp"
 
 Bullet::Bullet(float x, float y, float vx, float vy)
-    : x(x), y(y), vx(vx), vy(vy), dead(true)
+    : x(x), y(y), vx(vx), vy(vy), dead(true), dying(true), life(0)
 {
 }
 
@@ -55,3 +55,14 @@ float Bullet::getDirection() const
 {
     return Math::PI - std::atan2(vx, vy);
 }
+
+void Bullet::vanish()
+{
+    dying = true;
+}
+
+void Bullet::kill()
+{
+    dead = true;
+}
+

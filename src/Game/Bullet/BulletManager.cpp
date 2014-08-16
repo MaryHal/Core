@@ -1,12 +1,10 @@
 #include "BulletManager.hpp"
 
-float BulletManager::rank = 0.8;
-
-BulletManager::BulletManager(unsigned int initialCapacity)
+BulletManager::BulletManager()
     : vertices(sf::Quads),
     vertexCount(0)
 {
-    increaseCapacity(initialCapacity);
+    // Superclass constructor(BulletLuaManager) has no arguments, so it's called implicitly
 }
 
 BulletManager::~BulletManager()
@@ -15,28 +13,6 @@ BulletManager::~BulletManager()
     {
         delete [] *iter;
     }
-}
-
-void BulletManager::createBullet(const std::string& filename, Bullet* origin, Bullet* target)
-{
-    BulletLua* b = getFreeBullet();
-    b->set(filename, origin, target, this);
-    bullets.push_back(b);
-}
-
-void BulletManager::createBullet(std::shared_ptr<sol::state> lua, const std::string& func, Bullet* origin, Bullet* target)
-{
-    BulletLua* b = getFreeBullet();
-    b->set(lua, func, origin, target, this);
-    bullets.push_back(b);
-}
-
-void BulletManager::createBullet(std::shared_ptr<sol::state> lua, const std::string& func,
-                  double x, double y, double d, double s, Bullet* target)
-{
-    BulletLua* b = getFreeBullet();
-    b->set(lua, func, x, y, d, s, target, this);
-    bullets.push_back(b);
 }
 
 void BulletManager::setTexture(sf::Texture& tex)
@@ -65,24 +41,26 @@ void BulletManager::tick()
             float rad = std::sqrt(8*8 + 8*8);
             float dir = b->getDirection();
 
-            sf::Vertex v1(sf::Vector2f(b->x +  rad * sin(dir - 3.1415f/4), 
+            sf::Color color(255, 255, 255, b->life);
+
+            sf::Vertex v1(sf::Vector2f(b->x +  rad * sin(dir - 3.1415f/4),
                                        b->y + -rad * cos(dir - 3.1415f/4)),
-                          sf::Color(255, 255, 255),
+                          color,
                           sf::Vector2f(0.0f, 0.0f));
 
-            sf::Vertex v2(sf::Vector2f(b->x +  rad * sin(dir + 3.1415f/4), 
+            sf::Vertex v2(sf::Vector2f(b->x +  rad * sin(dir + 3.1415f/4),
                                        b->y + -rad * cos(dir + 3.1415f/4)),
-                          sf::Color(255, 255, 255),
+                          color,
                           sf::Vector2f(32.0f, 0.0f));
 
-            sf::Vertex v3(sf::Vector2f(b->x +  rad * sin(dir + 3 * 3.1415f/4), 
+            sf::Vertex v3(sf::Vector2f(b->x +  rad * sin(dir + 3 * 3.1415f/4),
                                        b->y + -rad * cos(dir + 3 * 3.1415f/4)),
-                          sf::Color(255, 255, 255),
+                          color,
                           sf::Vector2f(32.0f, 32.0f));
 
-            sf::Vertex v4(sf::Vector2f(b->x +  rad * sin(dir + 5 * 3.1415f/4), 
+            sf::Vertex v4(sf::Vector2f(b->x +  rad * sin(dir + 5 * 3.1415f/4),
                                        b->y + -rad * cos(dir + 5 * 3.1415f/4)),
-                          sf::Color(255, 255, 255),
+                          color,
                           sf::Vector2f(0.0f, 32.0f));
 
             vertices.append(v1);
@@ -97,59 +75,15 @@ void BulletManager::tick()
 
 void BulletManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    // for (auto& bullet : bullets)
-    // {
-    //     target.draw(bullet->getMover().sprite);
-    // }
-
     if (bulletTexture != nullptr)
         states.texture = bulletTexture;
     target.draw(vertices, states);
 }
 
-bool BulletManager::checkCollision(Bullet& b)
-{
-    return collision.checkCollision(b);
-}
-
-unsigned int BulletManager::bulletCount() const
-{
-    return bullets.size();
-}
-
-unsigned int BulletManager::freeCount() const
-{
-    return freeBullets.size();
-}
-
-unsigned int BulletManager::blockCount() const
-{
-    return blocks.size();
-}
-
-BulletLua* BulletManager::getFreeBullet()
-{
-    if (freeBullets.empty())
-        increaseCapacity();
-
-    BulletLua* bullet = freeBullets.top();
-    freeBullets.pop();
-
-    return bullet;
-}
-
 void BulletManager::increaseCapacity(unsigned int blockSize)
 {
-    blocks.push_back(new BulletLua[blockSize]);
-
-    // Throw all bullets into free stack
-    for (unsigned int i = 0; i < blockSize; ++i)
-    {
-        freeBullets.push(&blocks.back()[i]);
-    }
+    BulletLuaManager::increaseCapacity(blockSize);
 
     vertexCount += blockSize * 4;
     vertices.resize(vertexCount);
 }
-
-

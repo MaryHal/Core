@@ -16,7 +16,7 @@ class SpacialPartition
     private:
         static constexpr unsigned int tileSize = 100;
         static constexpr int WIDTH  = 640 / tileSize + 3;
-        static constexpr int HEIGHT = 480/ tileSize + 3;
+        static constexpr int HEIGHT = 480 / tileSize + 3;
         static constexpr int CAP = 1000;
 
         const Bullet* space[WIDTH][HEIGHT][CAP];

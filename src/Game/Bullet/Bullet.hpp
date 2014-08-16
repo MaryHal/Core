@@ -10,6 +10,9 @@ struct Bullet
         float vx, vy;
         bool dead;
 
+        bool dying;
+        int life;
+
         Bullet(float x, float y, float vx, float vy);
 
         void setSpeedAndDirection(float speed, float dir);
@@ -22,6 +25,9 @@ struct Bullet
         void setDirectionRelative(float dir);
         void setDirectionAim(float tx, float ty);
         float getDirection() const;
+
+        void vanish();
+        void kill();
 };
 
 #endif // _Bullet_hpp_

@@ -6,7 +6,7 @@
 
 #include "Bullet.hpp"
 
-class BulletManager;
+class BulletLuaManager;
 
 namespace sol
 {
@@ -23,18 +23,18 @@ class BulletLua
 
         void set(const std::string& filename,
                  Bullet* origin, Bullet* target,
-                 BulletManager* owner);
+                 BulletLuaManager* owner);
 
         void set(std::shared_ptr<sol::state> lua,
                  const std::string& func,
                  Bullet* origin, Bullet* target,
-                 BulletManager* owner);
+                 BulletLuaManager* owner);
 
         void set(std::shared_ptr<sol::state> lua,
                  const std::string& func,
                  double x, double y, double d, double s,
                  Bullet* target,
-                 BulletManager* owner);
+                 BulletLuaManager* owner);
 
         std::shared_ptr<sol::state> getLuaState();
         int getTurn() const;
@@ -58,7 +58,7 @@ class BulletLua
 
         int turn;
 
-        BulletManager* mOwner;
+        BulletLuaManager* mOwner;
 };
 
 #endif // _BulletLua_hpp_

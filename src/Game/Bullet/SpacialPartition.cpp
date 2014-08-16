@@ -2,6 +2,8 @@
 
 #include <cstring>
 
+#include "../../Utils/Log.hpp"
+
 SpacialPartition::SpacialPartition()
 {
     reset();
@@ -15,6 +17,7 @@ void SpacialPartition::addBullet(const Bullet* bullet)
     if (x < 0 || x > WIDTH || y < 0 || y > HEIGHT)
         return;
 
+    Console::logf("%d, %d -> %d", x, y, bulletCount[x][y]);
     space[x][y][bulletCount[x][y]] = bullet;
     bulletCount[x][y]++;
 }
@@ -22,7 +25,7 @@ void SpacialPartition::addBullet(const Bullet* bullet)
 // Call once per frame
 void SpacialPartition::reset()
 {
-    /* std::memset(space, 0, sizeof(Bullet*) * WIDTH * HEIGHT * CAP); */
+    std::memset(space, 0, sizeof(Bullet*) * WIDTH * HEIGHT * CAP);
     std::memset(bulletCount, 0, sizeof(int) * WIDTH * HEIGHT);
 }
 

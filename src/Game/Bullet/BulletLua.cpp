@@ -1,5 +1,5 @@
 #include "BulletLua.hpp"
-#include "BulletManager.hpp"
+#include "BulletLuaManager.hpp"
 
 #include <sol.hpp>
 
@@ -22,13 +22,15 @@ BulletLua::BulletLua()
 
 void BulletLua::set(const std::string& filename,
                     Bullet* origin, Bullet* target,
-                    BulletManager* owner)
+                    BulletLuaManager* owner)
 {
     // Copy Movers
     mMover = *origin;
     mTarget = target;
 
     mMover.dead = false;
+    mMover.dying = false;
+    mMover.life = 255;
 
     luaState = std::make_shared<sol::state>();
     luaState->open_file(filename);
@@ -43,13 +45,15 @@ void BulletLua::set(const std::string& filename,
 void BulletLua::set(std::shared_ptr<sol::state> lua,
                     const std::string& func,
                     Bullet* origin, Bullet* target,
-                    BulletManager* owner)
+                    BulletLuaManager* owner)
 {
     // Copy Movers
     mMover = *origin;
     mTarget = target;
 
     mMover.dead = false;
+    mMover.dying = false;
+    mMover.life = 255;
 
     luaState = lua;
     funcName = func;
@@ -62,7 +66,7 @@ void BulletLua::set(std::shared_ptr<sol::state> lua,
                     const std::string& func,
                     double x, double y, double d, double s,
                     Bullet* target,
-                    BulletManager* owner)
+                    BulletLuaManager* owner)
 {
     // Copy Movers
     mMover.x = x;
@@ -74,6 +78,8 @@ void BulletLua::set(std::shared_ptr<sol::state> lua,
     mTarget = target;
 
     mMover.dead = false;
+    mMover.dying = false;
+    mMover.life = 255;
 
     luaState = lua;
     funcName = func;
@@ -110,8 +116,20 @@ void BulletLua::run()
 
     /* mMover.sprite.setPosition(mMover.x, mMover.y); */
 
-    if (mMover.x < -120.0 || mMover.x > 760.0 ||
-        mMover.y < -120.0 || mMover.y > 600.0)
+    if (mMover.x < -100.0 || mMover.x > 700.0 ||
+        mMover.y < -100.0 || mMover.y > 600.0)
+    {
+        mMover.dead = true;
+    }
+
+    if (mMover.dying)
+    {
+        // Fade out over 30 frames
+        mMover.life -= 255/30;
+        if (mMover.life < 0)
+            mMover.life = 0;
+    }
+    if (mMover.life == 0)
     {
         mMover.dead = true;
     }
@@ -136,67 +154,67 @@ void BulletLua::initLua()
     luaState->open_libraries(sol::lib::math);
 
     luaState->set_function("getPosX",
-                           [&]()
+                           []()
                            {
                                return BulletLua::current->mMover.x;
                            });
 
     luaState->set_function("getPosY",
-                           [&]()
+                           []()
                            {
                                return BulletLua::current->mMover.y;
                            });
 
     luaState->set_function("getPosition",
-                           [&]()
+                           []()
                            {
                                BulletLua* c = BulletLua::current;
                                return std::make_tuple(c->mMover.x, c->mMover.y);
                            });
 
     luaState->set_function("getVelX",
-                           [&]()
+                           []()
                            {
                                BulletLua* c = BulletLua::current;
                                return c->mMover.vx;
                            });
 
     luaState->set_function("getVelY",
-                           [&]()
+                           []()
                            {
                                BulletLua* c = BulletLua::current;
                                return c->mMover.vy;
                            });
 
     luaState->set_function("getSpeed",
-                           [&]()
+                           []()
                            {
                                BulletLua* c = BulletLua::current;
                                return c->mMover.getSpeed();
                            });
 
     luaState->set_function("getDir",
-                           [&]()
+                           []()
                            {
                                BulletLua* c = BulletLua::current;
                                return Math::radToDeg(c->mMover.getDirection());
                            });
 
     luaState->set_function("getTurn",
-                           [&]()
+                           []()
                            {
                                BulletLua* c = BulletLua::current;
                                return c->getTurn();
                            });
 
     luaState->set_function("getRank",
-                           [&]()
+                           []()
                            {
-                               return BulletManager::rank;
+                               return BulletLuaManager::rank;
                            });
 
     luaState->set_function("setPos",
-                           [&](double x, double y)
+                           [](double x, double y)
                            {
                                BulletLua* c = BulletLua::current;
                                c->mMover.x = x;
@@ -204,7 +222,7 @@ void BulletLua::initLua()
                            });
 
     luaState->set_function("setVel",
-                           [&](double vx, double vy)
+                           [](double vx, double vy)
                            {
                                BulletLua* c = BulletLua::current;
                                c->mMover.vx = vx;
@@ -212,50 +230,50 @@ void BulletLua::initLua()
                            });
 
     luaState->set_function("setDir",
-                           [&](double dir)
+                           [](double dir)
                            {
                                BulletLua* c = BulletLua::current;
                                c->mMover.setDirection(Math::degToRad(dir));
                            });
 
     luaState->set_function("setDirRel",
-                           [&](double dir)
+                           [](double dir)
                            {
                                BulletLua* c = BulletLua::current;
                                c->mMover.setDirectionRelative(Math::degToRad(dir));
                            });
 
     luaState->set_function("setDirAim",
-                           [&]()
+                           []()
                            {
                                BulletLua* c = BulletLua::current;
                                c->mMover.setDirectionAim(c->mTarget->x, c->mTarget->y);
                            });
 
     luaState->set_function("setSpeed",
-                           [&](double s)
+                           [](double s)
                            {
                                BulletLua* c = BulletLua::current;
                                c->mMover.setSpeed(s);
                            });
 
     luaState->set_function("setSpeedRel",
-                           [&](double s)
+                           [](double s)
                            {
                                BulletLua* c = BulletLua::current;
                                c->mMover.setSpeedRelative(s);
                            });
 
     luaState->set_function("setFunction",
-                           [&](const std::string& funcName)
+                           [](const std::string& funcName)
                            {
                                BulletLua* c = BulletLua::current;
                                c->setFunctionName(funcName);
                            });
 
     luaState->set_function("fire",
-                           [&](double x, double y, double d, double s,
-                               const std::string& funcName)
+                           [](double x, double y, double d, double s,
+                              const std::string& funcName)
                            {
                                BulletLua* c = BulletLua::current;
                                c->mOwner->createBullet(c->luaState, funcName,
@@ -265,8 +283,8 @@ void BulletLua::initLua()
                            });
 
     luaState->set_function("fire",
-                           [&](double d, double s,
-                               const std::string& funcName)
+                           [](double d, double s,
+                              const std::string& funcName)
                            {
                                BulletLua* c = BulletLua::current;
                                c->mOwner->createBullet(c->luaState, funcName,
@@ -276,10 +294,17 @@ void BulletLua::initLua()
                            });
 
     luaState->set_function("vanish",
-                           [&]()
+                           []()
                            {
                                BulletLua* c = BulletLua::current;
-                               c->mMover.dead = true;
+                               c->mMover.vanish();
+                           });
+
+    luaState->set_function("kill",
+                           []()
+                           {
+                               BulletLua* c = BulletLua::current;
+                               c->mMover.kill();
                            });
 }
 
