@@ -22,7 +22,7 @@ void SpacialPartition::addBullet(const Bullet* bullet)
 // Call once per frame
 void SpacialPartition::reset()
 {
-    std::memset(space, 0, sizeof(Bullet*) * WIDTH * HEIGHT * CAP);
+    /* std::memset(space, 0, sizeof(Bullet*) * WIDTH * HEIGHT * CAP); */
     std::memset(bulletCount, 0, sizeof(int) * WIDTH * HEIGHT);
 }
 

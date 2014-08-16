@@ -49,8 +49,11 @@ void TestState::draw()
 bool TestState::update(sf::Time dt)
 {
     sf::Vector2i mousePos = sf::Mouse::getPosition(*getContext().window);
-    ship->x = mousePos.x;
-    ship->y = mousePos.y;
+    if (mousePos.x > 0 && mousePos.x < 640 && mousePos.y > 0 && mousePos.y < 480)
+    {
+        ship->x = mousePos.x;
+        ship->y = mousePos.y;
+    }
 
     manager.tick();
     if (manager.checkCollision(*ship.get()))

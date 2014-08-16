@@ -1,6 +1,6 @@
 #include "Bullet.hpp"
 
-#include <cmath>
+#include "../../Math/Math.hpp"
 
 Bullet::Bullet(float x, float y, float vx, float vy)
     : x(x), y(y), vx(vx), vy(vy), dead(true)
@@ -48,10 +48,10 @@ void Bullet::setDirectionRelative(float dir)
 
 void Bullet::setDirectionAim(float tx, float ty)
 {
-    setDirection(3.1415f - std::atan2(tx - x, ty - y));
+    setDirection(Math::PI - std::atan2(tx - x, ty - y));
 }
 
 float Bullet::getDirection() const
 {
-    return 3.1415f - std::atan2(vx, vy);
+    return Math::PI - std::atan2(vx, vy);
 }

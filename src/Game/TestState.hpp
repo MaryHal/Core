@@ -1,11 +1,12 @@
 #ifndef _TestState_hpp_
 #define _TestState_hpp_
 
+#include "../Utils/MakeUnique.hpp"
+
 #include "../System/State.hpp"
 #include <SFML/Graphics.hpp>
 
-#include "Bullet/BulletLuaManager.hpp"
-#include "../Utils/MakeUnique.hpp"
+#include "Bullet/BulletManager.hpp"
 
 class TestState : public State
 {
@@ -24,7 +25,7 @@ class TestState : public State
 
         std::unique_ptr<Bullet> boss;
         std::unique_ptr<Bullet> ship;
-        BulletLuaManager manager;
+        BulletManager manager;
 };
 
 #endif // _TestState_hpp_

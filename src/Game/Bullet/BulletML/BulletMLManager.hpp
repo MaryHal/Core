@@ -1,9 +1,9 @@
 #ifndef _BulletMLManager_hpp_
 #define _BulletMLManager_hpp_
 
-#include "../BulletManager.hpp"
 #include "Mover.hpp"
 
+#include <SFML/Graphics.hpp>
 #include <list>
 
 class BulletMLState;
@@ -11,7 +11,7 @@ class BulletMLParser;
 
 class BulletML;
 
-class BulletMLManager : public BulletManager
+class BulletMLManager : public sf::Drawable, public sf::Transformable
 {
     public:
         static int turn;

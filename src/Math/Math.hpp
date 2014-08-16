@@ -22,14 +22,6 @@ namespace Math
     float arcTan2(float x, float y);
     float sqrt(float value);
 
-    void distanceFromLine(double cx, double cy, double ax, double ay,
-            double bx, double by, double &distanceSegment,
-            double &distanceLine);
-
-    // Coordinate conversion
-    float getMagnitude(float x, float y);
-    float getDirection(float x, float y);
-
     /* float getX(float d, float m); */
     /* float getY(float d, float m); */
 };

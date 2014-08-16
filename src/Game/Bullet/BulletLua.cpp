@@ -1,12 +1,12 @@
 #include "BulletLua.hpp"
-#include "BulletLuaManager.hpp"
+#include "BulletManager.hpp"
 
 #include <sol.hpp>
 
-#include "../../Utils/Log.hpp"
+#include "../../Math/Math.hpp"
 
 // This pointer should point to the currently "processing" bullet.
-// The reason for this is that the functions generated for our lua state
+// The reason for this is that the lambda functions generated for our lua state
 // are generated at compile time. This means that while many objects can
 // control the lua state, the lua state can only reference the "this" pointer
 // of a single bullet. The lua functions now act on this pointer instead of "this".
@@ -22,7 +22,7 @@ BulletLua::BulletLua()
 
 void BulletLua::set(const std::string& filename,
                     Bullet* origin, Bullet* target,
-                    BulletLuaManager* owner)
+                    BulletManager* owner)
 {
     // Copy Movers
     mMover = *origin;
@@ -43,7 +43,7 @@ void BulletLua::set(const std::string& filename,
 void BulletLua::set(std::shared_ptr<sol::state> lua,
                     const std::string& func,
                     Bullet* origin, Bullet* target,
-                    BulletLuaManager* owner)
+                    BulletManager* owner)
 {
     // Copy Movers
     mMover = *origin;
@@ -62,7 +62,7 @@ void BulletLua::set(std::shared_ptr<sol::state> lua,
                     const std::string& func,
                     double x, double y, double d, double s,
                     Bullet* target,
-                    BulletLuaManager* owner)
+                    BulletManager* owner)
 {
     // Copy Movers
     mMover.x = x;
@@ -179,8 +179,7 @@ void BulletLua::initLua()
                            [&]()
                            {
                                BulletLua* c = BulletLua::current;
-                               Console::logf("%f", c->mMover.getDirection());
-                               return c->mMover.getDirection();
+                               return Math::radToDeg(c->mMover.getDirection());
                            });
 
     luaState->set_function("getTurn",
@@ -193,7 +192,7 @@ void BulletLua::initLua()
     luaState->set_function("getRank",
                            [&]()
                            {
-                               return BulletLuaManager::rank;
+                               return BulletManager::rank;
                            });
 
     luaState->set_function("setPos",
@@ -216,14 +215,14 @@ void BulletLua::initLua()
                            [&](double dir)
                            {
                                BulletLua* c = BulletLua::current;
-                               c->mMover.setDirection(dir);
+                               c->mMover.setDirection(Math::degToRad(dir));
                            });
 
     luaState->set_function("setDirRel",
                            [&](double dir)
                            {
                                BulletLua* c = BulletLua::current;
-                               c->mMover.setDirectionRelative(dir);
+                               c->mMover.setDirectionRelative(Math::degToRad(dir));
                            });
 
     luaState->set_function("setDirAim",
@@ -261,7 +260,7 @@ void BulletLua::initLua()
                                BulletLua* c = BulletLua::current;
                                c->mOwner->createBullet(c->luaState, funcName,
                                                        x, y,
-                                                       d, s,
+                                                       Math::degToRad(d), s,
                                                        c->mTarget);
                            });
 
@@ -272,7 +271,7 @@ void BulletLua::initLua()
                                BulletLua* c = BulletLua::current;
                                c->mOwner->createBullet(c->luaState, funcName,
                                                        c->mMover.x, c->mMover.y,
-                                                       d, s,
+                                                       Math::degToRad(d), s,
                                                        c->mTarget);
                            });
 
