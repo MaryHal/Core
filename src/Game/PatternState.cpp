@@ -4,9 +4,6 @@
 #include "../Utils/Log.hpp"
 #include "../Utils/StringUtils.hpp"
 
-#include "Bullet/BulletML/BulletML.hpp"
-#include <bulletmlparser-tinyxml2.h>
-
 #include <SFML/System/Vector2.hpp>
 
 PatternState::PatternState(StateStack& stack, Context context)
@@ -24,130 +21,30 @@ PatternState::PatternState(StateStack& stack, Context context)
         Console::logf("Resource loading block failed: %s", e.what());
     }
 
-    xmlFiles =
-    {
-        "5x5wide.xml",
-        "10flower.xml",
-        "circle_fireworks.xml",
-        "dis_bee_hakkyou.xml",
-        "homing_circle.xml",
-        "las1.xml",
-        "otk2-hanabi.xml",
-        "self-mis02.xml",
-        "sample.xml",
-        "tsx_evac02.xml",
-        "tsx_sanada.xml",
-        "progear.xml",
-    };
-
-    // Load patterns from list of files
-    for (const std::string& name : xmlFiles)
-    {
-        std::string filename = "data/pattern/" + name;
-        parsers.push_back(make_unique<BulletMLParserTinyXML2>(filename.c_str()));
-        parsers.back()->parse();
-    }
-
-    const sf::Font& font = context.fonts->get(Res::Fonts::normal);
-    barrageInfo.setFont(font);
-    barrageInfo.setPosition(8.0f, 8.0f);
-    barrageInfo.setCharacterSize(11);
-
-    bulletInfo.setFont(font);
-    bulletInfo.setPosition(8.0f, 370.0f);
-    bulletInfo.setCharacterSize(11);
-
-    help.setFont(font);
-    help.setPosition(8.0f, 432.0f);
-    help.setCharacterSize(11);
-    help.setString("Enter - run bullet file\nc - clear bullets\nh - toggle menu");
-
-    menu.setPosition(8.0f, 56.0f);
-    menu.addList(xmlFiles, font, 10);
-    menu.build();
-
-    menuVisible = true;
-
-    ship = make_unique<Mover>(320, 370, 0, 0);
-    boss = make_unique<Mover>(320, 120, 0, 0);
-    ship->dead = false;
-    boss->dead = false;
-
-    // Console::logf("%f %d", ship->x, ship->dead);
 }
 
 void PatternState::draw()
 {
     sf::RenderWindow& window = *(getContext().window);
-    window.draw(manager);
-    window.draw(*ship);
-    window.draw(*boss);
 
-    if (menuVisible)
-        window.draw(menu);
-
-    window.draw(barrageInfo);
-    window.draw(bulletInfo);
-    window.draw(help);
+    window.draw(debugText);
 }
 
 bool PatternState::update(sf::Time dt)
 {
-    barrageInfo.setString(formatString("Fps: %d\nFile: %s\nRank: %.2f", getContext().fps->getFps(), currentFile.toAnsiString().c_str(), BulletMLManager::rank));
-    bulletInfo.setString(formatString("CommandCount: %d/%d\nBulletCount %d/%d\nPoolSize: %d/%d",
-                                      manager.mCommands.size(), manager.mCommands.capacity(),
-                                      manager.mShots.size(), manager.mShots.capacity(),
-                                      manager.mPool.size(), manager.mPool.capacity()));
+    // debugText.setString(formatString("Fps: %d\nBullets: %d\nFree: %d\nBlocks: %d\nHits: %d",
+    //                                  getContext().fps->getFps(),
+    //                                  manager.bulletCount(),
+    //                                  manager.freeCount(),
+    //                                  manager.blockCount(),
+    //                                  hitCount));
 
-    /* Console::logf("%d %d %d", manager.mShots.size(), manager.mPool.size(), manager.mCommands.size()); */
-    sf::Vector2i mousePos = sf::Mouse::getPosition(*getContext().window);
-    ship->x = mousePos.x;
-    ship->y = mousePos.y;
-    ship->tick();
-
-    menu.update(dt);
-
-    manager.tick();
+    // manager.tick();
 
     return false;
 }
 
 bool PatternState::handleEvent(const sf::Event& event)
 {
-    menu.handleEvent(event);
-
-    if (menu.isSelected())
-    {
-        currentFile = menu.getSelection();
-        int index = menu.getIndex();
-
-        manager.createBullet(parsers[index].get(), boss.get(), ship.get());
-    }
-
-    if (event.type == sf::Event::KeyPressed)
-    {
-        if (event.key.code == sf::Keyboard::C)
-        {
-            manager.clearAll();
-        }
-
-        if (event.key.code == sf::Keyboard::H)
-        {
-            menuVisible = !menuVisible;
-        }
-
-        double dr = 0.1;
-        if (event.key.code == sf::Keyboard::Left)
-        {
-            if (BulletMLManager::rank - dr >= 0.0)
-                BulletMLManager::rank -= dr;
-        }
-        if (event.key.code == sf::Keyboard::Right)
-        {
-            if (BulletMLManager::rank + dr <= 1.0)
-                BulletMLManager::rank += dr;
-        }
-    }
-
     return false;
 }

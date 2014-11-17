@@ -6,8 +6,6 @@
 #include "../System/State.hpp"
 #include <SFML/Graphics.hpp>
 
-#include "Bullet/BulletManager.hpp"
-
 class TestState : public State
 {
     public:
@@ -19,13 +17,6 @@ class TestState : public State
 
     private:
         sf::Sprite bg;
-
-        sf::Text debugText;
-        int hitCount;
-
-        std::unique_ptr<Bullet> boss;
-        std::unique_ptr<Bullet> ship;
-        BulletManager manager;
 };
 
 #endif // _TestState_hpp_
