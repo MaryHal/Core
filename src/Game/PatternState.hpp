@@ -4,6 +4,8 @@
 #include "../System/State.hpp"
 #include "../Utils/MakeUnique.hpp"
 
+#include "../GUI/Menu.hpp"
+
 #include <SFML/Graphics.hpp>
 
 // From BulletLua
@@ -25,6 +27,7 @@ class PatternState : public State
         std::unique_ptr<Bullet> origin;
         std::unique_ptr<Bullet> destination;
 
+        Menu menu;
         sf::Texture bulletTexture;
         sf::Text debugText;
 };

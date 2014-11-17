@@ -32,7 +32,24 @@ PatternState::PatternState(StateStack& stack, Context context)
     bulletTexture.loadFromFile("data/texture/bullet2.png");
     manager->setTexture(bulletTexture);
 
-    manager->createBullet("data/lua/test2.lua", origin.get(), destination.get());
+    const sf::Font& font = context.fonts->get(Res::Fonts::normal);
+    debugText.setFont(font);
+    debugText.setPosition(4.0f, 4.0f);
+    debugText.setCharacterSize(12);
+
+    menu.setPosition(4.0f, 120.0f);
+    menu.addList({
+            "test.lua",
+                "test2.lua",
+                "test3.lua",
+                "test4.lua",
+                "test5.lua",
+                "test6.lua",
+                "test7.lua",
+                "test8.lua"
+                },
+        font, 12);
+    menu.build();
 }
 
 void PatternState::draw()
@@ -41,16 +58,27 @@ void PatternState::draw()
 
     window.draw(debugText);
     window.draw(*manager);
+
+    window.draw(menu);
 }
 
 bool PatternState::update(sf::Time dt)
 {
-    // debugText.setString(formatString("Fps: %d\nBullets: %d\nFree: %d\nBlocks: %d\nHits: %d",
-    //                                  getContext().fps->getFps(),
-    //                                  manager.bulletCount(),
-    //                                  manager.freeCount(),
-    //                                  manager.blockCount(),
-    //                                  hitCount));
+    debugText.setString(formatString("Fps: %d\nBullets: %d\nFree: %d\nBlocks: %d",
+                                     getContext().fps->getFps(),
+                                     manager->bulletCount(),
+                                     manager->freeCount(),
+                                     manager->blockCount()));
+
+    menu.update(dt);
+
+    if (menu.isSelected())
+    {
+        const sf::String selection = menu.getSelection();
+
+        manager->clear();
+        manager->createBullet("data/lua/" + selection, origin.get(), destination.get());
+    }
 
     manager->tick();
 
@@ -59,5 +87,7 @@ bool PatternState::update(sf::Time dt)
 
 bool PatternState::handleEvent(const sf::Event& event)
 {
+    menu.handleEvent(event);
+
     return false;
 }
