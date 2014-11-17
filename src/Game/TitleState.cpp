@@ -33,7 +33,6 @@ TitleState::TitleState(StateStack& stack, Context context)
     menu.setPosition(128.0f, 300.0f);
     menu.addItem(L"Test", font, 16);
     menu.addItem(L"Pattern", font, 16);
-    menu.addItem(L"Music", font, 16);
     menu.addItem(L"Hello", font, 16);
     menu.addItem(L"Bonjour", font, 16);
     menu.addItem(L"Hola", font, 16);
@@ -66,10 +65,6 @@ bool TitleState::update(sf::Time dt)
         else if (selection == "Pattern")
         {
             this->requestStackPush(States::Pattern);
-        }
-        else if (selection == "Music")
-        {
-            this->requestStackPush(States::Music);
         }
     }
 

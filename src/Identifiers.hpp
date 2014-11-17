@@ -9,8 +9,7 @@ namespace States
         Loading,
         Title,
         Test,
-        Pattern,
-        Music
+        Pattern
     };
 }
 
@@ -20,7 +19,7 @@ namespace Res
     enum class Fonts { normal };
     enum class Shaders {};
     enum class Sounds {};
-    enum class Music { main, main2 };
+    enum class Music {};
 };
 
 

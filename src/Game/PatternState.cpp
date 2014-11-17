@@ -6,6 +6,9 @@
 
 #include <SFML/System/Vector2.hpp>
 
+#include "Bullet.hpp"
+#include "Bullet/BulletManager.hpp"
+
 PatternState::PatternState(StateStack& stack, Context context)
     : State(stack, context)
 {
@@ -21,6 +24,15 @@ PatternState::PatternState(StateStack& stack, Context context)
         Console::logf("Resource loading block failed: %s", e.what());
     }
 
+    manager = make_unique<BulletManager>(-100, -100, 840, 680);
+
+    origin = make_unique<Bullet>(320.0f, 120.0f, 0.0f, 0.0f);
+    destination = make_unique<Bullet>(320.0f, 240.0f, 0.0f, 0.0f);
+
+    bulletTexture.loadFromFile("data/texture/bullet2.png");
+    manager->setTexture(bulletTexture);
+
+    manager->createBullet("data/lua/test2.lua", origin.get(), destination.get());
 }
 
 void PatternState::draw()
@@ -28,6 +40,7 @@ void PatternState::draw()
     sf::RenderWindow& window = *(getContext().window);
 
     window.draw(debugText);
+    window.draw(*manager);
 }
 
 bool PatternState::update(sf::Time dt)
@@ -39,7 +52,7 @@ bool PatternState::update(sf::Time dt)
     //                                  manager.blockCount(),
     //                                  hitCount));
 
-    // manager.tick();
+    manager->tick();
 
     return false;
 }

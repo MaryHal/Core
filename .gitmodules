@@ -1,3 +1,6 @@
 [submodule "ext/BulletLua"]
 	path = ext/BulletLua
 	url = git@github.com:sanford1/BulletLua.git
+[submodule "ext/sol"]
+	path = ext/sol
+	url = https://github.com/Rapptz/sol.git

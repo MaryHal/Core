@@ -21,7 +21,7 @@ class MyApp : public Application
             stateStack.registerState<TitleState>(States::Title);
             stateStack.registerState<TestState>(States::Test);
             stateStack.registerState<PatternState>(States::Pattern);
-            stateStack.registerState<MusicState>(States::Music);
+            // stateStack.registerState<MusicState>(States::Music);
         }
 };
 

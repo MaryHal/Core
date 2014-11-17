@@ -24,12 +24,12 @@ ifeq ($(config),debug)
   TARGETDIR  = bin
   TARGET     = $(TARGETDIR)/linux_Test64
   DEFINES   += -DDEBUG
-  INCLUDES  += 
+  INCLUDES  += -Iext/sol -Iext/BulletLua/include
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -std=c++11
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += 
-  LIBS      += -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
+  LDFLAGS   += -Wl,-rpath '-Wl,$$ORIGIN' -Lext/BulletLua/lib
+  LIBS      += -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system -lbulletlua -llua
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -38,6 +38,8 @@ ifeq ($(config),debug)
   define PRELINKCMDS
   endef
   define POSTBUILDCMDS
+	@echo Running post-build commands
+	cp ext/BulletLua/lib/libbulletlua.so bin
   endef
 endif
 
@@ -46,12 +48,12 @@ ifeq ($(config),release)
   TARGETDIR  = bin
   TARGET     = $(TARGETDIR)/linux_Test64
   DEFINES   += 
-  INCLUDES  += 
+  INCLUDES  += -Iext/sol -Iext/BulletLua/include
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -Wall -std=c++11
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -s
-  LIBS      += -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
+  LDFLAGS   += -s -Wl,-rpath '-Wl,$$ORIGIN' -Lext/BulletLua/lib
+  LIBS      += -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system -lbulletlua -llua
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -60,6 +62,8 @@ ifeq ($(config),release)
   define PRELINKCMDS
   endef
   define POSTBUILDCMDS
+	@echo Running post-build commands
+	cp ext/BulletLua/lib/libbulletlua.so bin
   endef
 endif
 
@@ -68,12 +72,12 @@ ifeq ($(config),debug32)
   TARGETDIR  = bin
   TARGET     = $(TARGETDIR)/linux_Test32
   DEFINES   += -DDEBUG
-  INCLUDES  += 
+  INCLUDES  += -Iext/sol -Iext/BulletLua/include
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -m32 -std=c++11
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -m32 -L/usr/lib32
-  LIBS      += -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
+  LDFLAGS   += -m32 -L/usr/lib32 -Wl,-rpath '-Wl,$$ORIGIN' -Lext/BulletLua/lib
+  LIBS      += -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system -lbulletlua -llua
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -82,6 +86,8 @@ ifeq ($(config),debug32)
   define PRELINKCMDS
   endef
   define POSTBUILDCMDS
+	@echo Running post-build commands
+	cp ext/BulletLua/lib/libbulletlua.so bin
   endef
 endif
 
@@ -90,12 +96,12 @@ ifeq ($(config),release32)
   TARGETDIR  = bin
   TARGET     = $(TARGETDIR)/linux_Test32
   DEFINES   += 
-  INCLUDES  += 
+  INCLUDES  += -Iext/sol -Iext/BulletLua/include
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -Wall -m32 -std=c++11
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -s -m32 -L/usr/lib32
-  LIBS      += -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
+  LDFLAGS   += -s -m32 -L/usr/lib32 -Wl,-rpath '-Wl,$$ORIGIN' -Lext/BulletLua/lib
+  LIBS      += -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system -lbulletlua -llua
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -104,6 +110,8 @@ ifeq ($(config),release32)
   define PRELINKCMDS
   endef
   define POSTBUILDCMDS
+	@echo Running post-build commands
+	cp ext/BulletLua/lib/libbulletlua.so bin
   endef
 endif
 
@@ -112,12 +120,12 @@ ifeq ($(config),debug64)
   TARGETDIR  = bin
   TARGET     = $(TARGETDIR)/linux_Test64
   DEFINES   += -DDEBUG
-  INCLUDES  += 
+  INCLUDES  += -Iext/sol -Iext/BulletLua/include
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -g -Wall -m64 -std=c++11
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -m64 -L/usr/lib64
-  LIBS      += -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
+  LDFLAGS   += -m64 -L/usr/lib64 -Wl,-rpath '-Wl,$$ORIGIN' -Lext/BulletLua/lib
+  LIBS      += -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system -lbulletlua -llua
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -126,6 +134,8 @@ ifeq ($(config),debug64)
   define PRELINKCMDS
   endef
   define POSTBUILDCMDS
+	@echo Running post-build commands
+	cp ext/BulletLua/lib/libbulletlua.so bin
   endef
 endif
 
@@ -134,12 +144,12 @@ ifeq ($(config),release64)
   TARGETDIR  = bin
   TARGET     = $(TARGETDIR)/linux_Test64
   DEFINES   += 
-  INCLUDES  += 
+  INCLUDES  += -Iext/sol -Iext/BulletLua/include
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -O2 -Wall -m64 -std=c++11
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -s -m64 -L/usr/lib64
-  LIBS      += -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
+  LDFLAGS   += -s -m64 -L/usr/lib64 -Wl,-rpath '-Wl,$$ORIGIN' -Lext/BulletLua/lib
+  LIBS      += -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system -lbulletlua -llua
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += 
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -148,6 +158,8 @@ ifeq ($(config),release64)
   define PRELINKCMDS
   endef
   define POSTBUILDCMDS
+	@echo Running post-build commands
+	cp ext/BulletLua/lib/libbulletlua.so bin
   endef
 endif
 
@@ -166,6 +178,7 @@ OBJECTS := \
 	$(OBJDIR)/TestState.o \
 	$(OBJDIR)/TitleState.o \
 	$(OBJDIR)/MusicState.o \
+	$(OBJDIR)/BulletManager.o \
 	$(OBJDIR)/State.o \
 	$(OBJDIR)/StateStack.o \
 	$(OBJDIR)/Application.o \
@@ -270,6 +283,9 @@ $(OBJDIR)/TitleState.o: src/Game/TitleState.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/MusicState.o: src/Game/MusicState.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/BulletManager.o: src/Game/Bullet/BulletManager.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/State.o: src/System/State.cpp

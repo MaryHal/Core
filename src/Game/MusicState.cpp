@@ -14,7 +14,7 @@ MusicState::MusicState(StateStack& stack, Context context)
     {
         context.textures->load(Res::Textures::musicbg, "data/bg/Frac5.png");
 
-        context.music->addSong(Res::Music::main2,  "data/music/Melodica.ogg");
+        // context.music->addSong(Res::Music::main2,  "data/music/Melodica.ogg");
     }
     catch (std::runtime_error& e)
     {
@@ -64,11 +64,11 @@ bool MusicState::update(sf::Time dt)
 
         if (selection == "Melodica")
         {
-            getContext().music->play(Res::Music::main2);
+            // getContext().music->play(Res::Music::main2);
         }
         else if (selection == "ReflectionEternal")
         {
-            getContext().music->play(Res::Music::main);
+            // getContext().music->play(Res::Music::main);
         }
     }
 
