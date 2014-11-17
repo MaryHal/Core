@@ -1,0 +1,3 @@
+[submodule "ext/BulletLua"]
+	path = ext/BulletLua
+	url = git@github.com:sanford1/BulletLua.git
