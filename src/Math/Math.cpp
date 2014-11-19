@@ -1,6 +1,12 @@
 #include "Math.hpp"
 
 #include <cmath>
+#include <algorithm>
+
+float Math::clamp(float n, float lowerBound, float upperBound)
+{
+    return std::max(lowerBound, std::min(n, upperBound));
+}
 
 unsigned int Math::nextPow2(register unsigned int n)
 {

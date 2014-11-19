@@ -5,6 +5,8 @@
 
 namespace Math
 {
+    float clamp(float n, float lowerBound, float upperBound);
+
     unsigned int nextPow2(register unsigned int n);
     bool checkPow2(unsigned int n);
 
@@ -27,4 +29,3 @@ namespace Math
 };
 
 #endif // _Math_hpp_
-

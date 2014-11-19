@@ -27,15 +27,17 @@ void TestState::draw()
     sf::RenderWindow& window = *getContext().window;
 
     window.draw(bg);
+    window.draw(player);
 }
 
 bool TestState::update(sf::Time dt)
 {
+    player.update(dt);
     return false;
 }
 
 bool TestState::handleEvent(const sf::Event& event)
 {
+    player.handleEvent(event);
     return false;
 }
-

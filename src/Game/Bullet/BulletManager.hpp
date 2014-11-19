@@ -15,11 +15,12 @@ class BulletManager : public BulletLuaManager,
         ~BulletManager() final;
 
         void setTexture(sf::Texture& tex);
-
         void tick() final;
-        void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
         unsigned int getVertexCount() const;
+
+    protected:
+        void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
     private:
         void increaseCapacity(unsigned int blockSize=BLOCK_SIZE) final;
@@ -32,4 +33,3 @@ class BulletManager : public BulletLuaManager,
 };
 
 #endif // _BulletManager_hpp_
-

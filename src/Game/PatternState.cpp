@@ -29,7 +29,7 @@ PatternState::PatternState(StateStack& stack, Context context)
     origin = make_unique<Bullet>(320.0f, 120.0f, 0.0f, 0.0f);
     destination = make_unique<Bullet>(320.0f, 240.0f, 0.0f, 0.0f);
 
-    bulletTexture.loadFromFile("data/texture/bullet2.png");
+    bulletTexture.loadFromFile("data/texture/bullet.png");
     manager->setTexture(bulletTexture);
 
     const sf::Font& font = context.fonts->get(Res::Fonts::normal);
@@ -37,16 +37,15 @@ PatternState::PatternState(StateStack& stack, Context context)
     debugText.setPosition(4.0f, 4.0f);
     debugText.setCharacterSize(12);
 
-    menu.setPosition(4.0f, 120.0f);
-    menu.addList({
-            "test.lua",
-                "test2.lua",
-                "test3.lua",
-                "test4.lua",
-                "test5.lua",
-                "test6.lua",
-                "test7.lua",
-                "test8.lua"
+    menu.setPosition(16.0f, 120.0f);
+    menu.addList({"test.lua"
+                , "test2.lua"
+                , "test3.lua"
+                , "test4.lua"
+                , "test5.lua"
+                , "test6.lua"
+                , "test7.lua"
+                , "test8.lua"
                 },
         font, 12);
     menu.build();
@@ -81,6 +80,15 @@ bool PatternState::update(sf::Time dt)
     }
 
     manager->tick();
+
+    sf::Vector2i mousePos = sf::Mouse::getPosition(*(getContext().window));
+    destination->x = mousePos.x;
+    destination->y = mousePos.y;
+
+    if (manager->checkCollision(*destination.get()))
+    {
+        manager->vanishAll();
+    }
 
     return false;
 }

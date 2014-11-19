@@ -179,6 +179,7 @@ OBJECTS := \
 	$(OBJDIR)/TitleState.o \
 	$(OBJDIR)/MusicState.o \
 	$(OBJDIR)/BulletManager.o \
+	$(OBJDIR)/Player.o \
 	$(OBJDIR)/State.o \
 	$(OBJDIR)/StateStack.o \
 	$(OBJDIR)/Application.o \
@@ -286,6 +287,9 @@ $(OBJDIR)/MusicState.o: src/Game/MusicState.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/BulletManager.o: src/Game/Bullet/BulletManager.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Player.o: src/Game/Platformer/Player.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/State.o: src/System/State.cpp
